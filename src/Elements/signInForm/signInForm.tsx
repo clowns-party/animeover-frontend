@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Form, Input, Button, Checkbox, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import Link from 'next/link'
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
@@ -81,11 +81,13 @@ export const SignInForm: FC = () => {
               </Form.Item>
             </Col>
             <Col span={6}>
-              <NavLink to="/signUp">
-                <Button type="primary" htmlType="button">
-                  SignUp
-                </Button>
-              </NavLink>
+              <Link href="/signUp">
+                <a>
+                  <Button type="primary" htmlType="button">
+                    SignUp
+                  </Button>
+                </a>
+              </Link>
             </Col>
           </Row>
         </Form>
