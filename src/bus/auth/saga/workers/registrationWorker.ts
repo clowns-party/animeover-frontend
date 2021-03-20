@@ -3,6 +3,7 @@ import { put, call } from "redux-saga/effects";
 import { startFetching, stopFetching, setFetchingError } from "../../actions";
 import { signUpAsyncType } from "../../types";
 import { service } from "../../../../Services";
+import Router from "next/router";
 
 export function* signUpWorker(action: signUpAsyncType): SagaIterator {
   const { payload } = action;
@@ -11,7 +12,9 @@ export function* signUpWorker(action: signUpAsyncType): SagaIterator {
     const result = yield call(service.signUp, payload);
     if (result?.data) {
       // yield put(set({ user: result.data, token: '' }));
+
       // yield put(push("/signIn"));
+      Router.push("signIn");
     } else {
       yield put(
         setFetchingError({

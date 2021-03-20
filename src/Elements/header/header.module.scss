@@ -1,0 +1,47 @@
+.logo_container {
+  display: flex;
+  cursor: pointer;
+  .name {
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .logo {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.item {
+  margin: 8px;
+}
+
+.list_anime {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  box-sizing: border-box;
+  align-items: center;
+  height: 100%;
+  width: 150px;
+  background-color: #3e3e3e;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  &:hover {
+    .arrow {
+      transform: rotate(90deg);
+    }
+    background-color: #4e5257;
+  }
+}
+
+.arrow {
+  transition: 0.3s linear;
+  margin-left: 8px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}

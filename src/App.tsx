@@ -1,8 +1,7 @@
 // core
 import React from "react";
-import { SignInForm } from "./Elements/signInForm/signInForm";
-import "antd/dist/antd.css";
 import { service } from "./Services";
+import { HomePage } from './Elements/HomePage/HomePage';
 
 function App() {
   // не тут должно быть TEMP
@@ -12,10 +11,10 @@ function App() {
   };
   return (
     <div className="App">
-      <SignInForm />
-      <button type="button" onClick={call}>
+      <HomePage />
+      {/* <button type="button" onClick={call}>
         TEST AUTH ME!
-      </button>
+      </button> */}
     </div>
   );
 }
