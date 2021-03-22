@@ -3,7 +3,7 @@ import { HeaderAnime } from './../src/Elements/header/HeaderAnime';
 
 export default function Home() {
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <HeaderAnime />
       <App />
     </div>

@@ -17,7 +17,7 @@ export const HomePage: FC = () => {
       {anime?.length &&
         anime.map((el) => {
           return (
-            <div>
+            <div key={el._id}>
               <img className={styles.list} src={el.picture} alt="sos" />
               <div>{el.title}</div>
             </div>

@@ -1,9 +1,18 @@
+.header_container {
+  background: #343434;
+  height: 48px;
+  align-items: center;
+}
+
 .logo_container {
   display: flex;
   cursor: pointer;
   .name {
     color: #fff;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
   }
 
   .logo {
@@ -12,8 +21,17 @@
   }
 }
 
+.login {
+  font: 14px;
+  font-weight: 600;
+  color: #fff;
+  padding-right: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
 .item {
-  margin: 8px;
+  margin: 0 8px;
 }
 
 .list_anime {
@@ -22,7 +40,7 @@
   padding: 0 12px;
   box-sizing: border-box;
   align-items: center;
-  height: 100%;
+  height: 48px;
   width: 150px;
   background-color: #3e3e3e;
   color: #fff;
@@ -42,6 +60,45 @@
 }
 
 .search {
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
+}
+
+.search_container_mobile,
+.container_list_anime_mobile {
+  display: none;
+}
+
+.hamburger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  span {
+    margin: 3px 0;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+  }
+}
+
+@media (max-width: 800px) {
+  .search_container {
+    display: none;
+  }
+
+  .search_container_mobile {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 530px) {
+  .container_list_anime_mobile {
+    display: inline-block;
+  }
+  .container_list_anime {
+    display: none;
+  }
 }
