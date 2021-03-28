@@ -1,9 +1,9 @@
-import { SignInForm } from "../src/Elements/signInForm/signInForm";
+import { SignInForm } from "../src/Elements/signInForm/SignInForm";
 
 export default function signIn() {
   return (
     <div>
-      <SignInForm />
+      <SignInForm type="_login" />
     </div>
   );
 }

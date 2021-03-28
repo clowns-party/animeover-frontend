@@ -1,0 +1,48 @@
+.anime {
+  height: 180px;
+  size: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  background-color: #e6f7ff;
+  color: #40a9ff;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  span {
+    background-color: #1890ff;
+    width: 4px;
+    height: 100%;
+    margin-right: 8px;
+  }
+}
+
+.card {
+  width: 142px;
+  margin-right: 4px;
+}
+
+@media (max-width: 1200px) {
+  .angoing_container {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+  .card {
+    margin-right: 4px;
+  }
+}
+@media (max-width: 800px) {
+  .card {
+    width: 120px;
+    font-size: 12px;
+  }
+  .anime {
+    height: 160px;
+    size: 100%;
+  }
+}

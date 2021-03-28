@@ -2,7 +2,10 @@ import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAnimeList } from "../../bus/anime/actions";
 import { useAnimelist } from "../../bus/anime/hooks/useAnimeList";
+import { ListAgnoing } from "./listAngoing/ListAngoing";
 import styles from "./home.module.scss";
+import { Col, Row } from "antd";
+import { Navigation } from './Navigation/Navigation';
 
 export const HomePage: FC = () => {
   const dispatch = useDispatch();
@@ -10,19 +13,18 @@ export const HomePage: FC = () => {
     dispatch(getAnimeList());
   }, []);
 
-  const { anime, isFetching, error } = useAnimelist();
-
   return (
-    <div className={styles.container}>
-      {anime?.length &&
-        anime.map((el) => {
-          return (
-            <div key={el._id}>
-              <img className={styles.list} src={el.picture} alt="sos" />
-              <div>{el.title}</div>
-            </div>
-          );
-        })}
+    <div className={styles.backImage}>
+      <Row justify={"center"}>
+        <div className={styles.container}>
+          <div className={styles.component}>
+            <ListAgnoing />
+          </div>
+          <div className={styles.component}>
+            <Navigation />
+          </div>
+        </div>
+      </Row>
     </div>
   );
 };

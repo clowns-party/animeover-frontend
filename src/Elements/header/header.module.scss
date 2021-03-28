@@ -1,5 +1,5 @@
 .header_container {
-  background: #343434;
+  background: #262626;
   height: 48px;
   align-items: center;
 }
@@ -10,6 +10,7 @@
   .name {
     color: #fff;
     font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -22,7 +23,8 @@
 }
 
 .login {
-  font: 14px;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   color: #fff;
   padding-right: 4px;
@@ -42,15 +44,16 @@
   align-items: center;
   height: 48px;
   width: 150px;
-  background-color: #3e3e3e;
+  background-color: #383838;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
   &:hover {
     .arrow {
       transform: rotate(90deg);
     }
-    background-color: #4e5257;
+    background-color: #494a4b;
   }
 }
 

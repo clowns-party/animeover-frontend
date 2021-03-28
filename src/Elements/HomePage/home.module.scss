@@ -1,9 +1,27 @@
 .container {
-  width: 500px;
-  height: 500px;
+  height: 100vh;
+  padding: 0 16px;
+  background-color: #fafafa;
 }
 
-.list {
-  width: 200px;
-  height: 200px;
+.component {
+  margin-bottom: 45px;
+}
+
+// .backImage {
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+// }
+
+@media (min-width: 1200px) {
+  .container {
+    min-width: 1200px;
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
 }

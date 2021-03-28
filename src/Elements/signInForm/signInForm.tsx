@@ -1,15 +1,21 @@
 import React, { FC } from "react";
-import { Form, Input, Button, Checkbox, Row, Col } from "antd";
+import { Form, Input, Button, Checkbox, Row, Col, PageHeader } from "antd";
 import { useDispatch } from "react-redux";
-import Link from 'next/link'
+import Link from "next/link";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
+import styles from "./login.module.scss";
+import { LoginOutlined } from "@ant-design/icons";
+
+type SingProps = {
+  type?: string;
+};
 
 const layout = {};
 const tailLayout = {};
 
-export const SignInForm: FC = () => {
+export const SignInForm: FC<SingProps> = ({ type }) => {
   const dispatch = useDispatch();
   const { isFetching, error, data } = useAuth();
 
@@ -33,12 +39,18 @@ export const SignInForm: FC = () => {
     console.log("Failed:", errorInfo);
   };
 
+  let className = "position";
+  if (type) {
+    className += type;
+  }
+
   return (
-    <Row justify="center">
-      {errorMessageJSX}
+    <Row className={styles[`${className}`]} justify="center">
+      {/* {errorMessageJSX}
       {loaderJSX}
-      {AuthData}
-      <Col span={12}>
+      {AuthData} */}
+      <Col span={24}>
+        <PageHeader style={{ paddingLeft: 0, fontSize: 20 }}>Вход</PageHeader>
         <Form
           {...layout}
           name="basic"
@@ -48,13 +60,13 @@ export const SignInForm: FC = () => {
           validateMessages={validateMessages}
         >
           <Form.Item
-            label="email"
+            label="Email"
             name="email"
             rules={[
               {
                 type: "email",
                 required: true,
-                message: "Please input your email!",
+                message: "Пожалуйста введите ваш email!",
               },
             ]}
           >
@@ -62,29 +74,31 @@ export const SignInForm: FC = () => {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="Пароль"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[
+              { required: true, message: "Пожалуйста введите ваш пароль!" },
+            ]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>Запомнить меня</Checkbox>
           </Form.Item>
           <Row justify="space-between">
-            <Col span={6}>
+            <Col>
               <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                  SignIn
+                <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                  Войти
                 </Button>
               </Form.Item>
             </Col>
-            <Col span={6}>
+            <Col>
               <Link href="/signUp">
                 <a>
-                  <Button type="primary" htmlType="button">
-                    SignUp
+                  <Button htmlType="button">
+                    Регистрация
                   </Button>
                 </a>
               </Link>

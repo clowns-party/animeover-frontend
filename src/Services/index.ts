@@ -49,7 +49,7 @@ export class Api {
   }
 
   animeList(): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>("/animedb");
+    return this.instance.get<Anime>("/animedb?limit=8");
   }
 }
 

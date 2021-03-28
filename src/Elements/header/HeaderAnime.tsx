@@ -5,7 +5,6 @@ import { SearchOutlined } from '@ant-design/icons';
 import Link from "next/link";
 
 export const HeaderAnime = () => {
-  const { Header } = Layout;
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
   return (
