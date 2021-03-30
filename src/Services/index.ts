@@ -24,6 +24,7 @@ export class Api {
     this.signUp = this.signUp.bind(this);
     this.auth = this.auth.bind(this);
     this.me = this.me.bind(this);
+    this.ongoingList = this.ongoingList.bind(this);
   }
 
   me(): Promise<AxiosResponse<User>> {
@@ -51,6 +52,12 @@ export class Api {
   animeList(): Promise<AxiosResponse<Anime>> {
     return this.instance.get<Anime>("/animedb?limit=8");
   }
+
+  ongoingList(): Promise<AxiosResponse<Anime>> {
+    return this.instance.get<Anime>("animedb/ongoing");
+  }
 }
+
+//прописывать bind в constructor
 
 export const service = new Api();

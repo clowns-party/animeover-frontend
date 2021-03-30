@@ -1,4 +1,5 @@
 export type AnimeList = Array<Anime>;
+
 export type Anime = {
   _id: string;
   sources: Array<string>;
@@ -18,9 +19,9 @@ export type Anime = {
 };
 
 export type AnimeError = {
-  message: string,
-  code: number | string
-}
+  message: string;
+  code: number | string;
+};
 
 export const GET_ANIME_LIST = "GET_ANIME_LIST";
 export type getAnimeListType = {
@@ -35,7 +36,7 @@ export type stopAnimeListType = {
 export const SET_ERROR_ANIME_LIST = "SET_ERROR_ANIME_LIST";
 export type setErrorAnimeListType = {
   type: typeof SET_ERROR_ANIME_LIST;
-  payload: AnimeError
+  payload: AnimeError;
 };
 
 export const START_ANIME_LIST = "START_ANIME_LIST";
@@ -49,8 +50,20 @@ export type setAnimeListType = {
   payload: AnimeList;
 };
 
+export const GET_ONGOING_LIST = "GET_ONGOING_LIST";
+export type getOngoingListType = {
+  type: typeof GET_ONGOING_LIST,
+};
+
+export const SET_ONGOING_LIST = "SET_ONGOING_LIST";
+export type setOngoingListType = {
+  type: typeof SET_ONGOING_LIST;
+  payload: AnimeList;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
+  | setOngoingListType
   | setAnimeListType
   | startAnimeListType
   | stopAnimeListType

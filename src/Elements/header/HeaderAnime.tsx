@@ -1,21 +1,38 @@
+import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./header.module.scss";
-import { Layout, Input, Row, Col, Button, Divider } from "antd";
-import { SearchOutlined } from '@ant-design/icons';
+import { Layout, Input, Row, Col, Button, Divider, Menu } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { useAuth } from "../../bus/auth/hooks/useAuth";
+import {
+  LoginOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 
 export const HeaderAnime = () => {
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
+  const { data, isFetching, error } = useAuth();
+
+  const [count, setCount] = useState(false);
+
+  const menuStyle = count ? "deleteMenu" : "";
+
   return (
     <>
       <Row className={styles.header_container}>
         <Col flex="40px" className={styles.container_list_anime_mobile}>
-          <div className={styles.hamburger}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <Button
+            type="primary"
+            onClick={() => {
+              setCount(!count);
+            }}
+            style={{ marginLeft: 6 }}
+          >
+            {count ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+          </Button>
         </Col>
         <Col flex="150px">
           <div className={`${styles.logo_container} ${styles.item}`}>
@@ -64,16 +81,72 @@ export const HeaderAnime = () => {
           </div>
         </Col>
         <Col flex="auto" className={styles.search_container_mobile}>
-          <Divider orientation="right" style={{ margin: "0"}}>
+          <Divider orientation="right" style={{ margin: "0" }}>
             <Button type="primary" icon={<SearchOutlined />} />
           </Divider>
         </Col>
-        <Col xs={3} sm={2} md={2} lg={2} xl={2} xxl={1} flex="auto">
-          <Link href="/signIn">
-            <div className={styles.login}>Вход</div>
-          </Link>
-        </Col>
+        {data?.user ? (
+          <Col
+            xs={7}
+            sm={7}
+            md={6}
+            lg={5}
+            xl={4}
+            xxl={3}
+            flex="auto"
+            className={styles.user_info_mobile}
+          >
+            <div className={styles.user_container}>
+              <div className={styles.user}>{data?.user.email}</div>
+              <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                <span className={styles.button_desktop}>Выход</span>
+              </Button>
+            </div>
+          </Col>
+        ) : (
+          <Col
+            xs={5}
+            sm={5}
+            md={4}
+            lg={3}
+            xl={3}
+            xxl={2}
+            flex="auto"
+            className={styles.user_info_mobile}
+          >
+            <div className={styles.login_desktop}>
+              <Link href="/signIn">
+                <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                  Войти
+                </Button>
+              </Link>
+            </div>
+          </Col>
+        )}
       </Row>
+
+      <div className={`${styles.menu_mobile} ${styles[`${menuStyle}`]}`}>
+        {data?.user ? (
+          <div className={styles.user_container_hamburger}>
+            <div className={styles.menu_mobile_item}>
+              <div className={styles.user}>{data?.user.email}</div>
+            </div>
+            <div className={styles.menu_mobile_item}>
+              <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                <span>Выход</span>
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.menu_mobile_item}>
+            <Link href="/signIn">
+              <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                Войти
+              </Button>
+            </Link>
+          </div>
+        )}
+      </div>
     </>
   );
 };

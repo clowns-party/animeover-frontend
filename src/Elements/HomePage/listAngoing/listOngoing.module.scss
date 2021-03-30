@@ -1,6 +1,6 @@
 .anime {
   height: 180px;
-  size: 100%;
+  object-fit: cover;
 }
 
 .header {
@@ -28,7 +28,7 @@
 }
 
 @media (max-width: 1200px) {
-  .angoing_container {
+  .ongoing_container {
     flex-wrap: nowrap;
     overflow-x: scroll;
   }
@@ -43,6 +43,5 @@
   }
   .anime {
     height: 160px;
-    size: 100%;
   }
 }

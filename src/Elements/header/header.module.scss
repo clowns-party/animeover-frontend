@@ -62,6 +62,32 @@
   margin-left: 8px;
 }
 
+.menu_mobile {
+  display: none;
+  transition: 0.4s linear;
+  left: -150px;
+  position: absolute;
+  z-index: 999;
+  width: 150px;
+  padding: 8px 4px 8px 4px;
+  box-sizing: border-box;
+  background-color: #262626;
+}
+
+.menu_mobile_login {
+  bottom: -60px !important;
+}
+
+.menu_mobile_item {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.deleteMenu {
+  left: 0 !important;
+}
+
 .search {
   width: 100%;
   box-sizing: border-box;
@@ -72,6 +98,32 @@
 .search_container_mobile,
 .container_list_anime_mobile {
   display: none;
+}
+
+.login_desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_container {
+  padding: 0 2px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user_container_hamburger {
+  padding: 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user {
+  color: #fff;
+  text-align: center;
 }
 
 .hamburger {
@@ -88,6 +140,7 @@
 }
 
 @media (max-width: 800px) {
+
   .search_container {
     display: none;
   }
@@ -97,11 +150,23 @@
   }
 }
 
-@media (max-width: 530px) {
+@media (max-width: 650px) {
+  .button_desktop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 550px) {
   .container_list_anime_mobile {
     display: inline-block;
   }
+  .menu_mobile {
+    display: inline-block;
+  }
   .container_list_anime {
+    display: none;
+  }
+  .user_info_mobile {
     display: none;
   }
 }

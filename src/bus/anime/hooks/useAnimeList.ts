@@ -3,9 +3,9 @@ import { AppState } from "../../../init/rootReducer";
 import { AnimeState } from "../reducer";
 
 export const useAnimelist = (): AnimeState => {
-  const { anime, isFetching, error } = useSelector<AppState, AnimeState>(
-    (state) => state.animeReducer
+  const { anime, ongoing, isFetching, error } = useSelector<AppState, AnimeState>(
+    (state) => state.anime
   );
 
-  return { anime, isFetching, error };
+  return { anime, ongoing, isFetching, error };
 };
