@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
 import Image from "next/image";
 import styles from "./header.module.scss";
 import { Layout, Input, Row, Col, Button, Divider, Menu } from "antd";
@@ -10,6 +11,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
+import { logout } from "../../bus/auth/actions";
 
 export const HeaderAnime = () => {
   const { Search } = Input;
@@ -19,6 +21,8 @@ export const HeaderAnime = () => {
   const [count, setCount] = useState(false);
 
   const menuStyle = count ? "deleteMenu" : "";
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -98,7 +102,7 @@ export const HeaderAnime = () => {
           >
             <div className={styles.user_container}>
               <div className={styles.user}>{data?.user.email}</div>
-              <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+              <Button type="primary" onClick={() => {dispatch(logout())}} icon={<LoginOutlined />}>
                 <span className={styles.button_desktop}>Выход</span>
               </Button>
             </div>
@@ -132,7 +136,7 @@ export const HeaderAnime = () => {
               <div className={styles.user}>{data?.user.email}</div>
             </div>
             <div className={styles.menu_mobile_item}>
-              <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+              <Button type="primary" onClick={() => {dispatch(logout())}} icon={<LoginOutlined />}>
                 <span>Выход</span>
               </Button>
             </div>
