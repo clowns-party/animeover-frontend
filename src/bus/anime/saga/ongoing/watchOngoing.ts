@@ -1,7 +1,6 @@
 import { SagaIterator } from "redux-saga";
-import { takeEvery } from "redux-saga/effects";
+import { takeEvery, call, all } from "redux-saga/effects";
 import { GET_ONGOING_LIST } from "../../types";
-import { call, all } from "redux-saga/effects";
 import { ongoingWorker } from "./ongoingWorker";
 
 function* watchFetchOngoing(): SagaIterator {

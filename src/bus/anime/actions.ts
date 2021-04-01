@@ -51,8 +51,8 @@ export function setAnimeList(payload: AnimeList): setAnimeListType {
 
 export function getOngoingList(): getOngoingListType {
   return {
-    type: GET_ONGOING_LIST
-  }
+    type: GET_ONGOING_LIST,
+  };
 }
 
 export function setOngoingList(payload: AnimeList): setOngoingListType {

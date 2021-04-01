@@ -14,6 +14,8 @@ export type User = {
   user: UserSchema;
 };
 
+export type UserResponse = { data: User };
+
 export const AUTH_SET = "AUTH_SET";
 export type setType = {
   type: typeof AUTH_SET;
@@ -68,12 +70,13 @@ export type initAuthAsync = {
   type: typeof INIT_AUTH_ASYNC;
 };
 
-export const LOGOUT = "LOGOUT"
+export const LOGOUT = "LOGOUT";
 export type logoutType = {
-  type: typeof LOGOUT
-}
+  type: typeof LOGOUT;
+};
 
-export type AuthActionTypes = signUpAsyncType
+export type AuthActionTypes =
+  | signUpAsyncType
   | signInAsyncType
   | setType
   | AuthStartFechingAction

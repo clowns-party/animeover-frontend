@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 import Image from "next/image";
 import styles from "./header.module.scss";
-import { Layout, Input, Row, Col, Button, Divider, Menu } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Input, Row, Col, Button, Divider } from "antd";
 import Link from "next/link";
-import { useAuth } from "../../bus/auth/hooks/useAuth";
 import {
   LoginOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import { logout } from "../../bus/auth/actions";
+import { useAuth } from "../../bus/auth/hooks/useAuth";
 
-export const HeaderAnime = () => {
+export const HeaderAnime: FC = () => {
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
   const { data, isFetching, error } = useAuth();
 
   const [count, setCount] = useState(false);
 
-  const menuStyle = count ? "deleteMenu" : "";
+  const menuStyle = count ? styles.deleteMenu : "";
 
   const dispatch = useDispatch();
 
@@ -102,7 +102,13 @@ export const HeaderAnime = () => {
           >
             <div className={styles.user_container}>
               <div className={styles.user}>{data?.user.email}</div>
-              <Button type="primary" onClick={() => {dispatch(logout())}} icon={<LoginOutlined />}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  dispatch(logout());
+                }}
+                icon={<LoginOutlined />}
+              >
                 <span className={styles.button_desktop}>Выход</span>
               </Button>
             </div>
@@ -120,7 +126,11 @@ export const HeaderAnime = () => {
           >
             <div className={styles.login_desktop}>
               <Link href="/signIn">
-                <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon={<LoginOutlined />}
+                >
                   Войти
                 </Button>
               </Link>
@@ -129,14 +139,20 @@ export const HeaderAnime = () => {
         )}
       </Row>
 
-      <div className={`${styles.menu_mobile} ${styles[`${menuStyle}`]}`}>
+      <div className={`${styles.menu_mobile} ${menuStyle}`}>
         {data?.user ? (
           <div className={styles.user_container_hamburger}>
             <div className={styles.menu_mobile_item}>
               <div className={styles.user}>{data?.user.email}</div>
             </div>
             <div className={styles.menu_mobile_item}>
-              <Button type="primary" onClick={() => {dispatch(logout())}} icon={<LoginOutlined />}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  dispatch(logout());
+                }}
+                icon={<LoginOutlined />}
+              >
                 <span>Выход</span>
               </Button>
             </div>

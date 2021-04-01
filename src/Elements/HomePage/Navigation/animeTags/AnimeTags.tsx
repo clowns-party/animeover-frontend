@@ -1,12 +1,14 @@
-import React from "react";
-import styles from "./animeTags.module.scss";
+import React, { FC } from "react";
 import { Button } from "antd";
+import styles from "./animeTags.module.scss";
 
-export const AnimeTags = () => {
+export const AnimeTags: FC = () => {
+  // Сделать мап
   return (
-    <div className={styles.anime_tags_container}>
+    <div className={styles.container}>
       <div className={styles.title}>
-        <span></span>Аниме
+        <span />
+        Аниме
       </div>
       <div className={styles.button}>
         <Button block>ОНГОИНГИ</Button>

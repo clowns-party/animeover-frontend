@@ -2,7 +2,7 @@ import { Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import React, { FC } from "react";
 import { useAnimelist } from "../../../bus/anime/hooks/useAnimeList";
-import styles from "./animeList.module.scss"
+import styles from "./animeList.module.scss";
 
 export const AnimeList: FC = () => {
   const { anime, ongoing, isFetching, error } = useAnimelist();
@@ -12,10 +12,11 @@ export const AnimeList: FC = () => {
       {anime?.length &&
         anime.map((el) => {
           return (
+            // если не нужен див, изменить на React.Fragment
             <div key={el._id}>
               <Card
                 className={styles.card}
-                size={"small"}
+                size="small"
                 hoverable
                 cover={
                   <img className={styles.anime} alt="anime" src={el.picture} />

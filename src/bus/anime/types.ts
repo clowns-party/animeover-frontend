@@ -18,6 +18,8 @@ export type Anime = {
   tags: Array<string>;
 };
 
+export type AnimeListReponse = { data: AnimeList };
+
 export type AnimeError = {
   message: string;
   code: number | string;
@@ -52,7 +54,7 @@ export type setAnimeListType = {
 
 export const GET_ONGOING_LIST = "GET_ONGOING_LIST";
 export type getOngoingListType = {
-  type: typeof GET_ONGOING_LIST,
+  type: typeof GET_ONGOING_LIST;
 };
 
 export const SET_ONGOING_LIST = "SET_ONGOING_LIST";
@@ -67,4 +69,5 @@ export type animeActionsTypes =
   | setAnimeListType
   | startAnimeListType
   | stopAnimeListType
-  | setErrorAnimeListType;
+  | setErrorAnimeListType
+  | getOngoingListType;

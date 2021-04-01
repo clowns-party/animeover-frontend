@@ -1,9 +1,9 @@
 // core
-import React from "react";
+import React, { FC } from "react";
 import { service } from "./Services";
-import { HomePage } from './Elements/HomePage/HomePage';
+import { HomePage } from "./Elements/HomePage/HomePage";
 
-function App() {
+const App: FC = () => {
   // не тут должно быть TEMP
   const call = async () => {
     const result = await service.me();
@@ -17,6 +17,6 @@ function App() {
       </button> */}
     </div>
   );
-}
+};
 
 export default App;

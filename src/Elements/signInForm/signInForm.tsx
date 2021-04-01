@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import { Form, Input, Button, Checkbox, Row, Col, PageHeader } from "antd";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { LoginOutlined } from "@ant-design/icons";
+import styles from "./login.module.scss";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
-import styles from "./login.module.scss";
-import { LoginOutlined } from "@ant-design/icons";
 
 type SingProps = {
   type?: string;
@@ -89,7 +89,11 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
           <Row justify="space-between">
             <Col>
               <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon={<LoginOutlined />}
+                >
                   Войти
                 </Button>
               </Form.Item>
@@ -97,9 +101,7 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
             <Col>
               <Link href="/signUp">
                 <a>
-                  <Button htmlType="button">
-                    Регистрация
-                  </Button>
+                  <Button htmlType="button">Регистрация</Button>
                 </a>
               </Link>
             </Col>

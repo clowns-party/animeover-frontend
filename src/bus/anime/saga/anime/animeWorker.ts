@@ -7,11 +7,12 @@ import {
   startAnimeList,
   stopAnimeList,
 } from "../../actions";
+import { AnimeListReponse } from "../../types";
 
 export function* animeWorker(): SagaIterator {
   yield put(startAnimeList());
   try {
-    const result = yield call(service.animeList);
+    const result: AnimeListReponse = yield call(service.animeList);
     yield put(setAnimeList(result.data));
   } catch (err) {
     yield put(setErrorAnimeList(err?.response?.data));

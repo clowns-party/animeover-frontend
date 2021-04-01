@@ -1,10 +1,9 @@
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Row } from "antd";
 import { getOngoingList, getAnimeList } from "../../bus/anime/actions";
-import { useAnimelist } from "../../bus/anime/hooks/useAnimeList";
 import { ListOngoing } from "./listAngoing/ListOngoing";
 import styles from "./home.module.scss";
-import { Col, Row } from "antd";
 import { Navigation } from "./Navigation/Navigation";
 import { AnimeList } from "./animeList/AnimeList";
 
@@ -17,7 +16,7 @@ export const HomePage: FC = () => {
 
   return (
     <div className={styles.backImage}>
-      <Row justify={"center"}>
+      <Row justify="center">
         <div className={styles.container}>
           <div className={styles.component}>
             <ListOngoing />

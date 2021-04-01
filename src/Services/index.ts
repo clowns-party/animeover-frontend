@@ -58,6 +58,6 @@ export class Api {
   }
 }
 
-//прописывать bind в constructor
+// прописывать bind в constructor
 
 export const service = new Api();
