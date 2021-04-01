@@ -46,12 +46,14 @@ const Ongoing = ({ el }) => {
 };
 
 const TitleOngoing = ({ el }) => {
+  const symbolIterate = (index: number, length: number, max: number) =>
+    index === length - 1 || index === max;
   return (
     <div>
       <div>{el.title}</div>
       <div>
         Тип: <span>{el.type}, </span>
-        {el.animeSeason.season != "UNDEFINED" ? (
+        {el.animeSeason.season !== "UNDEFINED" ? (
           <span>{el.animeSeason.season}, </span>
         ) : (
           ""
@@ -63,17 +65,16 @@ const TitleOngoing = ({ el }) => {
       <div>
         <span>Жанры: </span>
         {/* // вынести */}
-        {el.tags.map((t, index: number) => {
-          if (el.tags.length > 5 && index === 4) {
-            return <span key={index.toString()}>{t}... </span>;
-          }
-          if (el.tags.length === index + 1 && index <= 4) {
-            return <span key={index.toString()}>{t}</span>;
-          }
-          if (index <= 4) {
-            return <span key={index.toString()}>{t}, </span>;
-          }
-        })}
+        {el.tags.map(
+          (t, index: number) =>
+            index <= 5 && (
+              <span key={index.toString()}>
+                {t}
+                {symbolIterate(index, el.tags.length, 5) ? "" : ", "}
+              </span>
+            )
+        )}
+        <span>...</span>
       </div>
     </div>
   );
