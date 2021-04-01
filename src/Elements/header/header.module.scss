@@ -1,0 +1,172 @@
+.header_container {
+  background: #262626;
+  height: 48px;
+  align-items: center;
+}
+
+.logo_container {
+  display: flex;
+  cursor: pointer;
+  .name {
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .logo {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.login {
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #fff;
+  padding-right: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.item {
+  margin: 0 8px;
+}
+
+.list_anime {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  box-sizing: border-box;
+  align-items: center;
+  height: 48px;
+  width: 150px;
+  background-color: #383838;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  &:hover {
+    .arrow {
+      transform: rotate(90deg);
+    }
+    background-color: #494a4b;
+  }
+}
+
+.arrow {
+  transition: 0.3s linear;
+  margin-left: 8px;
+}
+
+.menu_mobile {
+  display: none;
+  transition: 0.4s linear;
+  left: -150px;
+  position: absolute;
+  z-index: 999;
+  width: 150px;
+  padding: 8px 4px 8px 4px;
+  box-sizing: border-box;
+  background-color: #262626;
+}
+
+.menu_mobile_login {
+  bottom: -60px !important;
+}
+
+.menu_mobile_item {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.deleteMenu {
+  left: 0 !important;
+}
+
+.search {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.search_container_mobile,
+.container_list_anime_mobile {
+  display: none;
+}
+
+.login_desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_container {
+  padding: 0 2px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user_container_hamburger {
+  padding: 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user {
+  color: #fff;
+  text-align: center;
+}
+
+.hamburger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  span {
+    margin: 3px 0;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+  }
+}
+
+@media (max-width: 800px) {
+
+  .search_container {
+    display: none;
+  }
+
+  .search_container_mobile {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 650px) {
+  .button_desktop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .container_list_anime_mobile {
+    display: inline-block;
+  }
+  .menu_mobile {
+    display: inline-block;
+  }
+  .container_list_anime {
+    display: none;
+  }
+  .user_info_mobile {
+    display: none;
+  }
+}

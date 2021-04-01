@@ -1,28 +1,35 @@
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getAnimeList } from "../../bus/anime/actions";
+import { getOngoingList, getAnimeList } from "../../bus/anime/actions";
 import { useAnimelist } from "../../bus/anime/hooks/useAnimeList";
-import s from "./HomePage.module.scss";
+import { ListOngoing } from "./listAngoing/ListOngoing";
+import styles from "./home.module.scss";
+import { Col, Row } from "antd";
+import { Navigation } from "./Navigation/Navigation";
+import { AnimeList } from "./animeList/AnimeList";
 
 export const HomePage: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getOngoingList());
     dispatch(getAnimeList());
   }, []);
 
-  const { anime, isFetching, error } = useAnimelist();
-
   return (
-    <div className={s.container}>
-      {anime?.length &&
-        anime.map((el) => {
-          return (
-            <div>
-              <img className={s.list} src={el.picture} alt="sos" />
-              <div>{el.title}</div>
-            </div>
-          );
-        })}
+    <div className={styles.backImage}>
+      <Row justify={"center"}>
+        <div className={styles.container}>
+          <div className={styles.component}>
+            <ListOngoing />
+          </div>
+          <div className={styles.component}>
+            <Navigation />
+          </div>
+          <div className={styles.component}>
+            <AnimeList />
+          </div>
+        </div>
+      </Row>
     </div>
   );
 };

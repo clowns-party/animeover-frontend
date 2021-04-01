@@ -1,6 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 import Cookies from "js-cookie";
+import Router from 'next/router'
 import {
   set,
   setFetchingError,
@@ -18,7 +19,7 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
       yield put(set(result.data));
       // Пересмотри этот сеттер куки, будто иногда не отрабатывает
       Cookies.set("token", result.data.token, { expires: 7 });
-      // yield put(push("/home"));
+      Router.push("/")
     } else {
       yield put(
         setFetchingError({

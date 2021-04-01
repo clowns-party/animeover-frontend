@@ -10,6 +10,7 @@ import {
   AUTH_SET_FETCHING_ERROR,
   AuthFormData,
   ErrorHttpAction,
+  LOGOUT,
 } from "./types";
 
 // SIGN IN ACTIONS
@@ -52,4 +53,10 @@ export function signUpAsync(payload: AuthFormData): AuthActionTypes {
     type: SIGN_UP_ASYNC,
     payload,
   };
+}
+
+export function logout(): AuthActionTypes {
+  return {
+    type: LOGOUT
+  }
 }

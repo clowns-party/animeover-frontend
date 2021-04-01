@@ -8,6 +8,7 @@ import {
   AUTH_STOP_FETCHING,
   AUTH_SET_FETCHING_ERROR,
   ErrorHttpAction,
+  LOGOUT,
 } from "./types";
 
 export type AuthState = {
@@ -58,6 +59,11 @@ export const AuthReducer = (
       return {
         ...state,
       };
+    case LOGOUT:
+      return {
+        ...state,
+        data: null
+      }  
 
     default:
       // eslint-disable-next-line no-case-declarations
