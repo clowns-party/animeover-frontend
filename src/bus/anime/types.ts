@@ -19,6 +19,8 @@ export type Anime = {
 };
 
 export type AnimeListReponse = { data: AnimeList };
+export type AnimeResponse = { data: Anime };
+export type IdType = string | string[];
 
 export type AnimeError = {
   message: string;
@@ -63,6 +65,18 @@ export type setOngoingListType = {
   payload: AnimeList;
 };
 
+export const GET_ANIME = "GET_ANIME";
+export type getAnimeType = {
+  type: typeof GET_ANIME;
+  payload: IdType;
+};
+
+export const SET_ANIME = "SET_ANIME";
+export type setAnimeType = {
+  type: typeof SET_ANIME;
+  payload: Anime;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
   | setOngoingListType
@@ -70,4 +84,6 @@ export type animeActionsTypes =
   | startAnimeListType
   | stopAnimeListType
   | setErrorAnimeListType
+  | getAnimeType
+  | setAnimeType
   | getOngoingListType;

@@ -1,21 +1,4 @@
-.container {
-  padding: 0 16px;
-  background-color: #fafafa;
-}
-
 .component {
   margin-bottom: 45px;
 }
 
-@media (min-width: 1200px) {
-  .container {
-    min-width: 1200px;
-    max-width: 1200px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .container {
-    width: 100%;
-  }
-}

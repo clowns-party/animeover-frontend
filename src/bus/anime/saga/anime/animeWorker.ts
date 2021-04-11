@@ -1,22 +1,17 @@
 import { SagaIterator } from "redux-saga";
-import { call, put } from "redux-saga/effects";
+import { put, call } from "redux-saga/effects";
 import { service } from "../../../../Services";
-import {
-  setAnimeList,
-  setErrorAnimeList,
-  startAnimeList,
-  stopAnimeList,
-} from "../../actions";
-import { AnimeListReponse } from "../../types";
+import { AnimeResponse, getAnimeType } from "../../types";
+import { startAnime, setAnime, setErrorAnime, stopAnime } from "../../actions";
 
-export function* animeWorker(): SagaIterator {
-  yield put(startAnimeList());
+export function* animeWorker(action: getAnimeType): SagaIterator {
+  yield put(startAnime());
   try {
-    const result: AnimeListReponse = yield call(service.animeList);
-    yield put(setAnimeList(result.data));
+    const result: AnimeResponse = yield call(service.anime, action.payload);
+    yield put(setAnime(result.data));
   } catch (err) {
-    yield put(setErrorAnimeList(err?.response?.data));
+    yield put(setErrorAnime(err));
   } finally {
-    yield put(stopAnimeList());
+    yield put(stopAnime());
   }
 }

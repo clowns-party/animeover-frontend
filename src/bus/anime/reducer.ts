@@ -9,10 +9,14 @@ import {
   AnimeError,
   GET_ONGOING_LIST,
   SET_ONGOING_LIST,
+  GET_ANIME,
+  SET_ANIME,
+  Anime,
 } from "./types";
 
 export type AnimeState = {
-  anime: AnimeList | null;
+  anime: Anime | null;
+  animeList: AnimeList | null;
   ongoing: AnimeList | null;
   isFetching: boolean;
   error: AnimeError | false;
@@ -20,6 +24,7 @@ export type AnimeState = {
 
 const initialState: AnimeState = {
   anime: null,
+  animeList: null,
   ongoing: null,
   isFetching: false,
   error: false,
@@ -41,7 +46,7 @@ export const animeReducer = (
     case SET_ANIME_LIST:
       return {
         ...state,
-        anime: [...action.payload],
+        animeList: [...action.payload],
       };
     case SET_ONGOING_LIST:
       return {
@@ -62,6 +67,15 @@ export const animeReducer = (
       return {
         ...state,
         error: action.payload,
+      };
+    case GET_ANIME:
+      return {
+        ...state,
+      };
+    case SET_ANIME:
+      return {
+        ...state,
+        anime: { ...action.payload },
       };
     default:
       // eslint-disable-next-line no-case-declarations

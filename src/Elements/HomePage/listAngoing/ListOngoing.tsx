@@ -1,10 +1,10 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
 import React, { FC } from "react";
-import { useAnimelist } from "../../../bus/anime/hooks/useAnimeList";
+import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./listOngoing.module.scss";
 
 export const ListOngoing: FC = () => {
-  const { anime, ongoing, isFetching, error } = useAnimelist();
+  const { anime, ongoing, isFetching, error } = useAnime();
 
   return (
     <div className={styles.container}>
@@ -37,7 +37,7 @@ const Ongoing = ({ el }) => {
         className={styles.card}
         size="small"
         hoverable
-        cover={<img className={styles.anime} alt="anime" src={el.picture} />}
+        cover={<img className={styles.anime} alt="anime" src={`https://shikimori.one/${el.picture}`} />}
       >
         <Meta title={el.title} description={el.type} />
       </Card>

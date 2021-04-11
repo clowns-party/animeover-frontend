@@ -15,21 +15,27 @@ import {
   setOngoingListType,
   getOngoingListType,
   GET_ONGOING_LIST,
+  GET_ANIME,
+  getAnimeType,
+  Anime,
+  setAnimeType,
+  SET_ANIME,
+  IdType,
 } from "./types";
 
-export function startAnimeList(): startAnimeListType {
+export function startAnime(): startAnimeListType {
   return {
     type: START_ANIME_LIST,
   };
 }
 
-export function stopAnimeList(): stopAnimeListType {
+export function stopAnime(): stopAnimeListType {
   return {
     type: STOP_ANIME_LIST,
   };
 }
 
-export function setErrorAnimeList(payload: AnimeError): setErrorAnimeListType {
+export function setErrorAnime(payload: AnimeError): setErrorAnimeListType {
   return {
     type: SET_ERROR_ANIME_LIST,
     payload,
@@ -58,6 +64,20 @@ export function getOngoingList(): getOngoingListType {
 export function setOngoingList(payload: AnimeList): setOngoingListType {
   return {
     type: SET_ONGOING_LIST,
+    payload,
+  };
+}
+
+export function getAnime(payload: IdType): getAnimeType {
+  return {
+    type: GET_ANIME,
+    payload,
+  };
+}
+
+export function setAnime(payload: Anime): setAnimeType {
+  return {
+    type: SET_ANIME,
     payload,
   };
 }
