@@ -67,12 +67,14 @@
   color: #fff;
   font: 14px "Noto Sans";
   font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .container_button {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   border: none;
   background: none;
   margin: 18px 0 18px 0;

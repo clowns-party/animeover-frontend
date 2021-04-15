@@ -1,10 +1,11 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
 import React, { FC } from "react";
+import Router from "next/router";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./listOngoing.module.scss";
 
 export const ListOngoing: FC = () => {
-  const { anime, ongoing, isFetching, error } = useAnime();
+  const { ongoing, isFetching, error } = useAnime();
 
   return (
     <div className={styles.container}>
@@ -19,7 +20,8 @@ export const ListOngoing: FC = () => {
       <Row className={styles.ongoing_container}>
         {ongoing?.length ? (
           ongoing.map(
-            (el, index) => index <= 7 && <Ongoing key={el._id} el={el} />
+            (el, index) =>
+              index <= 7 && <Ongoing key={el._id} id={el._id} el={el} />
           )
         ) : (
           <Skeletons />
@@ -29,15 +31,25 @@ export const ListOngoing: FC = () => {
   );
 };
 
-const Ongoing = ({ el }) => {
+const Ongoing = ({ el, id }) => {
   const { Meta } = Card;
+  const ongoingCliced = () => {
+    Router.push(`/ongoing/${id}`);
+  };
   return (
     <Tooltip placement="right" title={<TitleOngoing el={el} />}>
       <Card
+        onClick={() => ongoingCliced()}
         className={styles.card}
         size="small"
         hoverable
-        cover={<img className={styles.anime} alt="anime" src={`https://shikimori.one/${el.picture}`} />}
+        cover={
+          <img
+            className={styles.anime}
+            alt="anime"
+            src={`https://shikimori.one/${el.picture}`}
+          />
+        }
       >
         <Meta title={el.title} description={el.type} />
       </Card>
