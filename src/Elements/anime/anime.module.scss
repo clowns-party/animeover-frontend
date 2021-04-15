@@ -1,0 +1,141 @@
+.anime_container {
+  background-color: #fff;
+  padding: 16px 36px 0 16px;
+  margin-top: 35px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.anime_picture {
+  width: 200px;
+  height: 320px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.info_container {
+  display: flex;
+  .title {
+    color: #303030;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: "Noto Sans", sans-serif;
+    margin-bottom: 16px;
+  }
+  .item {
+    color: #2f2f2f;
+    font: 14px "Noto Sans";
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .text {
+    padding: 4px 6px;
+    border-radius: 6px;
+    background-color: #f3f8fd;
+    font: 14px "Noto Sans";
+    font-weight: 700;
+    color: #b4bdc6;
+  }
+}
+
+.green {
+  color: #31cc53;
+}
+
+.orange {
+  color: #ffa24d;
+}
+
+.blue {
+  color: #5c9dff;
+}
+
+.grey {
+  color: #b4bdc6;
+}
+
+.item_text {
+  font: 14px "Noto Sans";
+  font-weight: 700;
+}
+
+.star {
+  background-color: #4030ff;
+  border-radius: 22px;
+  padding: 8px 15px;
+  color: #fff;
+  font: 14px "Noto Sans";
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.container_button {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: none;
+  background: none;
+  margin: 18px 0 18px 0;
+  cursor: pointer;
+  position: relative;
+  min-height: 60px;
+}
+
+.button_icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 12px;
+  position: absolute;
+  right: 70px;
+  span {
+    transition: 0.5s linear;
+    height: 2px;
+    width: 13px;
+    background-color: #8e8b8b;
+  }
+  span:last-child {
+    transition: 0.5s linear;
+    transform: rotate(90deg);
+    margin-top: -2px;
+  }
+}
+
+.close_button {
+  right: 65px !important;
+  top: 10px !important;
+  span:first-child {
+    transition: 0.5s linear;
+    transform: rotate(45deg) !important;
+  }
+  span:last-child {
+    transition: 0.5s linear;
+    transform: rotate(-45deg) !important;
+  }
+}
+
+.button {
+  color: #8e8b8b;
+  font: 14px "Noto Sans";
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none !important;
+}
+
+.container_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.picture_and_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 36px;
+}

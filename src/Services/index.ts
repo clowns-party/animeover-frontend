@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 // Types
 import { AuthFormData, User, UserSchema } from "../bus/auth/types";
-import { Anime } from "../bus/anime/types";
+import { Anime, IdType } from "../bus/anime/types";
 
 export class Api {
   public baseUrl: string;
@@ -15,7 +15,7 @@ export class Api {
       baseURL: this.baseUrl,
       headers: {
         // идея не очень, инстанс создается один раз, не знает новых куки
-        //  хот апдейт придумать
+        // хот апдейт придумать
         Authorization: Cookies.get("token") ?? "",
       },
     });
@@ -25,6 +25,7 @@ export class Api {
     this.auth = this.auth.bind(this);
     this.me = this.me.bind(this);
     this.ongoingList = this.ongoingList.bind(this);
+    this.anime = this.anime.bind(this);
   }
 
   me(): Promise<AxiosResponse<User>> {
@@ -50,11 +51,15 @@ export class Api {
   }
 
   animeList(): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>("/animedb?limit=10");
+    return this.instance.get<Anime>("/animedb?limit=30");
   }
 
   ongoingList(): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>("animedb/ongoing");
+    return this.instance.get<Anime>("/ongoing");
+  }
+
+  anime(id: IdType): Promise<AxiosResponse<Anime>> {
+    return this.instance.get<Anime>(`/animedb/anime/${id}`);
   }
 }
 

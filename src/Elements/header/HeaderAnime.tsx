@@ -39,18 +39,20 @@ export const HeaderAnime: FC = () => {
           </Button>
         </Col>
         <Col flex="150px">
-          <div className={`${styles.logo_container} ${styles.item}`}>
-            <div className={styles.logo}>
-              <Image
-                src="/hands.svg"
-                layout="fixed"
-                alt="logo"
-                width={26}
-                height={26}
-              />
+          <Link href="/">
+            <div className={`${styles.logo_container} ${styles.item}`}>
+              <div className={styles.logo}>
+                <Image
+                  src="/hands.svg"
+                  layout="fixed"
+                  alt="logo"
+                  width={26}
+                  height={26}
+                />
+              </div>
+              <p className={`${styles.name} ${styles.item}`}>Clowns Anime</p>
             </div>
-            <p className={`${styles.name} ${styles.item}`}>Clowns Anime</p>
-          </div>
+          </Link>
         </Col>
         <Col flex="150px" className={styles.container_list_anime}>
           <div className={`${styles.list_anime} ${styles.item}`}>
