@@ -1,24 +1,16 @@
-import Cookies from "js-cookie";
 // Core
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
 // Types
 import { AuthFormData, User, UserSchema } from "../bus/auth/types";
 import { Anime, IdType } from "../bus/anime/types";
+import { axiosInstace } from "../../axios/axios.instance";
 
 export class Api {
   public baseUrl: string;
   public instance: AxiosInstance;
 
   constructor() {
-    this.baseUrl = "https://animeover-api.herokuapp.com";
-    this.instance = axios.create({
-      baseURL: this.baseUrl,
-      headers: {
-        // идея не очень, инстанс создается один раз, не знает новых куки
-        // хот апдейт придумать
-        Authorization: Cookies.get("token") ?? "",
-      },
-    });
+    this.instance = axiosInstace;
     // Methods
     this.animeList = this.animeList.bind(this);
     this.signUp = this.signUp.bind(this);

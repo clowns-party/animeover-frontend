@@ -5,6 +5,7 @@ import { watchAnimeList } from "../src/bus/anime/saga/animeList/animeListWatch";
 import { watchOngoing } from "../src/bus/anime/saga/ongoing/OngoingWatch";
 import { watchAuth } from "../src/bus/auth/saga/watcherAuth";
 import { watchRegistration } from "../src/bus/auth/saga/watcherRegistration";
+import { watchMe } from "../src/bus/auth/saga/watchMe";
 
 export function* rootSaga(): Generator {
   yield all([
@@ -12,6 +13,7 @@ export function* rootSaga(): Generator {
     watchRegistration(),
     watchOngoing(),
     watchAnimeList(),
-    animeWath()
+    animeWath(),
+    watchMe(),
   ]);
 }

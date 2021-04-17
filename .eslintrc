@@ -44,7 +44,11 @@
     "react/jsx-props-no-spreading": 0,
     "import/prefer-default-export": 0,
     "no-debugger": "warn",
+    "no-param-reassign":"off",
+    "no-nested-ternary":"off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "react/jsx-one-expression-per-line": "off",
+    "no-useless-constructor": "off",
     "import/extensions": [
       1,
       "ignorePackages",
