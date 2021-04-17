@@ -20,8 +20,14 @@ export class Api {
     this.anime = this.anime.bind(this);
   }
 
-  me(): Promise<AxiosResponse<User>> {
-    return this.instance.post<User>("/auth/me");
+  me(token?: string): Promise<AxiosResponse<User>> {
+    return !token
+      ? this.instance.post<User>("/auth/me")
+      : this.instance.post<User>("/auth/me", null, {
+          headers: {
+            Authorization: token,
+          },
+        });
   }
 
   auth(payload: AuthFormData): Promise<AxiosResponse<User>> {

@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from "axios";
 import cookie from "cookie";
+import { AxiosRequestConfig } from "axios";
 import { GetServerSidePropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 

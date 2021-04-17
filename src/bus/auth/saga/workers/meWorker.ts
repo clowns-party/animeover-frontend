@@ -13,7 +13,10 @@ import { service } from "../../../../Services";
 export function* meWorker(action: meAction): SagaIterator {
   try {
     yield put(startFetching());
-    const { data }: { data: User["user"] } = yield call(service.me);
+    const { data }: { data: User["user"] } = yield call(
+      service.me,
+      action.token
+    );
     if (data) {
       yield put(set({ user: data, token: Cookies.get("token") }));
     } else {

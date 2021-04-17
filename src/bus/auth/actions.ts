@@ -62,6 +62,7 @@ export function logout(): AuthActionTypes {
   };
 }
 
-export const me = (): AuthActionTypes => ({
+export const me = (token?: string): AuthActionTypes => ({
   type: ME,
+  token,
 });

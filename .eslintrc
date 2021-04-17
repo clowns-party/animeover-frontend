@@ -49,6 +49,7 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "react/jsx-one-expression-per-line": "off",
     "no-useless-constructor": "off",
+    "indent": "off",
     "import/extensions": [
       1,
       "ignorePackages",
