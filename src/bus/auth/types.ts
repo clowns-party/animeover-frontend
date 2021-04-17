@@ -16,6 +16,10 @@ export type User = {
 
 export type UserResponse = { data: User };
 
+export const ME = "ME";
+export type meAction = {
+  type: typeof ME;
+};
 export const AUTH_SET = "AUTH_SET";
 export type setType = {
   type: typeof AUTH_SET;
@@ -82,4 +86,5 @@ export type AuthActionTypes =
   | AuthStartFechingAction
   | AuthStopFechingAction
   | logoutType
-  | AuthSetError;
+  | AuthSetError
+  | meAction;

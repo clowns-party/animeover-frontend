@@ -11,6 +11,7 @@ import {
   AuthFormData,
   ErrorHttpAction,
   LOGOUT,
+  ME,
 } from "./types";
 
 // SIGN IN ACTIONS
@@ -57,6 +58,10 @@ export function signUpAsync(payload: AuthFormData): AuthActionTypes {
 
 export function logout(): AuthActionTypes {
   return {
-    type: LOGOUT
-  }
+    type: LOGOUT,
+  };
 }
+
+export const me = (): AuthActionTypes => ({
+  type: ME,
+});

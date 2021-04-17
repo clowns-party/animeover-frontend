@@ -1,20 +1,17 @@
 // core
-import React, { FC } from "react";
-import { service } from "./Services";
+import React, { FC, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { me } from "./bus/auth/actions";
 import { HomePage } from "./Elements/HomePage/HomePage";
 
 const App: FC = () => {
-  // не тут должно быть TEMP
-  const call = async () => {
-    const result = await service.me();
-    console.log(result);
-  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(me());
+  }, []);
   return (
     <div className="App">
       <HomePage />
-      {/* <button type="button" onClick={call}>
-        TEST AUTH ME!
-      </button> */}
     </div>
   );
 };

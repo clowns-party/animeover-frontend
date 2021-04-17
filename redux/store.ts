@@ -1,11 +1,11 @@
 // Core
 import { createStore, applyMiddleware } from "redux";
+import { createWrapper } from "next-redux-wrapper";
 
 // Instruments
 import { rootReducer } from "./rootReducer";
 import { rootSaga } from "./rootSaga";
 import { composeEnhancers, middleware, sagaMiddleware } from "./middleware";
-import { createWrapper } from "next-redux-wrapper";
 
 const makeStore = (context) => {
   const store = createStore(
@@ -15,7 +15,7 @@ const makeStore = (context) => {
 
   sagaMiddleware.run(rootSaga);
 
-  return store
-}
+  return store;
+};
 
-export const wrapperSome = createWrapper(makeStore)
+export const wrapperSome = createWrapper(makeStore);
