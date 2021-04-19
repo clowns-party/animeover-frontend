@@ -19,6 +19,8 @@ import {
   getAnimeType,
   Anime,
   setAnimeType,
+  REMOVE_ANIME_STATE,
+  removeAnimeStateType,
   SET_ANIME,
   IdType,
 } from "./types";
@@ -79,5 +81,11 @@ export function setAnime(payload: Anime): setAnimeType {
   return {
     type: SET_ANIME,
     payload,
+  };
+}
+
+export function removeAnimeState(): removeAnimeStateType {
+  return {
+    type: REMOVE_ANIME_STATE,
   };
 }

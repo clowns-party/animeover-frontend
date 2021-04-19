@@ -77,6 +77,11 @@ export type setAnimeType = {
   payload: Anime;
 };
 
+export const REMOVE_ANIME_STATE = "REMOVE_ANIME_STATE";
+export type removeAnimeStateType = {
+  type: typeof REMOVE_ANIME_STATE;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
   | setOngoingListType
@@ -86,4 +91,5 @@ export type animeActionsTypes =
   | setErrorAnimeListType
   | getAnimeType
   | setAnimeType
+  | removeAnimeStateType
   | getOngoingListType;

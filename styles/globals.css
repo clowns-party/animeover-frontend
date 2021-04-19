@@ -11,6 +11,18 @@ body {
     sans-serif;
 }
 
+html::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+}
+html::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: #afafaf;
+  border-radius: 9em;
+  box-shadow: inset 1px 1px 10px #f3faf7;
+}
+
 a {
   color: inherit;
   text-decoration: none;

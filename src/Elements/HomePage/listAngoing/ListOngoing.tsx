@@ -34,7 +34,7 @@ export const ListOngoing: FC = () => {
 const Ongoing = ({ el, id }) => {
   const { Meta } = Card;
   const ongoingCliced = () => {
-    Router.push(`/ongoing/${id}`);
+    Router.push(`/anime/${id}`);
   };
   return (
     <Tooltip placement="right" title={<TitleOngoing el={el} />}>

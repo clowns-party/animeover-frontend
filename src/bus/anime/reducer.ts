@@ -11,6 +11,7 @@ import {
   SET_ONGOING_LIST,
   GET_ANIME,
   SET_ANIME,
+  REMOVE_ANIME_STATE,
   Anime,
 } from "./types";
 
@@ -76,6 +77,11 @@ export const animeReducer = (
       return {
         ...state,
         anime: { ...action.payload },
+      };
+    case REMOVE_ANIME_STATE:
+      return {
+        ...state,
+        anime: null,
       };
     default:
       // eslint-disable-next-line no-case-declarations
