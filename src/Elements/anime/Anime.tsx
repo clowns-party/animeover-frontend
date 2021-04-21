@@ -5,33 +5,31 @@ import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
 import { Anime as AnimeType } from "../../bus/anime/types";
+import { imgFormatter } from "../../utils/imgFormatter";
+import { avatarSize, formatTags } from "./anime.functions";
 
 export const Anime: FC = () => {
   const { anime, isFetching, error } = useAnime();
 
   // FINISHED, UPCOMING, UNKNOWN, CURRENTLY, UNDEFINED
-
   const [list, changeList] = useState(false);
-  const animePicture =
-    anime?.picture.indexOf("/system/animes") === 0
-      ? `https://shikimori.one${anime?.picture}`
-      : anime?.picture;
+  const animePicture = anime && imgFormatter(anime?.picture);
 
   return (
     <AnimeContainer>
       <div className={styles.anime_container}>
         <div className={styles.info_container}>
           <div className={styles.picture_and_button}>
-            {anime ? (
+            {!isFetching ? (
               <img
                 className={styles.anime_picture}
                 src={animePicture}
-                alt="anime"
+                alt={anime?.title || "anime"}
               />
             ) : (
               <Skeleton.Avatar active shape="square" style={avatarSize()} />
             )}
-            {anime ? (
+            {!isFetching ? (
               <ButtonList list={list} changeList={changeList} />
             ) : (
               <div className={styles.container_button_skeleton}>
@@ -39,10 +37,12 @@ export const Anime: FC = () => {
               </div>
             )}
           </div>
-          <div>{anime ? <TitleAnime anime={anime} /> : <TitleSkeleton />}</div>
+          <div>
+            {!isFetching ? <TitleAnime anime={anime} /> : <TitleSkeleton />}
+          </div>
         </div>
         <div className={styles.star_container}>
-          {anime ? (
+          {!isFetching ? (
             <div className={styles.star}>
               <StarOutlined
                 style={{ color: "#FFEC44", fontSize: 15, marginRight: 4 }}
@@ -59,32 +59,6 @@ export const Anime: FC = () => {
       </div>
     </AnimeContainer>
   );
-};
-
-const avatarSize = () => {
-  let clientWidth = null;
-  if (process && process?.browser) {
-    clientWidth = window?.screen?.width;
-  }
-  if (clientWidth && clientWidth <= 395) {
-    return { width: 150, height: 270, borderRadius: 20 };
-  }
-  return { width: 200, height: 320, borderRadius: 20 };
-};
-
-// как тут типизировать если по идее функция может принимать разные массивы
-const handlerArray = (array) => {
-  return array?.length
-    ? array?.map(
-      (el, index: number) =>
-        index <= 5 && (
-          <span className={styles.word} key={String(index)}>
-            {el}
-            {index === array.length - 1 || index <= 5 ? " " : ", "}
-          </span>
-        )
-    )
-    : "No tags";
 };
 
 const TitleSkeleton: FC = () => {
@@ -137,7 +111,7 @@ const TitleAnime: FC<{ anime: AnimeType }> = ({ anime }) => {
     <>
       <div className={styles.title}>{anime?.title}</div>
       <div className={styles.item}>
-        Tags: <span className={styles.text}>{handlerArray(anime?.tags)}</span>
+        Tags: <span className={styles.text}>{formatTags(anime?.tags)}</span>
       </div>
       <div className={styles.item}>
         Type: <span className={styles.text}>{anime?.type}</span>
@@ -158,7 +132,7 @@ const TitleAnime: FC<{ anime: AnimeType }> = ({ anime }) => {
       </div>
       <div className={styles.item}>
         Synonyms:{" "}
-        <span className={styles.text}>{handlerArray(anime?.synonyms)}</span>
+        <span className={styles.text}>{formatTags(anime?.synonyms)}</span>
       </div>
       <div className={styles.item}>
         Status:{" "}
