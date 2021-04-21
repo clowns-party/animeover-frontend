@@ -71,6 +71,7 @@ export const animeReducer = (
     case GET_ANIME:
       return {
         ...state,
+        anime: null,
       };
     case SET_ANIME:
       return {

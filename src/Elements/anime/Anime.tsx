@@ -5,52 +5,44 @@ import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
 import { Anime as AnimeType } from "../../bus/anime/types";
+import { imgFormatter } from "../../utils/imgFormatter";
+import { avatarSize, formatTags } from "./anime.functions";
 
 export const Anime: FC = () => {
   const { anime, isFetching, error } = useAnime();
 
   // FINISHED, UPCOMING, UNKNOWN, CURRENTLY, UNDEFINED
-
-  // добавить скелетон на страницу
   const [list, changeList] = useState(false);
+  const animePicture = anime && imgFormatter(anime?.picture);
 
   return (
     <AnimeContainer>
       <div className={styles.anime_container}>
         <div className={styles.info_container}>
           <div className={styles.picture_and_button}>
-            {anime ? (
+            {!isFetching ? (
               <img
                 className={styles.anime_picture}
-                src={anime?.picture}
-                alt="anime"
+                src={animePicture}
+                alt={anime?.title || "anime"}
               />
             ) : (
-              <Skeleton.Avatar
-                active
-                shape="square"
-                style={{
-                  width: 200,
-                  height: 320,
-                  borderRadius: 20,
-                }}
-              />
+              <Skeleton.Avatar active shape="square" style={avatarSize()} />
             )}
-            <div className={styles.container_button}>
-              {anime ? (
-                <ButtonList list={list} changeList={changeList} />
-              ) : (
-                <Skeleton.Input
-                  style={{ width: 200, height: 35, borderRadius: 22 }}
-                  active
-                />
-              )}
-            </div>
+            {!isFetching ? (
+              <ButtonList list={list} changeList={changeList} />
+            ) : (
+              <div className={styles.container_button_skeleton}>
+                <Skeleton.Input className={styles.skeleton_button} active />
+              </div>
+            )}
           </div>
-          <div>{anime ? <TitleAnime anime={anime} /> : <TitleSkeleton />}</div>
+          <div>
+            {!isFetching ? <TitleAnime anime={anime} /> : <TitleSkeleton />}
+          </div>
         </div>
         <div className={styles.star_container}>
-          {anime ? (
+          {!isFetching ? (
             <div className={styles.star}>
               <StarOutlined
                 style={{ color: "#FFEC44", fontSize: 15, marginRight: 4 }}
@@ -69,49 +61,32 @@ export const Anime: FC = () => {
   );
 };
 
-// как тут типизировать если по идее функция может принимать разные массивы
-const handlerArray = (array) => {
-  return array?.map(
-    (el, index: number) =>
-      index <= 5 && (
-        <span className={styles.word} key={String(index)}>
-          {el}
-          {index === array.length - 1 || index <= 5 ? " " : ", "}
-        </span>
-      )
-  );
-};
-
 const TitleSkeleton: FC = () => {
-  const stylesDescriprion = { width: 200, height: 27, borderRadius: 6 };
   return (
     <>
       <div className={styles.title}>
-        <Skeleton.Input
-          style={{ width: 300, height: 40, borderRadius: 6 }}
-          active
-        />
+        <Skeleton.Input className={styles.skeleton_title} active />
       </div>
       <div className={styles.item}>
-        Tags: <Skeleton.Input style={stylesDescriprion} active />
+        Tags: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
       <div className={styles.item}>
-        Type: <Skeleton.Input style={stylesDescriprion} active />
+        Type: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
       <div className={styles.item}>
-        Year: <Skeleton.Input style={stylesDescriprion} active />
+        Year: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
       <div className={styles.item}>
-        Episodes: <Skeleton.Input style={stylesDescriprion} active />
+        Episodes: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
       <div className={styles.item}>
-        Season: <Skeleton.Input style={stylesDescriprion} active />
+        Season: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
       <div className={styles.item}>
-        Synonyms: <Skeleton.Input style={stylesDescriprion} active />
+        Synonyms: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
       <div className={styles.item}>
-        Status: <Skeleton.Input style={stylesDescriprion} active />
+        Status: <Skeleton.Input className={styles.skeleton_element} active />
       </div>
     </>
   );
@@ -124,6 +99,7 @@ const TitleAnime: FC<{ anime: AnimeType }> = ({ anime }) => {
         return "green";
       case "UPCOMING":
         return "orange";
+      case "ongoing":
       case "CURRENTLY":
         return "blue";
       default:
@@ -135,7 +111,7 @@ const TitleAnime: FC<{ anime: AnimeType }> = ({ anime }) => {
     <>
       <div className={styles.title}>{anime?.title}</div>
       <div className={styles.item}>
-        Tags: <span className={styles.text}>{handlerArray(anime?.tags)}</span>
+        Tags: <span className={styles.text}>{formatTags(anime?.tags)}</span>
       </div>
       <div className={styles.item}>
         Type: <span className={styles.text}>{anime?.type}</span>
@@ -156,7 +132,7 @@ const TitleAnime: FC<{ anime: AnimeType }> = ({ anime }) => {
       </div>
       <div className={styles.item}>
         Synonyms:{" "}
-        <span className={styles.text}>{handlerArray(anime?.synonyms)}</span>
+        <span className={styles.text}>{formatTags(anime?.synonyms)}</span>
       </div>
       <div className={styles.item}>
         Status:{" "}
@@ -179,8 +155,12 @@ const ButtonList: FC<{
   const closeButton = list && "close_button";
 
   return (
-    <>
-      <div className={styles.button} onClick={() => changeList(!list)}>
+    <div
+      className={styles.container_button}
+      onMouseEnter={() => changeList(true)}
+      onMouseLeave={() => changeList(false)}
+    >
+      <div className={styles.button}>
         <div className={`${styles.button_icon} ${styles[`${closeButton}`]}`}>
           <span />
           <span />
@@ -194,6 +174,6 @@ const ButtonList: FC<{
           <div className={styles.button}>Viewed</div>
         </div>
       )}
-    </>
+    </div>
   );
 };

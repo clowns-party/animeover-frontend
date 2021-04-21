@@ -8,5 +8,11 @@ export const useAnime = (): AnimeState => {
     AnimeState
   >((state) => state.anime);
 
-  return { animeList, anime, ongoing, isFetching, error };
+  return {
+    animeList,
+    anime: !isFetching && anime,
+    ongoing,
+    isFetching: Boolean(isFetching || !anime),
+    error,
+  };
 };
