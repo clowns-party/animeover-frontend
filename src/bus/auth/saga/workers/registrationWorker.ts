@@ -1,9 +1,9 @@
 import { SagaIterator } from "redux-saga";
 import { put, call } from "redux-saga/effects";
+import Router from "next/router";
 import { startFetching, stopFetching, setFetchingError } from "../../actions";
 import { signUpAsyncType } from "../../types";
 import { service } from "../../../../Services";
-import Router from "next/router";
 
 export function* signUpWorker(action: signUpAsyncType): SagaIterator {
   const { payload } = action;

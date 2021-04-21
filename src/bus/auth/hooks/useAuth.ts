@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { AppState } from "../../../redux/rootReducer";
+import { AppState } from "../../../../redux/rootReducer";
 import { AuthState } from "../reducer";
 
 export const useAuth = (): AuthState => {

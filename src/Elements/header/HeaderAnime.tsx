@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
-import styles from "./header.module.scss";
 import { Input, Row, Col, Button, Divider } from "antd";
 import Link from "next/link";
 import {
@@ -10,6 +9,7 @@ import {
   MenuUnfoldOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import styles from "./header.module.scss";
 import { logout } from "../../bus/auth/actions";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
