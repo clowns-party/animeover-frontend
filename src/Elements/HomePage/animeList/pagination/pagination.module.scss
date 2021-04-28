@@ -1,0 +1,13 @@
+.pagination_container {
+  display: flex;
+}
+
+.currentPage {
+  font: 20px "Open Sans";
+  font-weight: 600;
+}
+
+.page {
+  cursor: pointer;
+  margin-right: 6px;
+}

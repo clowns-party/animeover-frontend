@@ -12,6 +12,7 @@ import {
   GET_ANIME,
   SET_ANIME,
   Anime,
+  SET_ANIME_LIST_COUNT,
 } from "./types";
 
 export type AnimeState = {
@@ -19,6 +20,9 @@ export type AnimeState = {
   animeList: AnimeList | null;
   ongoing: AnimeList | null;
   isFetching: boolean;
+  currentPage: number;
+  totalPages: number;
+  pageLimit: number;
   error: AnimeError | false;
 };
 
@@ -27,6 +31,9 @@ const initialState: AnimeState = {
   animeList: null,
   ongoing: null,
   isFetching: false,
+  currentPage: 1,
+  totalPages: null,
+  pageLimit: 20,
   error: false,
 };
 
@@ -47,6 +54,11 @@ export const animeReducer = (
       return {
         ...state,
         animeList: [...action.payload],
+      };
+    case SET_ANIME_LIST_COUNT:
+      return {
+        ...state,
+        totalPages: action.payload,
       };
     case SET_ONGOING_LIST:
       return {

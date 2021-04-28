@@ -48,8 +48,8 @@ export class Api {
     });
   }
 
-  animeList(): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>("/animedb?limit=30");
+  animeList(limit: number, page: number): Promise<AxiosResponse<Anime>> {
+    return this.instance.get<Anime>(`/animedb?limit=${limit}&page=${page}`);
   }
 
   ongoingList(): Promise<AxiosResponse<Anime>> {
