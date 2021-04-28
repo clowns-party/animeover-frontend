@@ -1,6 +1,7 @@
-import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
+import { SagaIterator } from "redux-saga";
 import { service } from "../../../../Services";
+import { AnimeListReponse } from "../../types";
 import {
   setAnimeList,
   setAnimeListCount,
@@ -8,9 +9,8 @@ import {
   startAnime,
   stopAnime,
 } from "../../actions";
-import { AnimeListReponse, getAnimeListType } from "../../types";
 
-export function* animeListWorker(action: getAnimeListType): SagaIterator {
+export function* changePageWorker(action): SagaIterator {
   const { payload } = action;
   yield put(startAnime());
   try {

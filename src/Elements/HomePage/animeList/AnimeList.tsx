@@ -5,18 +5,26 @@ import Router from "next/router";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./animeList.module.scss";
 import { AnimeList as AnimeListType } from "../../../bus/anime/types";
+import { Pagination } from "./pagination/Pagination";
 
 export const AnimeList: FC = () => {
-  const { animeList } = useAnime();
+  const { animeList, pageLimit, totalPages, currentPage } = useAnime();
 
   return (
-    <div className={styles.anime_list_container}>
-      {animeList?.length ? (
-        <AnimeCards animeList={animeList} />
-      ) : (
-        <SkeletonCards />
-      )}
-    </div>
+    <>
+      <div className={styles.anime_list_container}>
+        {animeList?.length ? (
+          <AnimeCards animeList={animeList} />
+        ) : (
+          <SkeletonCards />
+        )}
+      </div>
+      <Pagination
+        pageLimit={pageLimit}
+        totalPages={totalPages}
+        currentPage={currentPage}
+      />
+    </>
   );
 };
 

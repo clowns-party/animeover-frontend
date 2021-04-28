@@ -18,7 +18,16 @@ export type Anime = {
   tags: Array<string>;
 };
 
-export type AnimeListReponse = { data: AnimeList };
+export type AnimeListPageParams = {
+  limit: number,
+  page: number
+}
+
+export type AnimeData = {
+  animeList: AnimeList;
+  count: number;
+};
+export type AnimeListReponse = { data: AnimeData };
 export type AnimeResponse = { data: Anime };
 export type IdType = string | string[];
 
@@ -30,6 +39,7 @@ export type AnimeError = {
 export const GET_ANIME_LIST = "GET_ANIME_LIST";
 export type getAnimeListType = {
   type: typeof GET_ANIME_LIST;
+  payload: AnimeListPageParams
 };
 
 export const STOP_ANIME_LIST = "STOP_ANIME_LIST";
@@ -77,6 +87,18 @@ export type setAnimeType = {
   payload: Anime;
 };
 
+export const SET_ANIME_LIST_COUNT = "SET_ANIME_LIST_COUNT";
+export type setAnimeListCountType = {
+  type: typeof SET_ANIME_LIST_COUNT;
+  payload: number;
+};
+
+export const CHANGE_PAGE = "CHANGE_PAGE";
+export type changePageType = {
+  type: typeof CHANGE_PAGE;
+  payload: AnimeListPageParams;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
   | setOngoingListType
@@ -86,4 +108,5 @@ export type animeActionsTypes =
   | setErrorAnimeListType
   | getAnimeType
   | setAnimeType
+  | setAnimeListCountType
   | getOngoingListType;

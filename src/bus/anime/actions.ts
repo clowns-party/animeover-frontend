@@ -21,6 +21,11 @@ import {
   setAnimeType,
   SET_ANIME,
   IdType,
+  setAnimeListCountType,
+  SET_ANIME_LIST_COUNT,
+  changePageType,
+  CHANGE_PAGE,
+  AnimeListPageParams,
 } from "./types";
 
 export function startAnime(): startAnimeListType {
@@ -42,9 +47,10 @@ export function setErrorAnime(payload: AnimeError): setErrorAnimeListType {
   };
 }
 
-export function getAnimeList(): getAnimeListType {
+export function getAnimeList(payload: AnimeListPageParams): getAnimeListType {
   return {
     type: GET_ANIME_LIST,
+    payload,
   };
 }
 
@@ -78,6 +84,20 @@ export function getAnime(payload: IdType): getAnimeType {
 export function setAnime(payload: Anime): setAnimeType {
   return {
     type: SET_ANIME,
+    payload,
+  };
+}
+
+export function setAnimeListCount(payload: number): setAnimeListCountType {
+  return {
+    type: SET_ANIME_LIST_COUNT,
+    payload,
+  };
+}
+
+export function changePage(payload: AnimeListPageParams): changePageType {
+  return {
+    type: CHANGE_PAGE,
     payload,
   };
 }
