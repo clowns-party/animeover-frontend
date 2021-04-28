@@ -10,7 +10,7 @@
   .name {
     color: #fff;
     font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -24,7 +24,7 @@
 
 .login {
   font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   color: #fff;
   padding-right: 4px;
@@ -48,7 +48,7 @@
   color: #fff;
   cursor: pointer;
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   &:hover {
     .arrow {
       transform: rotate(90deg);
@@ -124,6 +124,7 @@
 .user {
   color: #fff;
   text-align: center;
+  cursor: pointer;
 }
 
 .hamburger {
@@ -140,7 +141,6 @@
 }
 
 @media (max-width: 800px) {
-
   .search_container {
     display: none;
   }

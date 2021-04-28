@@ -103,7 +103,9 @@ export const HeaderAnime: FC = () => {
             className={styles.user_info_mobile}
           >
             <div className={styles.user_container}>
-              <div className={styles.user}>{data?.user.email}</div>
+              <Link href="/profile">
+                <div className={styles.user}>{data?.user.email}</div>
+              </Link>
               <Button
                 type="primary"
                 onClick={() => {
