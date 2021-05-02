@@ -19,15 +19,16 @@ export type Anime = {
 };
 
 export type AnimeListPageParams = {
-  limit: number,
-  page: number
-}
+  limit: number;
+  page: number;
+};
 
 export type AnimeData = {
   animeList: AnimeList;
   count: number;
 };
 export type AnimeListReponse = { data: AnimeData };
+export type OngoingListRespose = { data: AnimeData["animeList"] };
 export type AnimeResponse = { data: Anime };
 export type IdType = string | string[];
 
@@ -39,7 +40,7 @@ export type AnimeError = {
 export const GET_ANIME_LIST = "GET_ANIME_LIST";
 export type getAnimeListType = {
   type: typeof GET_ANIME_LIST;
-  payload: AnimeListPageParams
+  payload: AnimeListPageParams;
 };
 
 export const STOP_ANIME_LIST = "STOP_ANIME_LIST";

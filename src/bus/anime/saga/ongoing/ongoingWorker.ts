@@ -8,12 +8,12 @@ import {
   setErrorAnime,
 } from "../../actions";
 // types
-import { AnimeListReponse } from "../../types";
+import { OngoingListRespose } from "../../types";
 
 export function* ongoingWorker(): SagaIterator {
   yield put(startAnime());
   try {
-    const result: AnimeListReponse = yield call(
+    const result: OngoingListRespose = yield call(
       service.animeService.ongoingList
     );
     yield put(setOngoingList(result.data));

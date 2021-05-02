@@ -2,7 +2,7 @@ import React from "react";
 import App from "next/app";
 import "antd/dist/antd.css";
 import withReduxSaga from "next-redux-saga";
-import { wrapperSome } from "../redux/store";
+import { wrapperSome } from "redux/store";
 import "../styles/globals.css";
 
 class ExampleApp extends App {

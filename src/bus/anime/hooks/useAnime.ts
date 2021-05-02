@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
+import { AppState } from "redux/rootReducer";
 import { AnimeState } from "../reducer";
-import { AppState } from "../../../../redux/rootReducer";
 
 export const useAnime = (): AnimeState => {
   const {

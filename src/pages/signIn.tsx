@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { SignInForm } from "../src/Elements/signInForm/signInForm";
+import { SignInForm } from "Elements/signInForm/signInForm";
 
 const signIn: FC = () => {
   return (
