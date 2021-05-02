@@ -14,7 +14,7 @@ export function* meWorker(action: meAction): SagaIterator {
   try {
     yield put(startFetching());
     const { data }: { data: User["user"] } = yield call(
-      service.me,
+      service.authService.me,
       action.token
     );
     if (data) {

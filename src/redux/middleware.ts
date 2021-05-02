@@ -1,7 +1,7 @@
 // Core
 import { compose, Middleware } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { axiosMiddleware } from "../axios/axios.middleware";
+import { axiosMiddleware } from "utils/axios/axios.middleware";
 
 const DEV = process.env.NODE_ENV === "development";
 

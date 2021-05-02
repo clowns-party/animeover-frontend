@@ -17,13 +17,14 @@ export const Pagination: FC<{
   }
   return (
     <div className={styles.pagination_container}>
-      {pages?.map((el: number) => {
+      {pages?.map((el: number, index) => {
         return (
           // className={`${currentPage === el && styles.currentPage} ${
           //   styles.page
           // }`}
           <div
             className={styles.page}
+            key={index.toString()}
             onClick={() => dispatch(changePage({ limit: pageLimit, page: el }))}
           >
             {el}

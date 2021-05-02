@@ -13,7 +13,9 @@ import { AnimeListReponse } from "../../types";
 export function* ongoingWorker(): SagaIterator {
   yield put(startAnime());
   try {
-    const result: AnimeListReponse = yield call(service.ongoingList);
+    const result: AnimeListReponse = yield call(
+      service.animeService.ongoingList
+    );
     yield put(setOngoingList(result.data));
   } catch (err) {
     yield put(setErrorAnime(err));

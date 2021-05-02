@@ -15,7 +15,7 @@ export function* animeListWorker(action: getAnimeListType): SagaIterator {
   yield put(startAnime());
   try {
     const result: AnimeListReponse = yield call(
-      service.animeList,
+      service.animeService.animeList,
       payload.limit,
       payload.page
     );

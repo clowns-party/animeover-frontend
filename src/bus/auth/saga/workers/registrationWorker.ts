@@ -9,7 +9,7 @@ export function* signUpWorker(action: signUpAsyncType): SagaIterator {
   const { payload } = action;
   try {
     yield put(startFetching());
-    const result = yield call(service.signUp, payload);
+    const result = yield call(service.authService.signUp, payload);
     if (result?.data) {
       // yield put(set({ user: result.data, token: '' }));
 

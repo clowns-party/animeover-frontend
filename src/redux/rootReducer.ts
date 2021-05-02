@@ -2,8 +2,8 @@
 import { combineReducers } from "redux";
 
 // Reducers
-import { AuthReducer as auth } from "../src/bus/auth/reducer";
-import { animeReducer as anime } from "../src/bus/anime/reducer";
+import { AuthReducer as auth } from "bus/auth/reducer";
+import { animeReducer as anime } from "bus/anime/reducer";
 
 const reducers = () =>
   combineReducers({

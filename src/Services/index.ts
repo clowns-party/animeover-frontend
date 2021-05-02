@@ -1,66 +1,19 @@
-// Core
-import { AxiosInstance, AxiosResponse } from "axios";
-// Types
-import { AuthFormData, User, UserSchema } from "../bus/auth/types";
-import { Anime, IdType } from "../bus/anime/types";
-import { axiosInstace } from "../../axios/axios.instance";
+import { Service as AuthService } from "./AuthService";
+import { Service as AnimeService } from "./AnimeService";
+import { Api } from "./Api";
 
-export class Api {
-  public baseUrl: string;
-  public instance: AxiosInstance;
-
+class Services {
+  public authService: AuthService;
+  public animeService: AnimeService;
+  private api: Api;
   constructor() {
-    this.instance = axiosInstace;
-    // Methods
-    this.animeList = this.animeList.bind(this);
-    this.signUp = this.signUp.bind(this);
-    this.auth = this.auth.bind(this);
-    this.me = this.me.bind(this);
-    this.ongoingList = this.ongoingList.bind(this);
-    this.anime = this.anime.bind(this);
+    this.init();
+    this.authService = new AuthService(this.api.instance);
+    this.animeService = new AnimeService(this.api.instance);
   }
-
-  me(token?: string): Promise<AxiosResponse<User>> {
-    return !token
-      ? this.instance.post<User>("/auth/me")
-      : this.instance.post<User>("/auth/me", null, {
-          headers: {
-            Authorization: token,
-          },
-        });
-  }
-
-  auth(payload: AuthFormData): Promise<AxiosResponse<User>> {
-    return this.instance.post<User>("/auth", null, {
-      params: {
-        email: payload.email,
-        password: payload.password,
-      },
-    });
-  }
-
-  signUp(authData: AuthFormData): Promise<AxiosResponse<UserSchema>> {
-    return this.instance.post<UserSchema>("/auth/signup", null, {
-      params: {
-        email: authData.email,
-        password: authData.password,
-      },
-    });
-  }
-
-  animeList(limit: number, page: number): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>(`/animedb?limit=${limit}&page=${page}`);
-  }
-
-  ongoingList(): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>("/ongoing");
-  }
-
-  anime(id: IdType): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>(`/animedb/anime/${id}`);
+  init() {
+    this.api = new Api();
   }
 }
 
-// прописывать bind в constructor
-
-export const service = new Api();
+export const service = new Services();

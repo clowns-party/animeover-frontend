@@ -14,7 +14,10 @@ import { service } from "../../../../Services";
 export function* authWorker(action: signInAsyncType): SagaIterator {
   try {
     yield put(startFetching());
-    const result: UserResponse = yield call(service.auth, action.payload);
+    const result: UserResponse = yield call(
+      service.authService.auth,
+      action.payload
+    );
     if (result?.data) {
       yield put(set(result.data));
       // Пересмотри этот сеттер куки, будто иногда не отрабатывает

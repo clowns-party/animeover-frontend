@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getAnime } from "../../src/bus/anime/actions";
-import { Anime } from "../../src/Elements/anime/Anime";
-import { HeaderAnime } from "../../src/Elements/header/HeaderAnime";
+import { getAnime } from "bus/anime/actions";
+import { Anime } from "Elements/anime/Anime";
+import { HeaderAnime } from "Elements/header/HeaderAnime";
 
 const AnimePage: FC = () => {
   const dispatch = useDispatch();

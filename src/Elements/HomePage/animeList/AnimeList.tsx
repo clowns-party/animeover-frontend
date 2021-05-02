@@ -11,7 +11,7 @@ export const AnimeList: FC = () => {
   const { animeList, pageLimit, totalPages, currentPage } = useAnime();
 
   return (
-    <>
+    <div>
       <div className={styles.anime_list_container}>
         {animeList?.length ? (
           <AnimeCards animeList={animeList} />
@@ -24,7 +24,7 @@ export const AnimeList: FC = () => {
         totalPages={totalPages}
         currentPage={currentPage}
       />
-    </>
+    </div>
   );
 };
 

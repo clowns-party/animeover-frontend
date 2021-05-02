@@ -7,7 +7,10 @@ import { startAnime, setAnime, setErrorAnime, stopAnime } from "../../actions";
 export function* animeWorker(action: getAnimeType): SagaIterator {
   yield put(startAnime());
   try {
-    const result: AnimeResponse = yield call(service.anime, action.payload);
+    const result: AnimeResponse = yield call(
+      service.animeService.anime,
+      action.payload
+    );
     yield put(setAnime(result.data));
   } catch (err) {
     yield put(setErrorAnime(err));

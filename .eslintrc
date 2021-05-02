@@ -50,6 +50,7 @@
     "react/jsx-one-expression-per-line": "off",
     "no-useless-constructor": "off",
     "indent": "off",
+    "import/no-unresolved": "off",
     "import/extensions": [
       1,
       "ignorePackages",
