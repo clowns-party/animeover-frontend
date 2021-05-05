@@ -1,19 +1,22 @@
+import { AnimeList } from "bus/anime/types";
 import React from "react";
 import { service } from "Services";
 import { AnimeCards } from "./AnimeCards";
 
-const styles = {
-  fontFamily: "sans-serif",
-  textAlign: "center",
+type State = {
+  animeList: AnimeList | [];
+  page: number;
+  loading: boolean;
+  prevY: number;
 };
-
-export class InfiniteScroll extends React.Component {
-  observer: any;
-  loadingRef: any;
-  constructor(props) {
+type Props = any;
+export class InfiniteScroll extends React.Component<Props, State> {
+  observer: IntersectionObserver;
+  loadingRef: HTMLDivElement;
+  constructor(props: Props) {
     super(props);
     this.state = {
-      users: [],
+      animeList: [],
       page: 1,
       loading: false,
       prevY: 0,
@@ -21,27 +24,30 @@ export class InfiniteScroll extends React.Component {
   }
 
   componentDidMount() {
-    this.getUsers(this.state.page);
-
-    // Options
+    const { page } = this.state;
+    this.getUsers(page);
     const options = {
       root: null, // Page as root
       rootMargin: "0px",
       threshold: 1.0,
     };
-    // Create an observer
+
     this.observer = new IntersectionObserver(
-      this.handleObserver.bind(this), //callback
+      this.handleObserver.bind(this),
       options
     );
-    // Observ the `loadingRef`
+
     this.observer.observe(this.loadingRef);
   }
 
-  handleObserver(entities, observer) {
+  handleObserver(
+    entities: IntersectionObserverEntry[],
+    _observer: IntersectionObserver
+  ) {
+    const { prevY, page } = this.state;
     const { y } = entities[0].boundingClientRect;
-    if (this.state.prevY > y) {
-      const curPage = this.state.page + 1;
+    if (prevY > y) {
+      const curPage = page + 1;
       this.getUsers(curPage);
       this.setState({ page: curPage });
     }
@@ -49,27 +55,32 @@ export class InfiniteScroll extends React.Component {
   }
 
   getUsers(page) {
+    const { animeList } = this.state;
     this.setState({ loading: true });
     service.animeService.animeList(20, page).then((res) => {
-      // @ts-ignore
-      this.setState({ users: [...this.state.users, ...res.data.animeList] });
+      this.setState({
+        animeList: [...animeList, ...res.data.animeList],
+      });
       this.setState({ loading: false });
     });
   }
 
   render() {
+    const { loading, animeList } = this.state;
     const loadingCSS = {
       height: "100px",
       margin: "30px",
     };
-    const loadingTextCSS = { display: this.state.loading ? "block" : "none" };
+    const loadingTextCSS = { display: loading ? "block" : "none" };
     return (
       <div className="container">
         <div style={{ minHeight: "800px" }}>
-          <AnimeCards animeList={this.state.users} />
+          <AnimeCards animeList={animeList} />
         </div>
         <div
-          ref={(loadingRef) => (this.loadingRef = loadingRef)}
+          ref={(loadingRef) => {
+            this.loadingRef = loadingRef;
+          }}
           style={loadingCSS}
         >
           <span style={loadingTextCSS}>Loading...</span>

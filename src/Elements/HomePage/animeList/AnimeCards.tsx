@@ -1,9 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import { Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { AnimeList } from "bus/anime/types";
-import { Router } from "next/router";
-import { FC } from "react";
+import Router from "next/router";
 import styles from "./animeList.module.scss";
 
 export const AnimeCards: FC<{ animeList: AnimeList }> = ({ animeList }) => {

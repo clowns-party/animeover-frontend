@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import { Anime, AnimeList, IdType } from "bus/anime/types";
+import { Anime, AnimeList, IdType, AnimeData } from "bus/anime/types";
 import autoBind from "auto-bind";
 import { Api } from "./Api";
 
@@ -9,8 +9,8 @@ export class Service implements Api {
     this.instance = instance;
     autoBind(this);
   }
-  animeList(limit: number, page: number): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>(`/animedb?limit=${limit}&page=${page}`);
+  animeList(limit: number, page: number): Promise<AxiosResponse<AnimeData>> {
+    return this.instance.get<AnimeData>(`/animedb?limit=${limit}&page=${page}`);
   }
 
   ongoingList(): Promise<AxiosResponse<AnimeList>> {
