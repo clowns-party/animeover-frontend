@@ -37,8 +37,12 @@
 }
 
 .card {
-  width: 142px;
+  min-width: 142px;
   margin-right: 4px;
+  border-radius: 20px !important;
+  img {
+    border-radius: 20px 20px 0 0 !important;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -52,7 +56,7 @@
 }
 @media (max-width: 800px) {
   .card {
-    width: 120px;
+    min-width: 120px;
     font-size: 12px;
   }
   .anime {
