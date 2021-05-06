@@ -1,6 +1,5 @@
-import { UserOutlined } from "@ant-design/icons";
-import { Card } from "antd";
-import Meta from "antd/lib/card/Meta";
+import { DownloadOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card } from "antd";
 import React, { FC } from "react";
 import { User } from "../../bus/auth/types";
 import style from "./ProfileCard.module.scss";
@@ -11,8 +10,7 @@ type Props = {
 export const ProfileCard: FC<Props> = ({ user }) => {
   return (
     <Card
-      hoverable
-      style={{ width: 240 }}
+      className={style.card}
       cover={
         <>
           {user?.photoURL ? (
@@ -23,7 +21,18 @@ export const ProfileCard: FC<Props> = ({ user }) => {
         </>
       }
     >
-      <Meta title={user?.displayName} description={user?.email} />
+      <div className={style.user_info}>
+        <div>
+          <div className={style.title}>{user?.displayName}</div>
+          <div className={style.descrition}>{user?.email}</div>
+        </div>
+        <Button
+          className={style.button}
+          type="primary"
+        >
+          Edit
+        </Button>
+      </div>
     </Card>
   );
 };

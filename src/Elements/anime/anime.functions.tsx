@@ -22,7 +22,7 @@ export const avatarSize = () => {
     clientWidth = window?.screen?.width;
   }
   if (clientWidth && clientWidth <= 395) {
-    return { width: 150, height: 270, borderRadius: 20 };
+    return { width: 160, height: 270, borderRadius: 20 };
   }
-  return { width: 200, height: 320, borderRadius: 20 };
+  return { width: 230, height: 320, borderRadius: 20 };
 };

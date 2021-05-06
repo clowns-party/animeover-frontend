@@ -9,16 +9,15 @@ export const AnimeList: FC = () => {
   const { animeList, pageLimit, totalPages, currentPage } = useAnime();
 
   return (
-    <div>
-      <div className={styles.anime_list_container}>
-        {animeList?.length ? <InfiniteScroll /> : <SkeletonCards />}
-      </div>
-      <Pagination
-        pageLimit={pageLimit}
-        totalPages={totalPages}
-        currentPage={currentPage}
-      />
-    </div>
+    <>
+      {animeList?.length ? (
+        <InfiniteScroll />
+      ) : (
+        <div className={styles.anime_list_container}>
+          <SkeletonCards />
+        </div>
+      )}
+    </>
   );
 };
 

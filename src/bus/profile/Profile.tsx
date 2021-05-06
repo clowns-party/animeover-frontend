@@ -20,10 +20,10 @@ const Profile: FC<Props> = ({ user }) => {
       <HeaderAnime />
       <div className={style.container}>
         <Row gutter={24} justify="center">
-          <Col span={6}>
+          <Col span={9}>
             <ProfileCard user={user} />
           </Col>
-          <Col span={14}>
+          <Col span={11}>
             <ProfileForm />
           </Col>
           <Col span={20}>
