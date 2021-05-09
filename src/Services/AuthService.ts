@@ -36,4 +36,8 @@ export class Service implements Api {
       },
     });
   }
+
+  userAnimeList() {
+    return this.instance.get("/user/animelist");
+  }
 }

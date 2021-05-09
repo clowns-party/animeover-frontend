@@ -1,80 +1,38 @@
-import React from "react";
-import { Table, Tag, Space } from "antd";
+import React, { useEffect } from "react";
 import style from "./UserAnimeList.module.scss";
-
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (tags) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (text, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
+import { useDispatch } from "react-redux";
+import { getUserAnimeList } from "bus/auth/actions";
+import { useAuth } from "../auth/hooks/useAuth";
+import { service } from "../../Services/index";
 
 export const UserAnimeList = () => {
-  return <Table columns={columns} dataSource={data} className={style.table} />;
+  const dispatch = useDispatch();
+  const { userAnimeIsFething, userAnimeList } = useAuth();
+  const copy = userAnimeList && JSON.parse(JSON.stringify(userAnimeList));
+  const userAnimeWithInfo = copy?.forEach(async (el) => {
+    const reslut = await service.animeService.anime(el.id);
+    el["info"] = reslut?.data;
+  });
+  useEffect(() => {
+    dispatch(getUserAnimeList());
+  }, []);
+
+  return (
+    <>
+      test
+      {userAnimeWithInfo?.map((el) => {
+        return (
+          <div key={el.id}>
+            <div className={style.container_anime}>
+              <div className={style.number}>{el.info}</div>
+              {/* <div className={style.picture}></div>
+              <div className={style.name}></div>
+              <div className={style.status}></div>
+              <div className={style.menu}></div> */}
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
 };

@@ -24,11 +24,10 @@ const Profile: FC<Props> = ({ user }) => {
             <ProfileCard user={user} />
           </Col>
           <Col span={11}>
-            <ProfileForm />
-          </Col>
-          <Col span={20}>
+            {/* <ProfileForm /> */}
             <UserAnimeList />
           </Col>
+          <Col span={20}>test</Col>
         </Row>
       </div>
     </>

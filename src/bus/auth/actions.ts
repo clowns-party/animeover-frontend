@@ -10,9 +10,49 @@ import {
   AUTH_SET_FETCHING_ERROR,
   AuthFormData,
   ErrorHttpAction,
+  getUserAnimeListType,
   LOGOUT,
   ME,
+  GET_USER_ANIME_LIST,
+  USER_ANIME_LIST_START,
+  USER_ANIME_LIST_STOP,
+  USER_ANIME_LIST_ERROR,
+  SET_USER_ANIME_LIST,
 } from "./types";
+
+// USER ANIME
+
+export function getUserAnimeList(): getUserAnimeListType {
+  return {
+    type: GET_USER_ANIME_LIST,
+  };
+}
+
+export function userAnimeListStart(): AuthActionTypes {
+  return {
+    type: USER_ANIME_LIST_START,
+  };
+}
+
+export function userAnimeListStop(): AuthActionTypes {
+  return {
+    type: USER_ANIME_LIST_STOP,
+  };
+}
+
+export function userAnimeListErrors(payload: any): AuthActionTypes {
+  return {
+    type: USER_ANIME_LIST_ERROR,
+    payload,
+  };
+}
+
+export function setUserAnimeList(payload: any) {
+  return {
+    type: SET_USER_ANIME_LIST,
+    payload,
+  };
+}
 
 // SIGN IN ACTIONS
 export function signInAsync(payload: AuthFormData): AuthActionTypes {

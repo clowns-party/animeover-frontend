@@ -16,6 +16,33 @@ export type User = {
 
 export type UserResponse = { data: User };
 
+export const GET_USER_ANIME_LIST = "GET_USER_ANIME_LIST";
+export type getUserAnimeListType = {
+  type: typeof GET_USER_ANIME_LIST;
+};
+
+export const USER_ANIME_LIST_START = "USER_ANIME_LIST_START";
+export type userAnimeListStartType = {
+  type: typeof USER_ANIME_LIST_START;
+};
+
+export const USER_ANIME_LIST_STOP = "USER_ANIME_LIST_STOP";
+export type userAnimeListStopType = {
+  type: typeof USER_ANIME_LIST_STOP;
+};
+
+export const USER_ANIME_LIST_ERROR = "USER_ANIME_LIST_ERROR";
+export type userAnimeListErrorType = {
+  type: typeof USER_ANIME_LIST_ERROR;
+  payload: any
+};
+
+export const SET_USER_ANIME_LIST = "SET_USER_ANIME_LIST";
+export type setUserAnimeList = {
+  type: typeof SET_USER_ANIME_LIST;
+  payload: any;
+};
+
 export const ME = "ME";
 export type meAction = {
   type: typeof ME;
@@ -88,4 +115,9 @@ export type AuthActionTypes =
   | AuthStopFechingAction
   | logoutType
   | AuthSetError
+  | userAnimeListStartType
+  | userAnimeListStopType
+  | userAnimeListErrorType
+  | getUserAnimeListType
+  | setUserAnimeList
   | meAction;

@@ -28,6 +28,7 @@
     ],
     "jsx-a11y/anchor-is-valid": "off",
     "quotes": "off",
+    "dot-notation": "off",
     "no-underscore-dangle": "off",
     "react/prop-types": "off",
     "arrow-body-style": "off",
