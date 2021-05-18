@@ -1,6 +1,8 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Col, Row, Form, Input } from "antd";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { getUserAnimeList } from "bus/UserAnimeList/actions";
 // Components
 import { HeaderAnime } from "../../Elements/header/HeaderAnime";
 import { ProfileCard } from "../../Elements/ProfileCard/ProfileCard";
@@ -15,6 +17,10 @@ type Props = {
   user: User["user"] | null;
 };
 const Profile: FC<Props> = ({ user }) => {
+  const dispatch = useDispatch();
+  const onLoad = () => {
+    dispatch(getUserAnimeList());
+  };
   return (
     <>
       <HeaderAnime />
@@ -24,9 +30,9 @@ const Profile: FC<Props> = ({ user }) => {
             <ProfileCard user={user} />
           </Col>
           <Col span={11}>
-            <ProfileForm />
-          </Col>
-          <Col span={20}>
+            <button onClick={onLoad}>Load test</button>
+
+            {/* <ProfileForm /> */}
             <UserAnimeList />
           </Col>
         </Row>
