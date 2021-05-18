@@ -7,6 +7,7 @@ import { watchOngoing } from "bus/anime/saga/ongoing/OngoingWatch";
 import { watchAuth } from "bus/auth/saga/watcherAuth";
 import { watchRegistration } from "bus/auth/saga/watcherRegistration";
 import { watchMe } from "bus/auth/saga/watchMe";
+import { userAnimeListWatcher } from "bus/UserAnimeList/saga/userAnimeList.watcher";
 
 export function* rootSaga(): Generator {
   yield all([
@@ -17,5 +18,6 @@ export function* rootSaga(): Generator {
     watchChangePage(),
     animeWath(),
     watchMe(),
+    userAnimeListWatcher(),
   ]);
 }
