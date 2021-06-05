@@ -9,6 +9,7 @@ import {
   MenuUnfoldOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import { BaseButton } from "Elements/Base/Button/BaseButton";
 import styles from "./header.module.scss";
 import { logout } from "../../bus/auth/actions";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
@@ -107,13 +108,7 @@ export const HeaderAnime: FC = () => {
           >
             <div className={styles.login_desktop}>
               <Link href="/signIn">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  icon={<LoginOutlined />}
-                >
-                  Войти
-                </Button>
+                <BaseButton>Войти</BaseButton>
               </Link>
             </div>
           </Col>
@@ -141,9 +136,7 @@ export const HeaderAnime: FC = () => {
         ) : (
           <div className={styles.menu_mobile_item}>
             <Link href="/signIn">
-              <Button type="primary" htmlType="submit" icon={<LoginOutlined />}>
-                Войти
-              </Button>
+              <BaseButton>Войти</BaseButton>
             </Link>
           </div>
         )}

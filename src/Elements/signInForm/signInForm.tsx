@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Form, Input, Button, Checkbox, Row, Col, PageHeader } from "antd";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { LoginOutlined } from "@ant-design/icons";
+import { BaseButton } from "Elements/Base/Button/BaseButton";
 import styles from "./login.module.scss";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
@@ -89,13 +89,7 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
           <Row justify="space-between">
             <Col>
               <Form.Item {...tailLayout}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  icon={<LoginOutlined />}
-                >
-                  Войти
-                </Button>
+                <BaseButton>Войти</BaseButton>
               </Form.Item>
             </Col>
             <Col>
