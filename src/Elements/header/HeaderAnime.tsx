@@ -54,29 +54,6 @@ export const HeaderAnime: FC = () => {
             </div>
           </Link>
         </Col>
-        <Col flex="150px" className={styles.container_list_anime}>
-          <div className={`${styles.list_anime} ${styles.item}`}>
-            <div>
-              <Image
-                src="/home.svg"
-                alt="home"
-                layout="fixed"
-                width={13}
-                height={13}
-              />
-            </div>
-            Главная
-            <div className={styles.arrow}>
-              <Image
-                src="/arrow.svg"
-                alt="arrow"
-                layout="fixed"
-                width={10}
-                height={10}
-              />
-            </div>
-          </div>
-        </Col>
         <Col flex="auto" className={styles.search_container}>
           <div className={`${styles.item} ${styles.search}`}>
             <Search
