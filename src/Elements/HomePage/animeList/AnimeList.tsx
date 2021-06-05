@@ -2,7 +2,6 @@ import { Card, Skeleton } from "antd";
 import React, { FC } from "react";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./animeList.module.scss";
-import { Pagination } from "./pagination/Pagination";
 import { InfiniteScroll } from "./InfiniteScroll";
 
 export const AnimeList: FC = () => {
