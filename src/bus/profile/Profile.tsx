@@ -4,7 +4,7 @@ import { Button, Col, Row, Form, Input } from "antd";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getUserAnimeList } from "bus/UserAnimeList/actions";
 // Components
-import { HeaderAnime } from "../../Elements/header/HeaderAnime";
+import { Header } from "../../Elements/header";
 import { ProfileCard } from "../../Elements/ProfileCard/ProfileCard";
 import { UserAnimeList } from "../UserAnimeList/UserAnimeList";
 // Hooks
@@ -23,14 +23,16 @@ const Profile: FC<Props> = ({ user }) => {
   };
   return (
     <>
-      <HeaderAnime />
+      <Header />
       <div className={style.container}>
         <Row gutter={24} justify="center">
           <Col span={9}>
             <ProfileCard user={user} />
           </Col>
           <Col span={11}>
-            <button onClick={onLoad}>Load test</button>
+            <button onClick={onLoad} type="button">
+              Load test
+            </button>
 
             {/* <ProfileForm /> */}
             <UserAnimeList />

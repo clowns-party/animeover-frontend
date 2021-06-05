@@ -1,11 +1,11 @@
-import { HeaderAnime } from "Elements/header/HeaderAnime";
+import { Header } from "Elements/header";
 import { HomePage } from "Elements/HomePage/HomePage";
 import React from "react";
 
 export default function Home() {
   return (
     <div>
-      <HeaderAnime />
+      <Header />
       <HomePage />
     </div>
   );
