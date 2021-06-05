@@ -82,16 +82,16 @@ type Props = {
   children: React.ReactNode;
   extends?: HTMLAttributes<HTMLButtonElement>;
   style?: React.CSSProperties;
-  type?: ButtonType;
+  typeComponent?: ButtonType;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const BaseButton: FC<Props> = ({
   children,
   style,
-  type = ButtonType.default,
+  typeComponent = ButtonType.default,
   ...other
 }) => {
-  switch (type) {
+  switch (typeComponent) {
     case ButtonType.important:
       return (
         <ImportantButton {...other} style={style}>

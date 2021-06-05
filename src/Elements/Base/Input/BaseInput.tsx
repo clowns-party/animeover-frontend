@@ -1,8 +1,10 @@
+import { SearchIcon } from "assets/icons/SearchIcon";
 import React, { FC, HTMLAttributes, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
 export enum InputType {
   "default" = "default",
+  "search" = "search",
 }
 type StyledInputProps = {
   hasError: string | boolean;
@@ -43,23 +45,55 @@ const DefaultInput = styled.input`
   }
 `;
 
+const InputWrap = styled.div`
+  position: relative;
+  svg {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+  }
+`;
+
+const SearchInput = styled(DefaultInput)`
+  padding-right: 34px;
+`;
+
 type Props = {
   children?: React.ReactNode;
   extends?: HTMLAttributes<HTMLInputElement>;
   style?: React.CSSProperties;
-  type?: InputType;
+  typeComponent?: InputType;
   hasError?: string | boolean;
 } & InputHTMLAttributes<any>;
 export const BaseInput: FC<Props> = ({
   children,
   style,
-  type = DefaultInput.default,
+  typeComponent = DefaultInput.default,
   hasError,
   ...other
 }) => {
-  return (
-    <DefaultInput {...other} style={style} hasError={hasError}>
-      {children && children}
-    </DefaultInput>
-  );
+  switch (typeComponent) {
+    case InputType.default:
+      return (
+        <DefaultInput {...other} style={style} hasError={hasError}>
+          {children && children}
+        </DefaultInput>
+      );
+    case InputType.search:
+      return (
+        <InputWrap>
+          <SearchInput {...other} style={style} hasError={hasError}>
+            {children && children}
+          </SearchInput>
+          <SearchIcon />
+        </InputWrap>
+      );
+
+    default:
+      return (
+        <DefaultInput {...other} style={style} hasError={hasError}>
+          {children && children}
+        </DefaultInput>
+      );
+  }
 };
