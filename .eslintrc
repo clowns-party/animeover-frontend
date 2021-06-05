@@ -53,6 +53,7 @@
     "import/no-unresolved": "off",
     "no-shadow": "off",
     "no-confusing-arrow": "off",
+    "react/no-unknown-property": "off",
     "import/extensions": [
       1,
       "ignorePackages",

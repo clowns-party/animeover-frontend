@@ -1,28 +1,56 @@
-import React, { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Input } from "antd";
+import React, { FC } from "react";
 import Link from "next/link";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
 import { DesktopLogo } from "assets/icons/DesktopLogo";
-import { BaseInput } from "Elements/Base/Input/BaseInput";
+import { BaseInput, InputType } from "Elements/Base/Input/BaseInput";
 import styled from "styled-components";
-import { logout } from "../../bus/auth/actions";
+import { useMedia } from "react-use";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
 const HeaderStyled = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   background: white;
   height: 60px;
   align-items: center;
   padding: 1rem;
   position: fixed;
   z-index: 99;
+  .logo {
+    margin-right: 60px;
+  }
+  .header-end {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
-const HeaderWrap = styled.div`
-  width: 100%;
+const InputWrap = styled.div`
+  margin-right: 156px;
+  @media screen and (max-width: 992px) {
+    input {
+      width: 150px;
+    }
+    margin-right: 30px;
+  }
+`;
+
+const Links = styled.div`
+  display: flex;
+`;
+const LinkItem = styled.a`
+  cursor: pointer;
+  margin-right: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  transition: 0.3s all ease;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Clearfix = styled.div`
@@ -32,25 +60,63 @@ const Clearfix = styled.div`
 `;
 
 export const Header: FC = () => {
-  const { Search } = Input;
-  const onSearch = (value) => console.log(value);
+  const isMobile = useMedia("(max-width: 768px)");
+  const onSearch = (event) => console.log(event.target.value);
   const { data, isFetching, error } = useAuth();
+  const auth = data?.user;
 
-  const [count, setCount] = useState(false);
-
-  const dispatch = useDispatch();
+  const links = [
+    {
+      name: "Ongoing",
+      link: "/",
+    },
+    {
+      name: "Anime",
+      link: "/",
+    },
+  ];
 
   return (
     <>
-      <HeaderStyled>
-        <DesktopLogo />
-        <div>Ongoing Anime</div>
-        <BaseInput placeholder="SEARCH" />
-        <Link href="/signIn">
-          <BaseButton>LOG IN</BaseButton>
-        </Link>
-      </HeaderStyled>
-      <Clearfix />
+      {!isMobile && (
+        <>
+          <HeaderStyled>
+            <div className="logo">
+              <DesktopLogo />
+            </div>
+
+            <Links>
+              {links.map((link, index) => (
+                <Link href={link.link} key={index.toString()}>
+                  <LinkItem href={link.link}>{link.name}</LinkItem>
+                </Link>
+              ))}
+            </Links>
+            <div className="header-end">
+              <InputWrap>
+                <BaseInput
+                  placeholder="SEARCH"
+                  typeComponent={InputType.search}
+                  onChange={onSearch}
+                  className="input"
+                />
+              </InputWrap>
+              {auth ? (
+                <Link href="/profile">
+                  <a href="/profile">
+                    <img src={auth?.photoURL} alt="user" />
+                  </a>
+                </Link>
+              ) : (
+                <Link href="/signIn">
+                  <BaseButton>LOG IN</BaseButton>
+                </Link>
+              )}
+            </div>
+          </HeaderStyled>
+          <Clearfix />
+        </>
+      )}
     </>
     // <d>
     //   <Row className={styles.header_container}>

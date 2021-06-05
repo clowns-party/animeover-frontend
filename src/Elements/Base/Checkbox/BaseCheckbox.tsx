@@ -82,26 +82,26 @@ const DefaultChecbox = styled.div`
     line-height: 22px;
     color: #4a4a4a;
     cursor: ${(props: StyledCheckboxProps) =>
-      (props.disabled ? "no-drop" : "pointer")};
+      props.disabled ? "no-drop" : "pointer"};
     opacity: ${(props: StyledCheckboxProps) => (props.disabled ? "0.7" : "1")};
   }
 `;
 
 type Props = {
   children?: React.ReactNode;
-  extends?: HTMLAttributes<HTMLInputElement>;
+  extends?: HTMLAttributes<HTMLDivElement>;
   style?: React.CSSProperties;
-  type?: CheckboxType;
+  typeComponent?: CheckboxType;
   hasError?: string | boolean;
   label?: string;
   setChecked: (check: boolean) => void;
   checked: boolean;
   disabled?: boolean;
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+};
 export const BaseCheckbox: FC<Props> = ({
   children,
   style,
-  type = CheckboxType.default,
+  typeComponent = CheckboxType.default,
   label,
   hasError,
   setChecked,
