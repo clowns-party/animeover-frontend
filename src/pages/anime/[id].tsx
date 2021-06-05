@@ -3,7 +3,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAnime } from "bus/anime/actions";
 import { Anime } from "Elements/anime/Anime";
-import { HeaderAnime } from "Elements/header/HeaderAnime";
+import { Header } from "Elements/header";
 
 const AnimePage: FC = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const AnimePage: FC = () => {
 
   return (
     <div>
-      <HeaderAnime />
+      <Header />
       <Anime />;
     </div>
   );
