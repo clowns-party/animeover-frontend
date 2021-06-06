@@ -1,12 +1,65 @@
 import React, { FC } from "react";
-import { Form, Input, Button, Checkbox, Row, Col, PageHeader } from "antd";
+import { Form, Button, Checkbox, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
-import styles from "./login.module.scss";
+import styled from "styled-components";
+import { BaseInput } from "Elements/Base/Input/BaseInput";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
+
+const LoginContainer = styled(Row)`
+  background: #ffffff;
+  width: 460px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -200px 0 0 -250px;
+  border-radius: 24px;
+  padding: 40px 30px;
+`;
+
+const LoginHeader = styled.div`
+  color: #2c2738;
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 44px;
+  margin-bottom: 50px;
+`;
+const FormStyle = styled(Form.Item)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  label {
+    color: #756f86;
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    &:after {
+      content: "";
+    }
+  }
+  .ant-form-item-label {
+    text-align: left;
+  }
+`;
+
+const StyleInput = styled.div`
+  .input {
+    width: 100%;
+    height: 52px;
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
+  }
+`;
 
 type SingProps = {
   type?: string;
@@ -39,18 +92,13 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
     console.log("Failed:", errorInfo);
   };
 
-  let className = "position";
-  if (type) {
-    className += type;
-  }
-
   return (
-    <Row className={styles[`${className}`]} justify="center">
+    <LoginContainer>
       {/* {errorMessageJSX}
       {loaderJSX}
       {AuthData} */}
       <Col span={24}>
-        <PageHeader style={{ paddingLeft: 0, fontSize: 20 }}>Вход</PageHeader>
+        <LoginHeader>Вход</LoginHeader>
         <Form
           {...layout}
           name="basic"
@@ -59,7 +107,7 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
           onFinishFailed={onFinishFailed}
           validateMessages={validateMessages}
         >
-          <Form.Item
+          <FormStyle
             label="Email"
             name="email"
             rules={[
@@ -70,18 +118,22 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
               },
             ]}
           >
-            <Input />
-          </Form.Item>
+            <StyleInput>
+              <BaseInput className="input" />
+            </StyleInput>
+          </FormStyle>
 
-          <Form.Item
+          <FormStyle
             label="Пароль"
             name="password"
             rules={[
               { required: true, message: "Пожалуйста введите ваш пароль!" },
             ]}
           >
-            <Input.Password />
-          </Form.Item>
+            <StyleInput>
+              <BaseInput className="input" />
+            </StyleInput>
+          </FormStyle>
 
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
             <Checkbox>Запомнить меня</Checkbox>
@@ -102,6 +154,6 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
           </Row>
         </Form>
       </Col>
-    </Row>
+    </LoginContainer>
   );
 };
