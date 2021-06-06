@@ -3,9 +3,10 @@ import { AppState } from "redux/rootReducer";
 import { AuthState } from "../reducer";
 
 export const useAuth = (): AuthState => {
-  const { data, isFetching, error } = useSelector<AppState, AuthState>(
-    (state) => state.auth
-  );
+  const { data, isFetching, error, showModal } = useSelector<
+    AppState,
+    AuthState
+  >((state) => state.auth);
 
-  return { data, isFetching, error };
+  return { data, isFetching, error, showModal };
 };

@@ -62,7 +62,6 @@ const Clearfix = styled.div`
 `;
 
 export const Header: FC = () => {
-  const [showModal, toggleModal] = useState(false);
   const isMobile = useMedia("(max-width: 768px)");
   const onSearch = (event) => console.log(event.target.value);
   const { data, isFetching, error } = useAuth();
@@ -78,14 +77,6 @@ export const Header: FC = () => {
       link: "/",
     },
   ];
-
-  const show = () => {
-    toggleModal(true);
-  };
-
-  const cancel = () => {
-    toggleModal(false);
-  };
 
   return (
     <>
@@ -119,14 +110,11 @@ export const Header: FC = () => {
                   </a>
                 </Link>
               ) : (
-                <BaseButton onClick={show}>LOG IN</BaseButton>
+                <SignInForm />
               )}
             </div>
           </HeaderStyled>
           <Clearfix />
-          <BaseModal visible={showModal} show={show} cancel={cancel}>
-            <SignInForm />
-          </BaseModal>
         </>
       )}
     </>

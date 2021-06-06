@@ -63,6 +63,12 @@ export type signInAsyncType = {
   payload: AuthFormData;
 };
 
+export const SIGN_MODAL_TOGGLE = "SIGN_MODAL_TOGGLE";
+export type signModalToggleType = {
+  type: typeof SIGN_MODAL_TOGGLE;
+  payload: boolean;
+};
+
 export const SIGN_UP_ASYNC = "SIGN_UP_ASYNC";
 export type signUpAsyncType = {
   type: typeof SIGN_UP_ASYNC;
@@ -88,4 +94,5 @@ export type AuthActionTypes =
   | AuthStopFechingAction
   | logoutType
   | AuthSetError
-  | meAction;
+  | meAction
+  | signModalToggleType;
