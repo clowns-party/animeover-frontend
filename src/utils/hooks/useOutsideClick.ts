@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
-export const useOutsideClick = (ref, handler) => {
+export const useOutsideClick = (ref, handler, root?: any) => {
+  const container = root || document;
   useEffect(() => {
     const listener = (event) => {
       if (!ref.current || ref.current.contains(event.target)) {
@@ -8,11 +9,11 @@ export const useOutsideClick = (ref, handler) => {
       }
       handler(event);
     };
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
+    container.addEventListener("mousedown", listener);
+    container.addEventListener("touchstart", listener);
     return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
+      container.removeEventListener("mousedown", listener);
+      container.removeEventListener("touchstart", listener);
     };
   }, [ref, handler]);
 };

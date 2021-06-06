@@ -5,7 +5,6 @@ import { DesktopLogo } from "assets/icons/DesktopLogo";
 import { BaseInput, InputType } from "Elements/Base/Input/BaseInput";
 import styled from "styled-components";
 import { useMedia } from "react-use";
-import { BaseModal } from "Elements/Base/Modal/BaseModal";
 import { SignInForm } from "Elements/signInForm/signInForm";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
