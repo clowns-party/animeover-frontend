@@ -10,18 +10,21 @@ import {
   ErrorHttpAction,
   LOGOUT,
   ME,
+  SIGN_MODAL_TOGGLE,
 } from "./types";
 
 export type AuthState = {
   data: User | null;
   isFetching: boolean;
   error: ErrorHttpAction | false;
+  showModal: boolean;
 };
 
 const initialState: AuthState = {
   data: null,
   isFetching: false,
   error: false,
+  showModal: false,
 };
 
 export const AuthReducer = (
@@ -37,6 +40,11 @@ export const AuthReducer = (
     case SIGN_IN_ASYNC:
       return {
         ...state,
+      };
+    case SIGN_MODAL_TOGGLE:
+      return {
+        ...state,
+        showModal: action.payload,
       };
     case AUTH_START_FETCHING:
       return {

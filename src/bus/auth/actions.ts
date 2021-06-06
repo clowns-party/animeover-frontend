@@ -8,6 +8,7 @@ import {
   AUTH_START_FETCHING,
   AUTH_STOP_FETCHING,
   AUTH_SET_FETCHING_ERROR,
+  SIGN_MODAL_TOGGLE,
   AuthFormData,
   ErrorHttpAction,
   LOGOUT,
@@ -18,6 +19,13 @@ import {
 export function signInAsync(payload: AuthFormData): AuthActionTypes {
   return {
     type: SIGN_IN_ASYNC,
+    payload,
+  };
+}
+
+export function signModalToggle(payload: boolean): AuthActionTypes {
+  return {
+    type: SIGN_MODAL_TOGGLE,
     payload,
   };
 }

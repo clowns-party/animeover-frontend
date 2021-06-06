@@ -25,8 +25,12 @@ const DefaultButton = styled.button`
   height: 32px;
   cursor: pointer;
   border: none;
+  transition: 0.3s all ease;
   &:disabled {
     cursor: no-drop;
+    opacity: 0.7;
+  }
+  &:hover{
     opacity: 0.7;
   }
 `;
