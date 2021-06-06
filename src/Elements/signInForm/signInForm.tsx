@@ -9,14 +9,10 @@ import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
 
-const LoginContainer = styled(Row)`
-  background: #ffffff;
+const LoginBody = styled(Row)`
   width: 460px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -200px 0 0 -250px;
   border-radius: 24px;
+  background: #ffffff;
   padding: 40px 30px;
 `;
 
@@ -93,7 +89,7 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
   };
 
   return (
-    <LoginContainer>
+    <LoginBody>
       {/* {errorMessageJSX}
       {loaderJSX}
       {AuthData} */}
@@ -154,6 +150,6 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
           </Row>
         </Form>
       </Col>
-    </LoginContainer>
+    </LoginBody>
   );
 };
