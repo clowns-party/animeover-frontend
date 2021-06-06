@@ -1,5 +1,7 @@
-import React, { FC } from "react";
-import Modal from "antd/lib/modal/Modal";
+import React, { FC, useRef } from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
+import { useOutsideClick } from "utils/hooks/useOutsideClick";
 
 type Props = {
   children: React.ReactNode;
@@ -8,18 +10,41 @@ type Props = {
   submit?: () => void;
   cancel?: () => void;
 };
-export const BaseModal: FC<Props> = ({
-  children,
-  visible = false,
-  show = () => null,
-  submit = () => null,
-  cancel = () => null,
-}) => {
-  return (
-    <>
-      <Modal visible={visible} footer={null} onCancel={cancel}>
-        {children}
-      </Modal>
-    </>
-  );
+const ModalWrapper = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: #00000073;
+`;
+
+const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
+  let container;
+  if (typeof window !== "undefined") {
+    const rootContainer = document.createElement("div");
+    const parentElem = document.querySelector("#__next");
+    parentElem.appendChild(rootContainer);
+    container = rootContainer;
+  }
+  const modalRef = container && useRef();
+  container && useOutsideClick(modalRef, cancel, container);
+
+  const refedChildren =
+    children &&
+    React.cloneElement(children as React.ReactElement, {
+      ref: (el) => {
+        modalRef.current = el;
+      },
+    });
+  const Modal = visible && <ModalWrapper>{refedChildren}</ModalWrapper>;
+  return container ? ReactDOM.createPortal(Modal, container) : null;
 };
+
+export default React.memo(BaseModal);

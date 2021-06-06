@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "Elements/Base/Input/BaseInput";
-import { BaseModal } from "Elements/Base/Modal/BaseModal";
+import BaseModal from "Elements/Base/Modal/BaseModal";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync, signModalToggle } from "../../bus/auth/actions";
