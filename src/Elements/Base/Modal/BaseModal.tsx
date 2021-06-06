@@ -44,7 +44,7 @@ const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
       },
     });
   const Modal = visible && <ModalWrapper>{refedChildren}</ModalWrapper>;
-  return container ? ReactDOM.createPortal(Modal, container) : null;
+  return container ? ReactDOM.createPortal(Modal, container) : <div> </div>;
 };
 
 export default React.memo(BaseModal);
