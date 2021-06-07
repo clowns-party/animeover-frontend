@@ -1,11 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Link from "next/link";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
 import { DesktopLogo } from "assets/icons/DesktopLogo";
 import { BaseInput, InputType } from "Elements/Base/Input/BaseInput";
 import styled from "styled-components";
 import { useMedia } from "react-use";
-import { SignInForm } from "Elements/signInForm/signInForm";
+import { AuthForm } from "Elements/authForm";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
 const HeaderStyled = styled.div`
@@ -109,7 +108,7 @@ export const Header: FC = () => {
                   </a>
                 </Link>
               ) : (
-                <SignInForm />
+                <AuthForm />
               )}
             </div>
           </HeaderStyled>

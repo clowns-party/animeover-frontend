@@ -1,14 +1,12 @@
-import React, { FC, useState } from "react";
-import { Form, Button, Checkbox, Row, Col } from "antd";
+import React, { FC } from "react";
+import { Form, Checkbox, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
-import Link from "next/link";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
+import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "Elements/Base/Input/BaseInput";
-import BaseModal from "Elements/Base/Modal/BaseModal";
-import { useAuth } from "../../bus/auth/hooks/useAuth";
+import { AuthFormStates } from "Elements/authForm";
 import { AuthFormData } from "../../bus/auth/types";
-import { signInAsync, signModalToggle } from "../../bus/auth/actions";
+import { signInAsync } from "../../bus/auth/actions";
 
 const LoginBody = styled(Row)`
   width: 460px;
@@ -58,20 +56,15 @@ const StyleInput = styled.div`
   }
 `;
 
-type SingProps = {
-  type?: string;
+type Props = {
+  updateAuthState: (state: AuthFormStates) => void;
 };
 
 const layout = {};
 const tailLayout = {};
 
-export const SignInForm: FC<SingProps> = ({ type }) => {
+export const SignInForm: FC<Props> = ({ updateAuthState }) => {
   const dispatch = useDispatch();
-  const { isFetching, error, data, showModal } = useAuth();
-
-  const errorMessageJSX = error && <p>{error.message}</p>;
-  const loaderJSX = isFetching && <p>loading data from Api...</p>;
-  const AuthData = data && <pre>{data.user.email}</pre>;
 
   const onFinish = (values: AuthFormData) => {
     dispatch(signInAsync(values));
@@ -85,83 +78,65 @@ export const SignInForm: FC<SingProps> = ({ type }) => {
     },
   };
 
-  const show = () => {
-    dispatch(signModalToggle(true));
-  };
-
-  const cancel = () => {
-    dispatch(signModalToggle(false));
-  };
-
   return (
-    <>
-      <BaseButton onClick={show} disabled={isFetching}>
-        LOG IN
-      </BaseButton>
-      <BaseModal visible={showModal} show={show} cancel={cancel}>
-        <LoginBody>
-          <Col span={24}>
-            <LoginHeader>Вход</LoginHeader>
-            <Form
-              {...layout}
-              name="basic"
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              validateMessages={validateMessages}
-            >
-              <FormStyle
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    type: "email",
-                    required: true,
-                    message: "Пожалуйста введите ваш email!",
-                  },
-                ]}
-              >
-                <StyleInput>
-                  <BaseInput className="input" />
-                </StyleInput>
-              </FormStyle>
+    <LoginBody>
+      <Col span={24}>
+        <LoginHeader>Вход</LoginHeader>
+        <Form
+          {...layout}
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+        >
+          <FormStyle
+            label="Email"
+            name="email"
+            rules={[
+              {
+                type: "email",
+                required: true,
+                message: "Пожалуйста введите ваш email!",
+              },
+            ]}
+          >
+            <StyleInput>
+              <BaseInput className="input" />
+            </StyleInput>
+          </FormStyle>
 
-              <FormStyle
-                label="Пароль"
-                name="password"
-                rules={[
-                  { required: true, message: "Пожалуйста введите ваш пароль!" },
-                ]}
-              >
-                <StyleInput>
-                  <BaseInput className="input" type="password" />
-                </StyleInput>
-              </FormStyle>
+          <FormStyle
+            label="Пароль"
+            name="password"
+            rules={[
+              { required: true, message: "Пожалуйста введите ваш пароль!" },
+            ]}
+          >
+            <StyleInput>
+              <BaseInput className="input" type="password" />
+            </StyleInput>
+          </FormStyle>
 
-              <Form.Item
-                {...tailLayout}
-                name="remember"
-                valuePropName="checked"
-              >
-                <Checkbox>Запомнить меня</Checkbox>
+          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+            <Checkbox>Запомнить меня</Checkbox>
+          </Form.Item>
+          <Row justify="space-between">
+            <Col>
+              <Form.Item {...tailLayout}>
+                <BaseButton>Войти</BaseButton>
               </Form.Item>
-              <Row justify="space-between">
-                <Col>
-                  <Form.Item {...tailLayout}>
-                    <BaseButton>Войти</BaseButton>
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <Link href="/signUp">
-                    <a>
-                      <Button htmlType="button">Регистрация</Button>
-                    </a>
-                  </Link>
-                </Col>
-              </Row>
-            </Form>
-          </Col>
-        </LoginBody>
-      </BaseModal>
-    </>
+            </Col>
+            <Col>
+              <BaseButton
+                typeComponent={ButtonType.important}
+                onClick={() => updateAuthState(AuthFormStates.register)}
+              >
+                Регистрация
+              </BaseButton>
+            </Col>
+          </Row>
+        </Form>
+      </Col>
+    </LoginBody>
   );
 };
