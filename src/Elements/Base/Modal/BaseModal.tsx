@@ -36,15 +36,15 @@ const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
   const modalRef = container && useRef();
   container && useOutsideClick(modalRef, cancel, container);
 
-  const refedChildren =
-    children &&
-    React.cloneElement(children as React.ReactElement, {
-      ref: (el) => {
-        modalRef.current = el;
-      },
-    });
-  const Modal = visible && <ModalWrapper>{refedChildren}</ModalWrapper>;
-  return container ? ReactDOM.createPortal(Modal, container) : <div> </div>;
+  const Modal = visible && (
+    <ModalWrapper>
+      <div ref={modalRef}>{children}</div>
+    </ModalWrapper>
+  );
+  return React.useMemo(
+    () => (container ? ReactDOM.createPortal(Modal, container) : null),
+    [visible]
+  );
 };
 
 export default React.memo(BaseModal);

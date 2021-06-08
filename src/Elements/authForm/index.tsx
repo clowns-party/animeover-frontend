@@ -13,10 +13,6 @@ export enum AuthFormStates {
 }
 export const AuthForm = () => {
   const dispatch = useDispatch();
-  const [authState, setAuthState] = useState(AuthFormStates.login);
-  const updateAuthState = (state: AuthFormStates) => {
-    setAuthState(state);
-  };
 
   const { isFetching, showModal } = useAuth();
 
@@ -34,15 +30,25 @@ export const AuthForm = () => {
         LOG IN
       </BaseButton>
       <BaseModal visible={showModal} show={show} cancel={cancel}>
-        <div>
-          {authState === AuthFormStates.login && (
-            <SignInForm updateAuthState={updateAuthState} />
-          )}
-          {authState === AuthFormStates.register && (
-            <SignUpForm updateAuthState={updateAuthState} />
-          )}
-        </div>
+        <Forms />
       </BaseModal>
+    </>
+  );
+};
+
+const Forms = () => {
+  const [authState, setAuthState] = useState(AuthFormStates.register);
+  const updateAuthState = (state: AuthFormStates) => {
+    setAuthState(state);
+  };
+  return (
+    <>
+      {authState === AuthFormStates.login && (
+        <SignInForm updateAuthState={updateAuthState} />
+      )}
+      {authState === AuthFormStates.register && (
+        <SignUpForm updateAuthState={updateAuthState} />
+      )}
     </>
   );
 };
