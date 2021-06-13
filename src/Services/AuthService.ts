@@ -9,12 +9,13 @@ export class Service implements Api {
     this.instance = instance;
     autoBind(this);
   }
-  me(token?: string): Promise<AxiosResponse<User>> {
+  me(token?: string, refreshToken?: string): Promise<AxiosResponse<User>> {
     return !token
       ? this.instance.post<User>("/auth/me")
       : this.instance.post<User>("/auth/me", null, {
           headers: {
             Authorization: token,
+            Refreshtoken: refreshToken,
           },
         });
   }

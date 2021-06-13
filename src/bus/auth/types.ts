@@ -7,6 +7,9 @@ export interface UserSchema {
   phoneNumber: null | string;
   isAnonymous: boolean;
   tenantId: null | string;
+  stsTokenManager: {
+    refreshToken: string;
+  };
 }
 
 export type User = {

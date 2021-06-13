@@ -22,6 +22,13 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
       yield put(set(result.data));
       // Пересмотри этот сеттер куки, будто иногда не отрабатывает
       Cookies.set("token", result.data.token, { expires: 7 });
+      Cookies.set(
+        "refreshtoken",
+        result.data?.user?.stsTokenManager?.refreshToken,
+        {
+          expires: 7,
+        }
+      );
       yield put(signModalToggle(false));
     } else {
       yield put(

@@ -7,7 +7,7 @@ export const axiosMiddleware = (store: any) => (
 ) => async (action: AnyAction) => {
   // LOGIN || INIT || LOGOUT
   if (action.type === "ME" || action.type === "LOGOUT") {
-    authInterceptor(Cookies.get("token"));
+    authInterceptor(Cookies.get("token"), Cookies.get("refreshtoken"));
   }
   next(action);
 };
