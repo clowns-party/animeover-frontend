@@ -1,6 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 import Cookies from "js-cookie";
+import { AUTH_TOKEN, REFRESH_TOKEN } from "utils/axios/axios.auth";
 import {
   set,
   setFetchingError,
@@ -21,9 +22,9 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
     if (result?.data) {
       yield put(set(result.data));
       // Пересмотри этот сеттер куки, будто иногда не отрабатывает
-      Cookies.set("token", result.data.token, { expires: 7 });
+      Cookies.set(AUTH_TOKEN, result.data.token, { expires: 7 });
       Cookies.set(
-        "refreshtoken",
+        REFRESH_TOKEN,
         result.data?.user?.stsTokenManager?.refreshToken,
         {
           expires: 7,

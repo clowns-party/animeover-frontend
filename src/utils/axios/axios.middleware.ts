@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import { AnyAction, Dispatch } from "redux";
+import { AUTH_TOKEN, REFRESH_TOKEN } from "./axios.auth";
 import { authInterceptor } from "./axios.interceptor";
 
 export const axiosMiddleware = (store: any) => (
@@ -7,7 +8,7 @@ export const axiosMiddleware = (store: any) => (
 ) => async (action: AnyAction) => {
   // LOGIN || INIT || LOGOUT
   if (action.type === "ME" || action.type === "LOGOUT") {
-    authInterceptor(Cookies.get("token"), Cookies.get("refreshtoken"));
+    authInterceptor(Cookies.get(AUTH_TOKEN), Cookies.get(REFRESH_TOKEN));
   }
   next(action);
 };

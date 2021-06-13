@@ -6,13 +6,17 @@ import { User } from "../types";
 export const useServerSideSecure = async (
   context: GetServerSidePropsContext
 ): Promise<{ user: User | null }> => {
-  const { access, refresh } = context && getToken(context);
-  if (access && refresh) {
-    const { data }: { data: User } = await service.authService.me(
-      access,
-      refresh
-    );
-    return { user: data };
+  try {
+    const tokens = context && getToken(context);
+    if (tokens?.access && tokens?.refresh) {
+      const { data }: { data: User } = await service.authService.me(
+        tokens?.access,
+        tokens?.refresh
+      );
+      return { user: data };
+    }
+    return { user: null };
+  } catch (error) {
+    return { user: null };
   }
-  return { user: null };
 };

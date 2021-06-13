@@ -1,6 +1,7 @@
-import { AxiosInstance, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { AuthFormData, User, UserSchema } from "bus/auth/types";
 import autoBind from "auto-bind";
+import { BASE_API_URL } from "utils/axios/axios.instance";
 import { Api } from "./Api";
 
 export class Service implements Api {
@@ -10,9 +11,10 @@ export class Service implements Api {
     autoBind(this);
   }
   me(token?: string, refreshToken?: string): Promise<AxiosResponse<User>> {
-    return !token
+    return !token && !refreshToken
       ? this.instance.post<User>("/auth/me")
-      : this.instance.post<User>("/auth/me", null, {
+      : // Bad instance!
+        axios.post<User>(`${BASE_API_URL}/auth/me`, null, {
           headers: {
             Authorization: token,
             Refreshtoken: refreshToken,

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+export const BASE_API_URL = "https://animeover-api.herokuapp.com";
 export const axiosInstace = axios.create({
-  baseURL: "https://animeover-api.herokuapp.com",
+  baseURL: BASE_API_URL,
 });
