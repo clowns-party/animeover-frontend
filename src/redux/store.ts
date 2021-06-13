@@ -15,8 +15,8 @@ const makeStore = (context) => {
     composeEnhancers(applyMiddleware(...middleware))
   );
   sagaMiddleware.run(rootSaga);
-  const token = context && getToken(context);
-  if (token) store.dispatch(me(token));
+  const tokens = context && getToken(context);
+  if (tokens) store.dispatch(me(tokens));
 
   return store;
 };

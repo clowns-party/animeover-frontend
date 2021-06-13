@@ -70,7 +70,7 @@ export function logout(): AuthActionTypes {
   };
 }
 
-export const me = (token?: string): AuthActionTypes => ({
+export const me = (tokens): AuthActionTypes => ({
   type: ME,
-  token,
+  tokens,
 });

@@ -15,7 +15,8 @@ export function* meWorker(action: meAction): SagaIterator {
     yield put(startFetching());
     const { data }: { data: User["user"] } = yield call(
       service.authService.me,
-      action.token
+      action?.tokens?.access,
+      action?.tokens?.refresh
     );
     if (data) {
       yield put(set({ user: data, token: Cookies.get("token") }));

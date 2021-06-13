@@ -22,7 +22,10 @@ export type UserResponse = { data: User };
 export const ME = "ME";
 export type meAction = {
   type: typeof ME;
-  token?: string;
+  tokens?: {
+    access: string;
+    refresh: string;
+  };
 };
 export const AUTH_SET = "AUTH_SET";
 export type setType = {
