@@ -3,10 +3,17 @@ import Link from "next/link";
 import { DesktopLogo } from "assets/icons/DesktopLogo";
 import { BaseInput, InputType } from "Elements/Base/Input/BaseInput";
 import styled from "styled-components";
-import { useMedia } from "react-use";
 import { AuthForm } from "Elements/authForm";
+import { HeaderMobile } from "Elements/Base/HeaderMobile";
+import { ROUTES } from "utils/routes";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
+const Mobile = styled.div`
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
 const HeaderStyled = styled.div`
   width: 100%;
   display: flex;
@@ -23,6 +30,9 @@ const HeaderStyled = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
+  }
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -60,7 +70,6 @@ const Clearfix = styled.div`
 `;
 
 export const Header: FC = () => {
-  const isMobile = useMedia("(max-width: 768px)");
   const onSearch = (event) => console.log(event.target.value);
   const { data, isFetching, error } = useAuth();
   const auth = data?.user;
@@ -68,53 +77,54 @@ export const Header: FC = () => {
   const links = [
     {
       name: "Ongoing",
-      link: "/",
+      link: ROUTES.ongoing,
     },
     {
       name: "Anime",
-      link: "/",
+      link: ROUTES.anime,
     },
   ];
 
   return (
     <>
-      {!isMobile && (
-        <>
-          <HeaderStyled>
-            <div className="logo">
-              <DesktopLogo />
-            </div>
+      <HeaderStyled>
+        <Link href={ROUTES.main}>
+          <div className="logo">
+            <DesktopLogo />
+          </div>
+        </Link>
 
-            <Links>
-              {links.map((link, index) => (
-                <Link href={link.link} key={index.toString()}>
-                  <LinkItem href={link.link}>{link.name}</LinkItem>
-                </Link>
-              ))}
-            </Links>
-            <div className="header-end">
-              <InputWrap>
-                <BaseInput
-                  placeholder="SEARCH"
-                  typeComponent={InputType.search}
-                  onChange={onSearch}
-                  className="input"
-                />
-              </InputWrap>
-              {auth ? (
-                <Link href="/profile">
-                  <a href="/profile">
-                    <img src={auth?.photoURL} alt="user" />
-                  </a>
-                </Link>
-              ) : (
-                <AuthForm />
-              )}
-            </div>
-          </HeaderStyled>
-          <Clearfix />
-        </>
-      )}
+        <Links>
+          {links.map((link, index) => (
+            <Link href={link.link} key={index.toString()}>
+              <LinkItem href={link.link}>{link.name}</LinkItem>
+            </Link>
+          ))}
+        </Links>
+        <div className="header-end">
+          <InputWrap>
+            <BaseInput
+              placeholder="SEARCH"
+              typeComponent={InputType.search}
+              onChange={onSearch}
+              className="input"
+            />
+          </InputWrap>
+          {auth ? (
+            <Link href="/profile">
+              <a href="/profile">
+                <img src={auth?.photoURL} alt="user" />
+              </a>
+            </Link>
+          ) : (
+            <AuthForm />
+          )}
+        </div>
+      </HeaderStyled>
+      <Clearfix />
+      <Mobile>
+        <HeaderMobile />
+      </Mobile>
     </>
   );
 };

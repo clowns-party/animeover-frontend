@@ -41,9 +41,14 @@ const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
       <div ref={modalRef}>{children}</div>
     </ModalWrapper>
   );
+  // Bad render if you pass children as not component
+  const [force, setForce] = React.useState(false);
+  React.useEffect(() => {
+    setForce(!force);
+  }, []);
   return React.useMemo(
     () => (container ? ReactDOM.createPortal(Modal, container) : null),
-    [visible]
+    [visible, force]
   );
 };
 
