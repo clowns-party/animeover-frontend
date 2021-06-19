@@ -29,7 +29,12 @@ export const AuthForm = () => {
       <BaseButton onClick={show} disabled={isFetching}>
         LOG IN
       </BaseButton>
-      <BaseModal visible={showModal} show={show} cancel={cancel}>
+      <BaseModal
+        visible={showModal}
+        show={show}
+        cancel={cancel}
+        style={{ zIndex: 999999 }}
+      >
         <Forms />
       </BaseModal>
     </>

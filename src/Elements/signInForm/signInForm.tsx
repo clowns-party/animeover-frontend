@@ -5,15 +5,9 @@ import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "Elements/Base/Input/BaseInput";
 import { AuthFormStates } from "Elements/authForm";
+import { AuthBody, ModalFormItem } from "Elements/signUpForm/signUpForm";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
-
-const LoginBody = styled(Row)`
-  width: 460px;
-  border-radius: 24px;
-  background: #ffffff;
-  padding: 40px 30px;
-`;
 
 const LoginHeader = styled.div`
   color: #2c2738;
@@ -23,25 +17,6 @@ const LoginHeader = styled.div`
   font-size: 34px;
   line-height: 44px;
   margin-bottom: 50px;
-`;
-const FormStyle = styled(Form.Item)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  label {
-    color: #756f86;
-    font-family: IBM Plex Sans;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 21px;
-    &:after {
-      content: "";
-    }
-  }
-  .ant-form-item-label {
-    text-align: left;
-  }
 `;
 
 const StyleInput = styled.div`
@@ -79,7 +54,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
   };
 
   return (
-    <LoginBody>
+    <AuthBody>
       <Col span={24}>
         <LoginHeader>Вход</LoginHeader>
         <Form
@@ -89,7 +64,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          <FormStyle
+          <ModalFormItem
             label="Email"
             name="email"
             rules={[
@@ -103,9 +78,9 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
             <StyleInput>
               <BaseInput className="input" />
             </StyleInput>
-          </FormStyle>
+          </ModalFormItem>
 
-          <FormStyle
+          <ModalFormItem
             label="Пароль"
             name="password"
             rules={[
@@ -115,7 +90,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
             <StyleInput>
               <BaseInput className="input" type="password" />
             </StyleInput>
-          </FormStyle>
+          </ModalFormItem>
 
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
             <Checkbox>Запомнить меня</Checkbox>
@@ -137,6 +112,6 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
           </Row>
         </Form>
       </Col>
-    </LoginBody>
+    </AuthBody>
   );
 };

@@ -14,15 +14,23 @@ import { signUpAsync } from "../../bus/auth/actions";
 // Types
 import { AuthFormData } from "../../bus/auth/types";
 
-const layout = {};
-const tailLayout = {};
+// const layout = { labelCol: { span: 24 }, wrapperCol: { span: 24 } };
 
-const StyledRow = styled.div`
-  justify-content: center;
+export const AuthBody = styled.div`
   width: 460px;
-  background: #fff;
-  padding: 40px 30px 16px 30px;
   border-radius: 24px;
+  background: #ffffff;
+  padding: 40px 30px;
+  @media (max-width: 576px) {
+    width: 320px;
+  }
+  @media (max-height: 768px) {
+    max-height: 90vh;
+    max-width: 90vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 `;
 
 const Container = styled.div`
@@ -65,12 +73,18 @@ const StyledForm = styled(Form)`
   width: 100%;
 `;
 
-const ModalFormItem = styled(Form.Item)`
-  flex-direction: column;
+export const ModalFormItem = styled(Form.Item)`
+  display: flex;
+  flex-direction: column !important;
   .ant-form-item-label {
     text-align: left;
   }
   label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    color: #756f86;
     &:after {
       content: "";
     }
@@ -94,23 +108,22 @@ const InputStyle = styled.div`
   }
 `;
 
-const SubmitButton = styled.div`
-  .submitButton {
-    width: 100%;
-    height: 57px;
-    font-family: IBM Plex Sans;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 21px;
-    text-align: center;
-    border: none;
-    background: #000000;
-    color: #fff;
-    &:disabled {
-      background: #dbe2ea;
-      color: #b1b5bf;
-    }
+const SubmitButton = styled(BaseButton)`
+  width: 100%;
+  height: 57px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  border: none;
+  background: #000000;
+  color: #fff;
+  margin-top: 33px;
+  border: none;
+  &:disabled {
+    background: #dbe2ea;
+    color: #b1b5bf;
   }
 `;
 
@@ -136,7 +149,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
   };
 
   return (
-    <StyledRow>
+    <AuthBody>
       <Container>
         <Title>Sign Up</Title>
         <Subtitle>
@@ -150,7 +163,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
         </Subtitle>
 
         <StyledForm
-          {...layout}
+          // {...layout}
           form={form}
           initialValues={{ remember: true }}
           onFinish={onFinish}
@@ -217,7 +230,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
           </ModalFormItem>
           <Form.Item shouldUpdate className="submit">
             {() => (
-              <BaseButton
+              <SubmitButton
                 className="submitButton"
                 typeComponent={ButtonType.secondary}
                 type="submit"
@@ -229,11 +242,11 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
                 }
               >
                 SignUp
-              </BaseButton>
+              </SubmitButton>
             )}
           </Form.Item>
         </StyledForm>
       </Container>
-    </StyledRow>
+    </AuthBody>
   );
 };

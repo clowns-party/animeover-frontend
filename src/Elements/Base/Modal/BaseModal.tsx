@@ -6,6 +6,7 @@ import { useOutsideClick } from "utils/hooks/useOutsideClick";
 type Props = {
   children: React.ReactNode;
   visible?: boolean;
+  style?: React.CSSProperties;
   show?: () => void;
   submit?: () => void;
   cancel?: () => void;
@@ -25,7 +26,7 @@ const ModalWrapper = styled.div`
   background-color: #00000073;
 `;
 
-const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
+const BaseModal: FC<Props> = ({ children, cancel, visible, style }) => {
   let container;
   if (typeof window !== "undefined") {
     const rootContainer = document.createElement("div");
@@ -37,7 +38,7 @@ const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
   container && useOutsideClick(modalRef, cancel, container);
 
   const Modal = visible && (
-    <ModalWrapper>
+    <ModalWrapper style={style || {}}>
       <div ref={modalRef}>{children}</div>
     </ModalWrapper>
   );
@@ -46,6 +47,17 @@ const BaseModal: FC<Props> = ({ children, cancel, visible }) => {
   React.useEffect(() => {
     setForce(!force);
   }, []);
+  // bad resolve, find another
+  React.useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = "hidden";
+    } else if (!visible) {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [visible]);
   return React.useMemo(
     () => (container ? ReactDOM.createPortal(Modal, container) : null),
     [visible, force]
