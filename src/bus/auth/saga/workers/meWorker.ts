@@ -2,12 +2,7 @@ import Cookies from "js-cookie";
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 import { REFRESH_TOKEN } from "utils/axios/axios.auth";
-import {
-  set,
-  setFetchingError,
-  startFetching,
-  stopFetching,
-} from "../../actions";
+import { set, callAuthError, startFetching, stopFetching } from "../../actions";
 import { meAction, User } from "../../types";
 import { service } from "../../../../Services";
 
@@ -26,7 +21,7 @@ export function* meWorker(action: meAction): SagaIterator {
       yield put(set({ user: data, token: Cookies.get("token") }));
     } else {
       yield put(
-        setFetchingError({
+        callAuthError({
           error: {
             message: "unresolved",
             code: "500",
@@ -37,7 +32,7 @@ export function* meWorker(action: meAction): SagaIterator {
     }
   } catch (error) {
     yield put(
-      setFetchingError({
+      callAuthError({
         error: error?.response?.data ?? "Some error",
         for: "me",
       })

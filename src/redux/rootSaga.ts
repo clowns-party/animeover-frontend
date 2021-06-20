@@ -5,19 +5,15 @@ import { animeWath } from "bus/anime/saga/anime/animeWatch";
 import { watchAnimeList } from "bus/anime/saga/animeList/animeListWatch";
 import { watchOngoing } from "bus/anime/saga/ongoing/OngoingWatch";
 import { watchAuth } from "bus/auth/saga/watcherAuth";
-import { watchRegistration } from "bus/auth/saga/watcherRegistration";
-import { watchMe } from "bus/auth/saga/watchMe";
 import { userAnimeListWatcher } from "bus/UserAnimeList/saga/userAnimeList.watcher";
 
 export function* rootSaga(): Generator {
   yield all([
     watchAuth(),
-    watchRegistration(),
     watchOngoing(),
     watchAnimeList(),
     watchChangePage(),
     animeWath(),
-    watchMe(),
     userAnimeListWatcher(),
   ]);
 }

@@ -3,8 +3,8 @@ import { call, put } from "redux-saga/effects";
 import Cookies from "js-cookie";
 import { AUTH_TOKEN, REFRESH_TOKEN } from "utils/axios/axios.auth";
 import {
+  callAuthError,
   set,
-  setFetchingError,
   signModalToggle,
   startFetching,
   stopFetching,
@@ -33,7 +33,7 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
       yield put(signModalToggle(false));
     } else {
       yield put(
-        setFetchingError({
+        callAuthError({
           error: {
             message: "unresolved",
             code: "500",
@@ -44,7 +44,7 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
     }
   } catch (error) {
     yield put(
-      setFetchingError({
+      callAuthError({
         error: error?.response?.data ?? "Some error",
         for: "login",
       })

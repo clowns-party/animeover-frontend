@@ -1,13 +1,14 @@
 // Core
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 // Antd
-import { Form, message } from "antd";
+import { Form } from "antd";
 // Hooks
 import { useDispatch } from "react-redux";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "Elements/Base/Input/BaseInput";
 import { AuthFormStates } from "Elements/authForm";
+import { useToast } from "utils/hooks/useToast";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 // Actions
 import { signUpAsync } from "../../bus/auth/actions";
@@ -137,14 +138,9 @@ type Props = {
 export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
   const dispatch = useDispatch();
   const { isFetching, error, data } = useAuth("register");
-  React.useEffect(() => {
-    if (error) {
-      message.error({
-        content: error?.error?.message,
-        duration: 3,
-      });
-    }
-  }, [error]);
+  const msg = (error && error?.error?.message) || "";
+  const hasErr = Boolean(msg);
+  useToast(msg, 3, "error");
 
   const [form] = Form.useForm();
 
@@ -193,7 +189,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
             ]}
           >
             <InputStyle>
-              <BaseInput className="input" />
+              <BaseInput className="input" hasError={hasErr} />
             </InputStyle>
           </ModalFormItem>
 
@@ -209,7 +205,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
             ]}
           >
             <InputStyle>
-              <BaseInput type="password" className="input" />
+              <BaseInput type="password" className="input" hasError={hasErr} />
             </InputStyle>
           </ModalFormItem>
 
@@ -237,7 +233,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
             ]}
           >
             <InputStyle>
-              <BaseInput type="password" className="input" />
+              <BaseInput type="password" className="input" hasError={hasErr} />
             </InputStyle>
           </ModalFormItem>
           <Form.Item shouldUpdate className="submit">

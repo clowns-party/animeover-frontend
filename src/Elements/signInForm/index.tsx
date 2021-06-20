@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Form, Checkbox, Row, Col, message } from "antd";
+import { Form, Checkbox, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import { BaseInput } from "Elements/Base/Input/BaseInput";
 import { AuthFormStates } from "Elements/authForm";
 import { AuthBody, ModalFormItem } from "Elements/signUpForm";
 import { useAuth } from "bus/auth/hooks/useAuth";
+import { useToast } from "utils/hooks/useToast";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
 
@@ -41,15 +42,10 @@ const tailLayout = {};
 
 export const SignInForm: FC<Props> = ({ updateAuthState }) => {
   const dispatch = useDispatch();
-  const { error } = useAuth("login");
-  React.useEffect(() => {
-    if (error) {
-      message.error({
-        content: error?.error?.message,
-        duration: 3,
-      });
-    }
-  }, [error]);
+  const { error, isFetching } = useAuth("login");
+  const msg = (error && error?.error?.message) || "";
+  const hasErr = Boolean(msg);
+  useToast(msg, 3, "error");
 
   const onFinish = (values: AuthFormData) => {
     dispatch(signInAsync(values));
@@ -86,7 +82,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
             ]}
           >
             <StyleInput>
-              <BaseInput className="input" />
+              <BaseInput className="input" hasError={hasErr} />
             </StyleInput>
           </ModalFormItem>
 
@@ -96,7 +92,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
             rules={[{ required: true, message: "Please enter your password!" }]}
           >
             <StyleInput>
-              <BaseInput className="input" type="password" />
+              <BaseInput className="input" type="password" hasError={hasErr} />
             </StyleInput>
           </ModalFormItem>
 
@@ -106,13 +102,14 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
           <Row justify="space-between">
             <Col>
               <Form.Item {...tailLayout}>
-                <BaseButton>login</BaseButton>
+                <BaseButton disabled={isFetching}>login</BaseButton>
               </Form.Item>
             </Col>
             <Col>
               <BaseButton
                 typeComponent={ButtonType.important}
                 onClick={() => updateAuthState(AuthFormStates.register)}
+                disabled={isFetching}
               >
                 register
               </BaseButton>

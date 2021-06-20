@@ -57,12 +57,21 @@ type AuthStopFechingAction = {
 };
 
 export const AUTH_SET_FETCHING_ERROR = "AUTH_SET_FETCHING_ERROR";
+export type AuthErrorPayload =
+  | {
+      error: ErrorHttpAction;
+      for: ERROR_TYPES_AUTH;
+    }
+  | false;
 export type AuthSetError = {
   type: typeof AUTH_SET_FETCHING_ERROR;
-  payload: {
-    error: ErrorHttpAction;
-    for: ERROR_TYPES_AUTH;
-  };
+  payload: AuthErrorPayload;
+};
+// saga
+export const CALL_AUTH_ERROR_HANDLER = "CALL_AUTH_ERROR_HANDLER";
+export type callAuthErrorHandler = {
+  type: typeof CALL_AUTH_ERROR_HANDLER;
+  payload: AuthErrorPayload;
 };
 
 // Async
@@ -105,4 +114,5 @@ export type AuthActionTypes =
   | logoutType
   | AuthSetError
   | meAction
-  | signModalToggleType;
+  | signModalToggleType
+  | callAuthErrorHandler;

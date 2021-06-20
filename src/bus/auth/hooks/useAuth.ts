@@ -9,7 +9,11 @@ export const useAuth = (type?: ERROR_TYPES_AUTH): AuthState => {
     AuthState
   >((state) => state.auth);
 
-  const err = error && type && error.for === type ? error : false;
+  const err = type
+    ? error && type && error.for === type
+      ? error
+      : false
+    : error;
 
   return { data, isFetching, error: err, showModal };
 };

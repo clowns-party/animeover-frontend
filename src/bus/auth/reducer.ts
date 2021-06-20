@@ -12,6 +12,7 @@ import {
   ME,
   SIGN_MODAL_TOGGLE,
   ERROR_TYPES_AUTH,
+  CALL_AUTH_ERROR_HANDLER,
 } from "./types";
 
 export type AuthState = {
@@ -63,6 +64,8 @@ export const AuthReducer = (
         ...state,
         isFetching: false,
       };
+    case CALL_AUTH_ERROR_HANDLER:
+      return { ...state };
     case AUTH_SET_FETCHING_ERROR:
       return {
         ...state,

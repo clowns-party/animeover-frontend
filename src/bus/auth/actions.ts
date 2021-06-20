@@ -10,10 +10,11 @@ import {
   AUTH_SET_FETCHING_ERROR,
   SIGN_MODAL_TOGGLE,
   AuthFormData,
-  ErrorHttpAction,
   LOGOUT,
   ME,
-  ERROR_TYPES_AUTH,
+  CALL_AUTH_ERROR_HANDLER,
+  callAuthErrorHandler,
+  AuthErrorPayload,
 } from "./types";
 
 // SIGN IN ACTIONS
@@ -50,12 +51,16 @@ export function stopFetching(): AuthActionTypes {
   };
 }
 
-export function setFetchingError(payload: {
-  error: ErrorHttpAction;
-  for: ERROR_TYPES_AUTH;
-}): AuthActionTypes {
+export function setFetchingError(payload: AuthErrorPayload): AuthActionTypes {
   return {
     type: AUTH_SET_FETCHING_ERROR,
+    payload,
+  };
+}
+
+export function callAuthError(payload: AuthErrorPayload): callAuthErrorHandler {
+  return {
+    type: CALL_AUTH_ERROR_HANDLER,
     payload,
   };
 }

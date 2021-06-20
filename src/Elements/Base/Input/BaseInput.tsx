@@ -10,7 +10,7 @@ type StyledInputProps = {
   hasError: string | boolean;
 };
 
-const DefaultInput = styled.input`
+const DefaultInput = styled.input<{ hasError: boolean }>`
   width: 280px;
   height: 32px;
   background: #ffff;
@@ -63,7 +63,7 @@ type Props = {
   extends?: HTMLAttributes<HTMLInputElement>;
   style?: React.CSSProperties;
   typeComponent?: InputType;
-  hasError?: string | boolean;
+  hasError?: boolean;
 } & InputHTMLAttributes<any>;
 export const BaseInput: FC<Props> = ({
   children,

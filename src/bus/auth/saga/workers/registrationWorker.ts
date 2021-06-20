@@ -4,7 +4,7 @@ import { put, call } from "redux-saga/effects";
 import {
   startFetching,
   stopFetching,
-  setFetchingError,
+  callAuthError,
   signModalToggle,
   signInAsync,
 } from "../../actions";
@@ -21,7 +21,7 @@ export function* signUpWorker(action: signUpAsyncType): SagaIterator {
       yield put(signInAsync(action.payload));
     } else {
       yield put(
-        setFetchingError({
+        callAuthError({
           error: {
             message: "unresolved",
             code: "500",
@@ -32,7 +32,7 @@ export function* signUpWorker(action: signUpAsyncType): SagaIterator {
     }
   } catch (error) {
     yield put(
-      setFetchingError({
+      callAuthError({
         error: error?.response?.data ?? "Some error",
         for: "register",
       })
