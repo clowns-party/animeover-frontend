@@ -1,73 +1,56 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
-import { Button, Col, Row, Form, Input } from "antd";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { getUserAnimeList } from "bus/UserAnimeList/actions";
 // Components
+import styled from "styled-components";
+import { ProfileContainer } from "Elements/Base/Containers/ProfileContainer";
+import { ProfileAnimeList } from "Elements/profile/ProfileAnimeList";
 import { Header } from "../../Elements/header";
-import { ProfileCard } from "../../Elements/ProfileCard/ProfileCard";
-import { UserAnimeList } from "../UserAnimeList/UserAnimeList";
+import {
+  BaseProfileCardStyle,
+  ProfileCard,
+} from "../../Elements/ProfileCard/ProfileCard";
 // Hooks
 import { useServerSideSecure } from "../auth/hooks/useServerSideSecure";
 // Types
 import { User } from "../auth/types";
-import style from "./Profile.module.scss";
+
+const ProfileColumnCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  flex: 1 1 auto;
+  max-width: 50%;
+  flex-basis: auto;
+  flex-wrap: wrap;
+  @media (max-width: 768px) {
+    margin-right: 0px;
+    flex: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+`;
+
+const HistoryCard = styled(BaseProfileCardStyle)`
+  margin-top: 68px;
+  height: 295px;
+  margin-bottom: 68px;
+`;
 
 type Props = {
   user: User["user"] | null;
 };
 const Profile: FC<Props> = ({ user }) => {
-  const dispatch = useDispatch();
-  const onLoad = () => {
-    dispatch(getUserAnimeList());
-  };
   return (
     <>
       <Header />
-      <div className={style.container}>
-        <Row gutter={24} justify="center">
-          <Col span={9}>
-            <ProfileCard user={user} />
-          </Col>
-          <Col span={11}>
-            <button onClick={onLoad} type="button">
-              Load test
-            </button>
-
-            {/* <ProfileForm /> */}
-            <UserAnimeList />
-          </Col>
-        </Row>
-      </div>
+      <ProfileContainer>
+        <ProfileColumnCards>
+          <ProfileCard user={user} />
+          <HistoryCard>history</HistoryCard>
+        </ProfileColumnCards>
+        <ProfileAnimeList />
+      </ProfileContainer>
     </>
-  );
-};
-
-const ProfileForm = () => {
-  return (
-    <Form name="basic" initialValues={{ remember: true }}>
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: "Please input your username!" }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };
 
