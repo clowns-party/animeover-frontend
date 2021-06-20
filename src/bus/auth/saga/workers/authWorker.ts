@@ -2,6 +2,7 @@ import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 import Cookies from "js-cookie";
 import { AUTH_TOKEN, REFRESH_TOKEN } from "utils/axios/axios.auth";
+import { nativeReload } from "utils/nativeReload";
 import {
   callAuthError,
   set,
@@ -31,6 +32,7 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
         }
       );
       yield put(signModalToggle(false));
+      yield call(nativeReload);
     } else {
       yield put(
         callAuthError({
