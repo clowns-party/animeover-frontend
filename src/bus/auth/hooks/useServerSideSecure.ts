@@ -3,9 +3,26 @@ import { getToken } from "utils/axios/axios.auth";
 import { service } from "../../../Services";
 import { User } from "../types";
 
+type Redirect = {
+  redirect: {
+    destination: string;
+    permanent: boolean;
+  };
+};
+
+type ReturnProps = {
+  props: {
+    user: User | null;
+  };
+};
+
 export const useServerSideSecure = async (
   context: GetServerSidePropsContext
-): Promise<{ user: User | null }> => {
+): Promise<ReturnProps | Redirect> => {
+  const redirect = {
+    destination: "/",
+    permanent: false,
+  };
   try {
     const tokens = context && getToken(context);
     if (tokens?.access && tokens?.refresh) {
@@ -13,10 +30,10 @@ export const useServerSideSecure = async (
         tokens?.access,
         tokens?.refresh
       );
-      return { user: data };
+      return { props: { user: data } };
     }
-    return { user: null };
+    return { redirect };
   } catch (error) {
-    return { user: null };
+    return { redirect };
   }
 };

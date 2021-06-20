@@ -76,23 +76,6 @@ export default Profile;
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const redirect = {
-    destination: "/",
-    permanent: false,
-  };
-  try {
-    const { user } = await useServerSideSecure(context);
-    if (!user) {
-      return {
-        redirect,
-      };
-    }
-    return {
-      props: { user },
-    };
-  } catch (error) {
-    return {
-      redirect,
-    };
-  }
+  const res = await useServerSideSecure(context);
+  return res;
 };
