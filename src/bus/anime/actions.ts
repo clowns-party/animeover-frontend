@@ -26,6 +26,8 @@ import {
   changePageType,
   CHANGE_PAGE,
   AnimeListPageParams,
+  SET_CURRENT_PAGE,
+  setCurrentPageType,
 } from "./types";
 
 export function startAnime(): startAnimeListType {
@@ -98,6 +100,13 @@ export function setAnimeListCount(payload: number): setAnimeListCountType {
 export function changePage(payload: AnimeListPageParams): changePageType {
   return {
     type: CHANGE_PAGE,
+    payload,
+  };
+}
+
+export function setCurrentPage(payload: number): setCurrentPageType {
+  return {
+    type: SET_CURRENT_PAGE,
     payload,
   };
 }

@@ -27,13 +27,21 @@ export function* meWorker(action: meAction): SagaIterator {
     } else {
       yield put(
         setFetchingError({
-          message: "unresolved",
-          code: "500",
+          error: {
+            message: "unresolved",
+            code: "500",
+          },
+          for: "me",
         })
       );
     }
   } catch (error) {
-    yield put(setFetchingError(error?.response?.data ?? "Some error"));
+    yield put(
+      setFetchingError({
+        error: error?.response?.data ?? "Some error",
+        for: "me",
+      })
+    );
   } finally {
     yield put(stopFetching());
   }

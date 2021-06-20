@@ -43,6 +43,7 @@ export type ErrorHttpAction = {
   message: string;
   code: string | number;
 };
+export type ERROR_TYPES_AUTH = "me" | "login" | "register";
 
 // Sync
 export const AUTH_START_FETCHING = "AUTH_START_FETCHING";
@@ -58,7 +59,10 @@ type AuthStopFechingAction = {
 export const AUTH_SET_FETCHING_ERROR = "AUTH_SET_FETCHING_ERROR";
 export type AuthSetError = {
   type: typeof AUTH_SET_FETCHING_ERROR;
-  payload: ErrorHttpAction;
+  payload: {
+    error: ErrorHttpAction;
+    for: ERROR_TYPES_AUTH;
+  };
 };
 
 // Async

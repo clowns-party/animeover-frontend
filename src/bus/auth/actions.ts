@@ -13,6 +13,7 @@ import {
   ErrorHttpAction,
   LOGOUT,
   ME,
+  ERROR_TYPES_AUTH,
 } from "./types";
 
 // SIGN IN ACTIONS
@@ -49,7 +50,10 @@ export function stopFetching(): AuthActionTypes {
   };
 }
 
-export function setFetchingError(payload: ErrorHttpAction): AuthActionTypes {
+export function setFetchingError(payload: {
+  error: ErrorHttpAction;
+  for: ERROR_TYPES_AUTH;
+}): AuthActionTypes {
   return {
     type: AUTH_SET_FETCHING_ERROR,
     payload,

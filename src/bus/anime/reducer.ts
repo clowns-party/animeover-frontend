@@ -13,6 +13,7 @@ import {
   SET_ANIME,
   Anime,
   SET_ANIME_LIST_COUNT,
+  SET_CURRENT_PAGE,
 } from "./types";
 
 export type AnimeState = {
@@ -90,6 +91,12 @@ export const animeReducer = (
         ...state,
         anime: { ...action.payload },
       };
+    case SET_CURRENT_PAGE: {
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+    }
     default:
       // eslint-disable-next-line no-case-declarations
       const x: never = action;

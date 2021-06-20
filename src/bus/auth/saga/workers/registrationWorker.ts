@@ -22,13 +22,21 @@ export function* signUpWorker(action: signUpAsyncType): SagaIterator {
     } else {
       yield put(
         setFetchingError({
-          message: "unresolved",
-          code: "500",
+          error: {
+            message: "unresolved",
+            code: "500",
+          },
+          for: "register",
         })
       );
     }
   } catch (error) {
-    yield put(setFetchingError(error?.response?.data ?? "Some error"));
+    yield put(
+      setFetchingError({
+        error: error?.response?.data ?? "Some error",
+        for: "register",
+      })
+    );
   } finally {
     yield put(stopFetching());
   }

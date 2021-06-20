@@ -5,6 +5,7 @@ import { WhatshotIcon } from "assets/icons/WhatshotIcon";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { zIndexLayout } from "utils/constants/zIndexLayout";
 import { ROUTES } from "utils/routes";
 import { HeaderOverlay } from "./HeaderOverlay";
 
@@ -12,7 +13,7 @@ const MobileWrap = styled.div<{ overlay: boolean }>`
   position: fixed;
   bottom: ${(props) => (props.overlay ? "0px" : "20px")};
   width: 100%;
-  z-index: 999999;
+  z-index: ${zIndexLayout.MIDDLE_LEVEL};
   display: flex;
   justify-content: center;
   transition: 0.2s all ease;

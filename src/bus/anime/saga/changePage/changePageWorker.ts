@@ -5,6 +5,7 @@ import { AnimeListReponse } from "../../types";
 import {
   setAnimeList,
   setAnimeListCount,
+  setCurrentPage,
   setErrorAnime,
   startAnime,
   stopAnime,
@@ -19,6 +20,7 @@ export function* changePageWorker(action): SagaIterator {
       payload.limit,
       payload.page
     );
+    yield put(setCurrentPage(payload.page));
     yield put(setAnimeList(result.data.animeList));
     yield put(setAnimeListCount(result.data.count));
   } catch (err) {

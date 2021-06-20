@@ -11,12 +11,18 @@ import {
   LOGOUT,
   ME,
   SIGN_MODAL_TOGGLE,
+  ERROR_TYPES_AUTH,
 } from "./types";
 
 export type AuthState = {
   data: User | null;
   isFetching: boolean;
-  error: ErrorHttpAction | false;
+  error:
+    | {
+        error: ErrorHttpAction;
+        for: ERROR_TYPES_AUTH;
+      }
+    | false;
   showModal: boolean;
 };
 

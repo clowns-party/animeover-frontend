@@ -34,3 +34,6 @@ a {
 input {
   outline: none;
 }
+.ant-message {
+  z-index: 99999999 !important;
+}

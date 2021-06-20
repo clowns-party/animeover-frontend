@@ -11,15 +11,18 @@ type State = {
   loading: boolean;
   prevY: number;
 };
-type Props = any;
+type Props = {
+  startPage?: number;
+};
 export class InfiniteScroll extends React.Component<Props, State> {
   observer: IntersectionObserver;
   loadingRef: HTMLDivElement;
   constructor(props: Props) {
     super(props);
+    const { startPage } = this.props;
     this.state = {
       animeList: [],
-      page: 1,
+      page: startPage || 1,
       loading: false,
       prevY: 0,
     };
@@ -27,7 +30,7 @@ export class InfiniteScroll extends React.Component<Props, State> {
 
   componentDidMount() {
     const { page } = this.state;
-    this.getUsers(page);
+    this.fetchAnime(page);
     const options = {
       root: null, // Page as root
       rootMargin: "0px",
@@ -50,13 +53,13 @@ export class InfiniteScroll extends React.Component<Props, State> {
     const { y } = entities[0].boundingClientRect;
     if (prevY > y) {
       const curPage = page + 1;
-      this.getUsers(curPage);
+      this.fetchAnime(curPage);
       this.setState({ page: curPage });
     }
     this.setState({ prevY: y });
   }
 
-  getUsers(page) {
+  fetchAnime(page) {
     const { animeList } = this.state;
     this.setState({ loading: true });
     service.animeService.animeList(20, page).then((res) => {

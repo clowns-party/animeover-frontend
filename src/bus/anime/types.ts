@@ -100,6 +100,12 @@ export type changePageType = {
   payload: AnimeListPageParams;
 };
 
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export type setCurrentPageType = {
+  type: typeof SET_CURRENT_PAGE;
+  payload: number;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
   | setOngoingListType
@@ -110,4 +116,5 @@ export type animeActionsTypes =
   | getAnimeType
   | setAnimeType
   | setAnimeListCountType
-  | getOngoingListType;
+  | getOngoingListType
+  | setCurrentPageType;

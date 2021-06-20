@@ -2,6 +2,6 @@ export const ROUTES = {
   main: "/",
   profile: "/profile",
   ongoing: "/",
-  anime: "/",
+  anime: "/anime",
   animeById: (id: string) => `/anime/${id}`,
 };

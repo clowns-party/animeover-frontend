@@ -1,11 +1,12 @@
 import React, { FC } from "react";
-import { Form, Checkbox, Row, Col } from "antd";
+import { Form, Checkbox, Row, Col, message } from "antd";
 import { useDispatch } from "react-redux";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "Elements/Base/Input/BaseInput";
 import { AuthFormStates } from "Elements/authForm";
-import { AuthBody, ModalFormItem } from "Elements/signUpForm/signUpForm";
+import { AuthBody, ModalFormItem } from "Elements/signUpForm";
+import { useAuth } from "bus/auth/hooks/useAuth";
 import { AuthFormData } from "../../bus/auth/types";
 import { signInAsync } from "../../bus/auth/actions";
 
@@ -40,6 +41,15 @@ const tailLayout = {};
 
 export const SignInForm: FC<Props> = ({ updateAuthState }) => {
   const dispatch = useDispatch();
+  const { error } = useAuth("login");
+  React.useEffect(() => {
+    if (error) {
+      message.error({
+        content: error?.error?.message,
+        duration: 3,
+      });
+    }
+  }, [error]);
 
   const onFinish = (values: AuthFormData) => {
     dispatch(signInAsync(values));
@@ -56,7 +66,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
   return (
     <AuthBody>
       <Col span={24}>
-        <LoginHeader>Вход</LoginHeader>
+        <LoginHeader>Login</LoginHeader>
         <Form
           {...layout}
           name="basic"
@@ -71,7 +81,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
               {
                 type: "email",
                 required: true,
-                message: "Пожалуйста введите ваш email!",
+                message: "Please enter your email",
               },
             ]}
           >
@@ -81,11 +91,9 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
           </ModalFormItem>
 
           <ModalFormItem
-            label="Пароль"
+            label="Password"
             name="password"
-            rules={[
-              { required: true, message: "Пожалуйста введите ваш пароль!" },
-            ]}
+            rules={[{ required: true, message: "Please enter your password!" }]}
           >
             <StyleInput>
               <BaseInput className="input" type="password" />
@@ -93,12 +101,12 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
           </ModalFormItem>
 
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-            <Checkbox>Запомнить меня</Checkbox>
+            <Checkbox>Remember me</Checkbox>
           </Form.Item>
           <Row justify="space-between">
             <Col>
               <Form.Item {...tailLayout}>
-                <BaseButton>Войти</BaseButton>
+                <BaseButton>login</BaseButton>
               </Form.Item>
             </Col>
             <Col>
@@ -106,7 +114,7 @@ export const SignInForm: FC<Props> = ({ updateAuthState }) => {
                 typeComponent={ButtonType.important}
                 onClick={() => updateAuthState(AuthFormStates.register)}
               >
-                Регистрация
+                register
               </BaseButton>
             </Col>
           </Row>

@@ -1,7 +1,7 @@
 // Core
 import React, { FC, useEffect, useState } from "react";
 // Antd
-import { Form } from "antd";
+import { Form, message } from "antd";
 // Hooks
 import { useDispatch } from "react-redux";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
@@ -120,10 +120,13 @@ const SubmitButton = styled(BaseButton)`
   background: #000000;
   color: #fff;
   margin-top: 33px;
-  border: none;
+  border: none !important;
   &:disabled {
     background: #dbe2ea;
     color: #b1b5bf;
+  }
+  &:hover {
+    color: #fff;
   }
 `;
 
@@ -133,7 +136,16 @@ type Props = {
 
 export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
   const dispatch = useDispatch();
-  const { isFetching, error, data } = useAuth();
+  const { isFetching, error, data } = useAuth("register");
+  React.useEffect(() => {
+    if (error) {
+      message.error({
+        content: error?.error?.message,
+        duration: 3,
+      });
+    }
+  }, [error]);
+
   const [form] = Form.useForm();
 
   const onFinish = (values: AuthFormData) => {
@@ -241,7 +253,7 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
                   isFetching
                 }
               >
-                SignUp
+                Sign Up
               </SubmitButton>
             )}
           </Form.Item>

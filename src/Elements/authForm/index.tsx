@@ -2,10 +2,11 @@ import { signModalToggle } from "bus/auth/actions";
 import { useAuth } from "bus/auth/hooks/useAuth";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
 import BaseModal from "Elements/Base/Modal/BaseModal";
-import { SignInForm } from "Elements/signInForm/signInForm";
-import { SignUpForm } from "Elements/signUpForm/signUpForm";
+import { SignInForm } from "Elements/signInForm";
+import { SignUpForm } from "Elements/signUpForm";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { zIndexLayout } from "utils/constants/zIndexLayout";
 
 export enum AuthFormStates {
   login = "login",
@@ -33,7 +34,7 @@ export const AuthForm = () => {
         visible={showModal}
         show={show}
         cancel={cancel}
-        style={{ zIndex: 999999 }}
+        style={{ zIndex: zIndexLayout.MIDDLE_LEVEL }}
       >
         <Forms />
       </BaseModal>
@@ -42,7 +43,7 @@ export const AuthForm = () => {
 };
 
 const Forms = () => {
-  const [authState, setAuthState] = useState(AuthFormStates.register);
+  const [authState, setAuthState] = useState(AuthFormStates.login);
   const updateAuthState = (state: AuthFormStates) => {
     setAuthState(state);
   };

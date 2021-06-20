@@ -1,6 +1,7 @@
 import React, { FC, useRef } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
+import { zIndexLayout } from "utils/constants/zIndexLayout";
 import { useOutsideClick } from "utils/hooks/useOutsideClick";
 
 type Props = {
@@ -22,7 +23,7 @@ const ModalWrapper = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 99999;
+  z-index: ${zIndexLayout.PRE_MIDDLE_LEVEL};
   background-color: #00000073;
 `;
 
@@ -35,6 +36,7 @@ const BaseModal: FC<Props> = ({ children, cancel, visible, style }) => {
     container = rootContainer;
   }
   const modalRef = container && useRef();
+
   container && useOutsideClick(modalRef, cancel, container);
 
   const Modal = visible && (

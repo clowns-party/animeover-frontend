@@ -34,13 +34,21 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
     } else {
       yield put(
         setFetchingError({
-          message: "unresolved",
-          code: "500",
+          error: {
+            message: "unresolved",
+            code: "500",
+          },
+          for: "login",
         })
       );
     }
   } catch (error) {
-    yield put(setFetchingError(error?.response?.data ?? "Some error"));
+    yield put(
+      setFetchingError({
+        error: error?.response?.data ?? "Some error",
+        for: "login",
+      })
+    );
   } finally {
     yield put(stopFetching());
   }

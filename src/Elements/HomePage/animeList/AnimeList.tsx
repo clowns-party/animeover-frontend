@@ -5,12 +5,12 @@ import styles from "./animeList.module.scss";
 import { InfiniteScroll } from "./InfiniteScroll";
 
 export const AnimeList: FC = () => {
-  const { animeList, pageLimit, totalPages, currentPage } = useAnime();
+  const { animeList, currentPage } = useAnime();
 
   return (
     <>
       {animeList?.length ? (
-        <InfiniteScroll />
+        <InfiniteScroll startPage={currentPage} />
       ) : (
         <div className={styles.anime_list_container}>
           <SkeletonCards />

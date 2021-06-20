@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { AuthForm } from "Elements/authForm";
 import { HeaderMobile } from "Elements/Base/HeaderMobile";
 import { ROUTES } from "utils/routes";
+import { zIndexLayout } from "utils/constants/zIndexLayout";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
 const Mobile = styled.div`
@@ -22,9 +23,10 @@ const HeaderStyled = styled.div`
   align-items: center;
   padding: 1rem;
   position: fixed;
-  z-index: 99;
+  z-index: ${zIndexLayout.LOW_LEVEL};
   .logo {
     margin-right: 60px;
+    cursor: pointer;
   }
   .header-end {
     width: 100%;
