@@ -1,8 +1,9 @@
 import React, { FC, useRef } from "react";
-import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { zIndexLayout } from "utils/constants/zIndexLayout";
 import { useOutsideClick } from "utils/hooks/useOutsideClick";
+import { Portal } from "react-portal";
+import { useImperativeDisableScroll } from "utils/hooks/useImperativeDisableScroll";
 
 type Props = {
   children: React.ReactNode;
@@ -28,42 +29,29 @@ const ModalWrapper = styled.div`
 `;
 
 const BaseModal: FC<Props> = ({ children, cancel, visible, style }) => {
-  let container;
-  if (typeof window !== "undefined") {
-    const rootContainer = document.createElement("div");
-    const parentElem = document.querySelector("#__next");
-    parentElem.appendChild(rootContainer);
-    container = rootContainer;
-  }
-  const modalRef = container && useRef();
+  const modalRef = useRef();
+  const wrapRer = useRef();
+  useOutsideClick(modalRef, cancel);
 
-  container && useOutsideClick(modalRef, cancel, container);
-
-  const Modal = visible && (
-    <ModalWrapper style={style || {}}>
-      <div ref={modalRef}>{children}</div>
-    </ModalWrapper>
+  return (
+    <>
+      {visible && (
+        <Portal>
+          <NoScrollSAFE visible={visible} />
+          <ModalWrapper style={style || {}} ref={wrapRer}>
+            <div ref={modalRef}>{children}</div>
+          </ModalWrapper>
+        </Portal>
+      )}
+    </>
   );
-  // Bad render if you pass children as not component
-  const [force, setForce] = React.useState(false);
-  React.useEffect(() => {
-    setForce(!force);
-  }, []);
-  // bad resolve, find another
-  React.useEffect(() => {
-    if (visible) {
-      document.body.style.overflow = "hidden";
-    } else if (!visible) {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [visible]);
-  return React.useMemo(
-    () => (container ? ReactDOM.createPortal(Modal, container) : null),
-    [visible, force]
-  );
+};
+// Safe scrool component, when used 2 modals, scroll not blocked, call hook only when modal showed
+const NoScrollSAFE = ({ visible }) => {
+  useImperativeDisableScroll({
+    disabled: visible,
+  });
+  return <></>;
 };
 
 export default React.memo(BaseModal);
