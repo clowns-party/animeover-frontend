@@ -94,12 +94,6 @@ export type signUpAsyncType = {
   payload: AuthFormData;
 };
 
-// сделать при перезугрке страницы подтягивание данных
-export const INIT_AUTH_ASYNC = "INIT_AUTH_ASYNC";
-export type initAuthAsync = {
-  type: typeof INIT_AUTH_ASYNC;
-};
-
 export const LOGOUT = "LOGOUT";
 export type logoutType = {
   type: typeof LOGOUT;

@@ -1,29 +1,23 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { AuthFormData, User, UserSchema } from "bus/auth/types";
 import autoBind from "auto-bind";
-import { BASE_API_URL } from "utils/axios/axios.instance";
+import { GetServerSidePropsContext } from "next";
+import { ParsedUrlQuery } from "querystring";
 import { Api } from "./Api";
 
-export class Service implements Api {
-  public instance: AxiosInstance;
-  constructor(instance: AxiosInstance) {
-    this.instance = instance;
+export class Service extends Api {
+  constructor() {
+    super();
     autoBind(this);
   }
-  me(token?: string, refreshToken?: string): Promise<AxiosResponse<User>> {
-    return !token && !refreshToken
-      ? this.instance.post<User>("/auth/me")
-      : // Bad instance!
-        axios.post<User>(`${BASE_API_URL}/auth/me`, null, {
-          headers: {
-            Authorization: token,
-            Refreshtoken: refreshToken,
-          },
-        });
+  me(
+    context?: GetServerSidePropsContext<ParsedUrlQuery>
+  ): Promise<AxiosResponse<User>> {
+    return this.getInstance(context).post<User>("/auth/me");
   }
 
   auth(payload: AuthFormData): Promise<AxiosResponse<User>> {
-    return this.instance.post<User>("/auth", null, {
+    return this.getInstance().post<User>("/auth", null, {
       params: {
         email: payload.email,
         password: payload.password,
@@ -32,7 +26,7 @@ export class Service implements Api {
   }
 
   signUp(authData: AuthFormData): Promise<AxiosResponse<UserSchema>> {
-    return this.instance.post<UserSchema>("/auth/signup", null, {
+    return this.getInstance().post<UserSchema>("/auth/signup", null, {
       params: {
         email: authData.email,
         password: authData.password,

@@ -3,21 +3,23 @@ import { Anime, AnimeList, IdType, AnimeData } from "bus/anime/types";
 import autoBind from "auto-bind";
 import { Api } from "./Api";
 
-export class Service implements Api {
+export class Service extends Api {
   public instance: AxiosInstance;
-  constructor(instance: AxiosInstance) {
-    this.instance = instance;
+  constructor() {
+    super();
     autoBind(this);
   }
   animeList(limit: number, page: number): Promise<AxiosResponse<AnimeData>> {
-    return this.instance.get<AnimeData>(`/animedb?limit=${limit}&page=${page}`);
+    return this.getInstance().get<AnimeData>(
+      `/animedb?limit=${limit}&page=${page}`
+    );
   }
 
   ongoingList(): Promise<AxiosResponse<AnimeList>> {
-    return this.instance.get<AnimeList>("/ongoing");
+    return this.getInstance().get<AnimeList>("/ongoing");
   }
 
   anime(id: IdType): Promise<AxiosResponse<Anime>> {
-    return this.instance.get<Anime>(`/animedb/anime/${id}`);
+    return this.getInstance().get<Anime>(`/animedb/anime/${id}`);
   }
 }

@@ -24,14 +24,11 @@ export const useServerSideSecure = async (
     permanent: false,
   };
   try {
-    const tokens = context && getToken(context);
-    if (tokens?.access && tokens?.refresh) {
-      const { data }: { data: User } = await service.authService.me(
-        tokens?.access,
-        tokens?.refresh
-      );
+    const { data }: { data: User } = await service.authService.me(context);
+    if (data) {
       return { props: { user: data } };
     }
+
     return { redirect };
   } catch (error) {
     return { redirect };

@@ -1,4 +1,5 @@
 import cookie from "cookie";
+import Cookies from "js-cookie";
 import { GetServerSidePropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 
@@ -15,21 +16,7 @@ export const getToken = (
   );
 
   return {
-    access: cookies[AUTH_TOKEN],
-    refresh: cookies[REFRESH_TOKEN],
+    access: cookies[AUTH_TOKEN] || Cookies.get(AUTH_TOKEN),
+    refresh: cookies[REFRESH_TOKEN] || Cookies.get(REFRESH_TOKEN),
   };
 };
-
-// export const createSetAuthInterceptor = (
-//   token: string,
-//   refreshToken: string
-// ) => (config: AxiosRequestConfig) => {
-//   if (token && refreshToken) {
-//     config.headers.Authorization = token || "";
-//     config.headers.Refreshtoken = refreshToken || "";
-//   } else {
-//     delete config.headers.Authorization;
-//     delete config.headers.Refreshtoken;
-//   }
-//   return config;
-// };
