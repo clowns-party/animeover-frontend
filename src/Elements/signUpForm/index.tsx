@@ -171,7 +171,6 @@ export const SignUpForm: FC<Props> = ({ updateAuthState }) => {
         </Subtitle>
 
         <StyledForm
-          // {...layout}
           form={form}
           initialValues={{ remember: true }}
           onFinish={onFinish}

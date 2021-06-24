@@ -32,6 +32,14 @@ const HeaderStyled = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    img {
+      height: 40px;
+      width: 40px;
+      max-width: 40px;
+      max-height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
   }
   @media screen and (max-width: 768px) {
     display: none;

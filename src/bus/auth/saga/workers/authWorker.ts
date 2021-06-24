@@ -20,16 +20,12 @@ export function* authWorker(action: signInAsyncType): SagaIterator {
       action.payload
     );
     if (result?.data) {
-      yield put(set(result.data));
+      yield put(set({ user: result.data }));
       // Пересмотри этот сеттер куки, будто иногда не отрабатывает
-      Cookies.set(AUTH_TOKEN, result.data.token, { expires: 7 });
-      Cookies.set(
-        REFRESH_TOKEN,
-        result.data?.user?.stsTokenManager?.refreshToken,
-        {
-          expires: 7,
-        }
-      );
+      Cookies.set(AUTH_TOKEN, result.data.accessToken, { expires: 7 });
+      Cookies.set(REFRESH_TOKEN, result.data?.refreshToken, {
+        expires: 7,
+      });
       yield put(signModalToggle(false));
     } else {
       yield put(

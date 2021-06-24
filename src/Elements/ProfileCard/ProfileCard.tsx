@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { UserOutlined } from "@ant-design/icons";
-import { Breakpoint } from "antd/lib/_util/responsiveObserve";
+import { ProfileForm } from "bus/profile/form/ProfileForm";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
-import { BaseInput } from "Elements/Base/Input/BaseInput";
 import React, { FC } from "react";
 import styled from "styled-components";
 import { User } from "../../bus/auth/types";
@@ -88,42 +86,8 @@ export const ProfileCard: FC<Props> = ({ user }) => {
           </BaseButton>
         </Info>
       ) : (
-        <ProfileEditor user={user} toggle={toggle} />
+        <ProfileForm user={user} toggle={toggle} />
       )}
     </Card>
-  );
-};
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  input {
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-`;
-
-type EditorProps = { toggle: () => void } & Props;
-const ProfileEditor: FC<EditorProps> = ({ user, toggle }) => {
-  return (
-    <Form>
-      <label>displayName</label>
-      <BaseInput value={user.displayName} />
-      <label>email</label>
-      <BaseInput value={user.email} />
-      <label>photoURL</label>
-      <BaseInput value={user.photoURL} />
-      <BaseButton
-        typeComponent={ButtonType.important}
-        className="btn"
-        onClick={toggle}
-      >
-        save
-      </BaseButton>
-    </Form>
   );
 };

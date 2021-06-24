@@ -1,23 +1,17 @@
 export interface UserSchema {
-  uid: string;
   displayName: string;
   photoURL: string;
   email: string;
   emailVerified: boolean;
-  phoneNumber: null | string;
-  isAnonymous: boolean;
-  tenantId: null | string;
-  stsTokenManager: {
-    refreshToken: string;
-  };
+  accessToken: string;
+  refreshToken: string;
 }
 
 export type User = {
-  token: string;
   user: UserSchema;
 };
 
-export type UserResponse = { data: User };
+export type UserResponse = { data: UserSchema };
 
 export const ME = "ME";
 export type meAction = {

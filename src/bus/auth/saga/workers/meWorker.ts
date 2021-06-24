@@ -15,10 +15,10 @@ export function* meWorker(action: meAction): SagaIterator {
       action?.tokens?.refresh
     );
     if (data) {
-      Cookies.set(REFRESH_TOKEN, data?.stsTokenManager?.refreshToken, {
+      Cookies.set(REFRESH_TOKEN, data?.refreshToken, {
         expires: 7,
       });
-      yield put(set({ user: data, token: Cookies.get("token") }));
+      yield put(set({ user: data }));
     } else {
       yield put(
         callAuthError({
