@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
 import { BaseProfileCardStyle } from "Elements/ProfileCard/ProfileCard";
 import { getUserAnimeList } from "bus/UserAnimeList/actions";
 import { useDispatch } from "react-redux";
@@ -25,15 +24,13 @@ const Card = styled(BaseProfileCardStyle)`
 
 export const ProfileAnimeList = () => {
   const dispatch = useDispatch();
-  const onLoad = () => {
+  React.useEffect(() => {
     dispatch(getUserAnimeList());
-  };
+  }, []);
+
   return (
     <Container>
       <Card>
-        <BaseButton onClick={onLoad} type="button">
-          Load test
-        </BaseButton>
         <UserAnimeList />
       </Card>
     </Container>

@@ -1,5 +1,6 @@
 import { SET_ERROR_ANIME_LIST } from "bus/anime/types";
 import { ErrorHttpAction } from "bus/auth/types";
+import { AppState } from "../../redux/rootReducer";
 import {
   RawAnimeListType,
   UserAnimeListType,
@@ -54,3 +55,7 @@ export const UserAnimeList = (
       return state;
   }
 };
+
+// Selectors
+export const userAnimeList = (state: AppState) =>
+  (state.userAnimeList.data?.length && state.userAnimeList.data) || null;

@@ -1,5 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { AnimeList } from "bus/anime/types";
+import Loader from "Elements/loader";
 import React from "react";
 import { service } from "Services";
 import { AnimeCards } from "./AnimeCards";
@@ -76,10 +77,7 @@ export class InfiniteScroll extends React.Component<Props, State> {
       height: "15px",
       margin: "15px",
     };
-    const loadingTextCSS = {
-      display: loading ? "flex" : "none",
-      justifyContent: "center",
-    };
+
     return (
       <div className="container">
         <div
@@ -94,14 +92,7 @@ export class InfiniteScroll extends React.Component<Props, State> {
           }}
           style={loadingCSS}
         >
-          <span style={loadingTextCSS}>
-            <LoadingOutlined
-              style={{
-                color: "#1890ff",
-                fontSize: 30,
-              }}
-            />
-          </span>
+          <Loader loading={loading} />
         </div>
       </div>
     );

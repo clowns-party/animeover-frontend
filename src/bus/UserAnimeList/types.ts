@@ -11,6 +11,7 @@
 //   }
 // }
 
+import { Anime } from "bus/anime/types";
 import { ErrorHttpAction } from "bus/auth/types";
 
 export type RawAnimeListType = {
@@ -25,7 +26,7 @@ export type ResponseUserAnimeListType = {
   data: RawAnimeListType;
 };
 
-export type UserAnimeListType = any[];
+export type UserAnimeListType = Anime[];
 
 export const GET_USER_ANIME_LIST = "GET_USER_ANIME_LIST";
 export type getUserAnimeListType = {
