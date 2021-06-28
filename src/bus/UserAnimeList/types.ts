@@ -11,22 +11,48 @@
 //   }
 // }
 
+import { AxiosResponse } from "axios";
 import { Anime } from "bus/anime/types";
 import { ErrorHttpAction } from "bus/auth/types";
 
 export type RawAnimeListType = {
   [id: string]: {
-    status: string;
+    status: UserAnimeListStatuses;
     review: string;
-    star: number;
+    star: UserAnimeListStars;
   };
 };
 
-export type ResponseUserAnimeListType = {
-  data: RawAnimeListType;
-};
+export type ResponseUserAnimeListType = AxiosResponse<RawAnimeListType>;
 
 export type UserAnimeListType = Anime[];
+
+export type UserAnimeListStatuses =
+  | "viewed"
+  | "abandoned"
+  | "postponed"
+  | "planned"
+  | "reviewing"
+  | "look";
+export type UserAnimeListStars =
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "10";
+
+export type UserAnimeListFormData = {
+  animeId: string;
+  status: UserAnimeListStatuses;
+  review?: string;
+  star?: UserAnimeListStars;
+};
 
 export const GET_USER_ANIME_LIST = "GET_USER_ANIME_LIST";
 export type getUserAnimeListType = {

@@ -55,6 +55,7 @@
     "no-confusing-arrow": "off",
     "react/no-unknown-property": "off",
     "no-unused-expressions": "off",
+    "arrow-parens": "off",
     "import/extensions": [
       1,
       "ignorePackages",

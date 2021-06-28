@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
+import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeListDropdown";
 import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
@@ -11,8 +12,6 @@ import { avatarSize, formatTags } from "./anime.functions";
 export const Anime: FC = () => {
   const { anime, isFetching, error } = useAnime();
 
-  // FINISHED, UPCOMING, UNKNOWN, CURRENTLY, UNDEFINED
-  const [list, changeList] = useState(false);
   const animePicture = anime && imgFormatter(anime?.picture);
 
   return (
@@ -30,7 +29,7 @@ export const Anime: FC = () => {
               <Skeleton.Avatar active shape="square" style={avatarSize()} />
             )}
             {!isFetching ? (
-              <ButtonList list={list} changeList={changeList} />
+              <UserAnimeListDropdown />
             ) : (
               <div className={styles.container_button_skeleton}>
                 <Skeleton.Input className={styles.skeleton_button} active />
@@ -145,35 +144,5 @@ const TitleAnime: FC<{ anime: AnimeType }> = ({ anime }) => {
         </span>
       </div>
     </>
-  );
-};
-
-const ButtonList: FC<{
-  list: boolean;
-  changeList: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ list, changeList }) => {
-  const closeButton = list && "close_button";
-
-  return (
-    <div
-      className={styles.container_button}
-      onMouseEnter={() => changeList(true)}
-      onMouseLeave={() => changeList(false)}
-    >
-      <div className={styles.button}>
-        <div className={`${styles.button_icon} ${styles[`${closeButton}`]}`}>
-          <span />
-          <span />
-        </div>
-        {!list && <div className={styles.button_text}>Add To List</div>}
-      </div>
-      {list && (
-        <div className={styles.container_buttons}>
-          <div className={styles.button}>Planned</div>
-          <div className={styles.button}>Watching</div>
-          <div className={styles.button}>Viewed</div>
-        </div>
-      )}
-    </div>
   );
 };
