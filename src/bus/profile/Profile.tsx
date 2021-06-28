@@ -4,6 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import styled from "styled-components";
 import { ProfileContainer } from "Elements/Base/Containers/ProfileContainer";
 import { ProfileAnimeList } from "Elements/profile/ProfileAnimeList";
+import { useAuth } from "bus/auth/hooks/useAuth";
 import { Header } from "../../Elements/header";
 import {
   BaseProfileCardStyle,
@@ -40,12 +41,14 @@ type Props = {
   user: User["user"] | null;
 };
 const Profile: FC<Props> = ({ user }) => {
+  const { data } = useAuth();
+  const userData = data?.user || user;
   return (
     <>
       <Header />
       <ProfileContainer>
         <ProfileColumnCards>
-          <ProfileCard user={user} />
+          <ProfileCard user={userData} />
           <HistoryCard>history</HistoryCard>
         </ProfileColumnCards>
         <ProfileAnimeList />

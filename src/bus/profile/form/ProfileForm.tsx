@@ -1,13 +1,12 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { AuthFormData, User } from "bus/auth/types";
 import { Form } from "antd";
 import styled from "styled-components";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import React, { FC } from "react";
 import { BaseInput } from "Elements/Base/Input/BaseInput";
 import { VALIDA_IMAGE_URL_PATTERN } from "utils/validate/validateImgUrl";
-import { service } from "Services";
+import { useAuth } from "bus/auth/hooks/useAuth";
 import { UpdateUserFormData } from "../types";
+import { useProfileForm } from "../hooks/useProfileForm";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -33,17 +32,21 @@ const FormItem = styled(Form.Item)`
   margin-bottom: 0px !important;
 `;
 
-type EditorProps = { toggle: () => void; user: User["user"] | null };
+type EditorProps = { toggle: () => void };
 
-export const ProfileForm: FC<EditorProps> = ({ user, toggle }) => {
+export const ProfileForm: FC<EditorProps> = ({ toggle }) => {
+  const { data } = useAuth();
+  const user = data?.user;
+
+  const { onSubmit, loading } = useProfileForm();
+
   const [form] = Form.useForm();
   const onFinish = async (values: UpdateUserFormData & { email: string }) => {
-    delete values.email;
     try {
-      const res = await service.userService.updateUser(values);
+      await onSubmit(values);
       toggle();
     } catch (error) {
-      alert("сделать тост на ошибку");
+      console.log(error);
     }
   };
 
@@ -58,9 +61,9 @@ export const ProfileForm: FC<EditorProps> = ({ user, toggle }) => {
     <StyledForm
       form={form}
       initialValues={{
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
+        displayName: user?.displayName,
+        email: user?.email,
+        photoURL: user?.photoURL,
       }}
       onFinish={onFinish}
       validateMessages={validateMessages}
@@ -89,7 +92,7 @@ export const ProfileForm: FC<EditorProps> = ({ user, toggle }) => {
           },
         ]}
       >
-        <BaseInput />
+        <BaseInput disabled />
       </FormItem>
       <FormItem
         label="Photo URL ( jpeg | jpg | png)"
@@ -111,7 +114,7 @@ export const ProfileForm: FC<EditorProps> = ({ user, toggle }) => {
             className="btn"
             disabled={Boolean(
               form.getFieldsError().filter(({ errors }) => errors.length)
-                .length > 0
+                .length > 0 || loading
             )}
           >
             save

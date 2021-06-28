@@ -86,7 +86,7 @@ export const ProfileCard: FC<Props> = ({ user }) => {
           </BaseButton>
         </Info>
       ) : (
-        <ProfileForm user={user} toggle={toggle} />
+        <ProfileForm toggle={toggle} />
       )}
     </Card>
   );
