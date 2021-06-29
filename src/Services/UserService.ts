@@ -19,11 +19,13 @@ export class Service extends Api {
   }
   animeListChange(
     form: UserAnimeListFormData
-  ): Promise<AxiosResponse<ResponseUserAnimeListType>> {
-    return this.getInstance().patch<ResponseUserAnimeListType>(
+  ): Promise<ResponseUserAnimeListType> {
+    return this.getInstance().patch<ResponseUserAnimeListType["data"]>(
       "/user/animelist",
       null,
-      { params: { ...form } }
+      {
+        params: { ...form },
+      }
     );
   }
   updateUser(

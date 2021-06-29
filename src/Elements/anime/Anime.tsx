@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
 import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeListDropdown";
+import { BaseButton } from "Elements/Base/Button/BaseButton";
 import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
@@ -13,6 +14,8 @@ export const Anime: FC = () => {
   const { anime, isFetching, error } = useAnime();
 
   const animePicture = anime && imgFormatter(anime?.picture);
+
+  const isShiki = anime && anime.sources.includes("shikimori");
 
   return (
     <AnimeContainer>
@@ -28,8 +31,9 @@ export const Anime: FC = () => {
             ) : (
               <Skeleton.Avatar active shape="square" style={avatarSize()} />
             )}
+            {!isFetching && isShiki && <BaseButton>Go to shiki</BaseButton>}
             {!isFetching ? (
-              <UserAnimeListDropdown />
+              <UserAnimeListDropdown show={!isShiki} />
             ) : (
               <div className={styles.container_button_skeleton}>
                 <Skeleton.Input className={styles.skeleton_button} active />

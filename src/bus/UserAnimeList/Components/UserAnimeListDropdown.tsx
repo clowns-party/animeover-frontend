@@ -1,13 +1,13 @@
-import { notification } from "antd";
 import { BaseDropdown } from "Elements/Base/Dropdown/BaseDropdown";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { service } from "Services";
 import styled from "styled-components";
 import { selectedAnimeList } from "utils/constants/selectedAnimeList";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
-import { getUserAnimeList } from "../actions";
+import { useAuth } from "bus/auth/hooks/useAuth";
+import { changeAnimeUserList, getUserAnimeList } from "../actions";
 import { userAnimeListState } from "../reducer";
 import { UserAnimeListStatuses } from "../types";
 
@@ -27,13 +27,19 @@ const BtnsGroup = styled.div`
   width: 100%;
   justify-content: space-between;
 `;
-
-export const UserAnimeListDropdown = () => {
+type Props = {
+  show?: boolean;
+};
+export const UserAnimeListDropdown: FC<Props> = ({ show = true }) => {
+  const { data, isFetching: loadingUser } = useAuth();
+  const user = data?.user;
   const dispatch = useDispatch();
   const router = useRouter();
   React.useEffect(() => {
-    dispatch(getUserAnimeList());
-  }, []);
+    if (user) {
+      dispatch(getUserAnimeList());
+    }
+  }, [user]);
 
   const { _original, isFetching } = useSelector(userAnimeListState);
   const selected = _original;
@@ -50,23 +56,6 @@ export const UserAnimeListDropdown = () => {
     }
   }, [inList]);
 
-  const openNotification = () => {
-    if (!inList) {
-      const key = `open${Date.now()}`;
-      const btn = (
-        <BaseButton onClick={() => notification.close(key)}>Edit</BaseButton>
-      );
-      notification.open({
-        message: "You added anime to your list!",
-        description:
-          "You can add a rating or write your own review about this anime.",
-        btn,
-        key,
-        duration: 8,
-      });
-    }
-  };
-
   const onChange = async (status: UserAnimeListStatuses) => {
     setstate((prev) => ({ ...prev, loading: true }));
     try {
@@ -74,9 +63,13 @@ export const UserAnimeListDropdown = () => {
         animeId,
         status,
       };
-      await service.userService.animeListChange(form);
-      setActive(status);
-      openNotification();
+      const result = await service.userService.animeListChange(form);
+      dispatch(
+        changeAnimeUserList({
+          response: result.data,
+          changed: form,
+        })
+      );
     } catch (error) {
       alert(error.message);
     } finally {
@@ -86,11 +79,18 @@ export const UserAnimeListDropdown = () => {
 
   const blockBtns = state.loading || isFetching;
 
+  if (!show) {
+    return <></>;
+  }
+  if (!data && !loadingUser) {
+    return <div>Login for adding anime in your list</div>;
+  }
+
   return (
     <Container>
       <StyledDropdown
         list={selectedAnimeList}
-        active={isFetching ? "-" : active}
+        active={active}
         select={onChange}
         disabled={state.loading || isFetching}
       />

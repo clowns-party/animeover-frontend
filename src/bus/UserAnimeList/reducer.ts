@@ -8,6 +8,7 @@ import {
   GET_USER_ANIME_LIST,
   TOGGLE_LOADING_USER_ANIME_LIST,
   SET_USER_ANIME_LIST,
+  CHANGE_ANIME_USER_LIST,
 } from "./types";
 
 type UserAnimeListState = {
@@ -33,6 +34,11 @@ export const UserAnimeList = (
       return {
         ...state,
       };
+    case CHANGE_ANIME_USER_LIST: {
+      return {
+        ...state,
+      };
+    }
     case TOGGLE_LOADING_USER_ANIME_LIST:
       return {
         ...state,

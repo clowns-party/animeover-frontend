@@ -50,7 +50,7 @@ export function* userAnimeListWorker(): SagaIterator {
   }
 }
 
-const fetchUserAnimeListByRaw = (data: RawAnimeListType) => {
+export const fetchUserAnimeListByRaw = (data: RawAnimeListType) => {
   const links = objToArr(data);
   const promises = links.map((el) => {
     return service.animeService.anime(el.id).then((res) => res.data);
