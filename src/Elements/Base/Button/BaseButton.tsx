@@ -7,6 +7,7 @@ export enum ButtonType {
   "default" = "default",
   "secondary" = "secondary",
   "download" = "download",
+  "danger" = "danger",
 }
 const DefaultButton = styled.button`
   background: #000000;
@@ -30,7 +31,7 @@ const DefaultButton = styled.button`
     cursor: no-drop;
     opacity: 0.7;
   }
-  &:hover{
+  &:hover {
     opacity: 0.7;
   }
 `;
@@ -81,6 +82,10 @@ const DownloadWrap = styled.div`
     margin-right: 10px;
   }
 `;
+const DangerBtn = styled(DefaultButton)`
+  background: #ad1515;
+  color: #ffffff;
+`;
 
 type Props = {
   children: React.ReactNode;
@@ -116,6 +121,12 @@ export const BaseButton: FC<Props> = ({
             {children}
           </DownloadWrap>
         </DownloadButton>
+      );
+    case ButtonType.danger:
+      return (
+        <DangerBtn {...other} style={style}>
+          {children}
+        </DangerBtn>
       );
     default:
       return (

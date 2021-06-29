@@ -59,3 +59,5 @@ export const UserAnimeList = (
 // Selectors
 export const userAnimeList = (state: AppState) =>
   (state.userAnimeList.data?.length && state.userAnimeList.data) || null;
+
+export const userAnimeListState = (state: AppState) => state.userAnimeList;
