@@ -17,6 +17,11 @@ export class Service extends Api {
       `/user/animelist`
     );
   }
+  animeListRemoveItem(animeId: string): Promise<ResponseUserAnimeListType> {
+    return this.getInstance().delete<ResponseUserAnimeListType["data"]>(
+      `/user/animelist?animeId=${animeId}`
+    );
+  }
   animeListChange(
     form: UserAnimeListFormData
   ): Promise<ResponseUserAnimeListType> {

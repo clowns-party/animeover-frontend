@@ -10,7 +10,8 @@ import {
   CHANGE_ANIME_USER_LIST,
   changeAnimeUserListType,
   UserAnimeListFormData,
-  RawAnimeListType,
+  REMOVE_ANIME_LIST_BY_ID,
+  removeAnimeByIdType,
 } from "./types";
 
 export function getUserAnimeList(): getUserAnimeListType {
@@ -46,12 +47,18 @@ export function setErrorAnimeList(
   };
 }
 
-export function changeAnimeUserList(payload: {
-  response: RawAnimeListType;
-  changed: UserAnimeListFormData;
-}): changeAnimeUserListType {
+export function changeAnimeUserList(
+  payload: UserAnimeListFormData
+): changeAnimeUserListType {
   return {
     type: CHANGE_ANIME_USER_LIST,
+    payload,
+  };
+}
+
+export function removeAnimeUserListById(payload: string): removeAnimeByIdType {
+  return {
+    type: REMOVE_ANIME_LIST_BY_ID,
     payload,
   };
 }

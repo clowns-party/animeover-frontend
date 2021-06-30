@@ -6,7 +6,10 @@ import {
   setUserAnimeList,
   toggleLoadingUserAnimeList,
 } from "bus/UserAnimeList/actions";
-import { changeAnimeUserListType } from "bus/UserAnimeList/types";
+import {
+  changeAnimeUserListType,
+  ResponseUserAnimeListType,
+} from "bus/UserAnimeList/types";
 import { call, put } from "redux-saga/effects";
 import { service } from "Services";
 import { useNotificationAnimeList } from "../../hooks/useNotificationAnimeList";
@@ -17,9 +20,14 @@ export function* changeUserAnimeListWorker(
 ): SagaIterator {
   try {
     yield put(toggleLoadingUserAnimeList(true));
+    const changed = action.payload;
+    const result: ResponseUserAnimeListType = yield call(
+      service.userService.animeListChange,
+      changed
+    );
 
-    const { changed, response } = action.payload;
-    const _originalUpdated = response;
+    const _originalUpdated = result.data;
+
     const storage = userAnimelistStorage();
     const { userAnimeList } = storage.get();
     // Search in list

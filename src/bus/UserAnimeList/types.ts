@@ -84,10 +84,13 @@ export type setErrorAnimeListType = {
 export const CHANGE_ANIME_USER_LIST = "CHANGE_ANIME_USER_LIST";
 export type changeAnimeUserListType = {
   type: typeof CHANGE_ANIME_USER_LIST;
-  payload: {
-    response: RawAnimeListType;
-    changed: UserAnimeListFormData;
-  };
+  payload: UserAnimeListFormData;
+};
+
+export const REMOVE_ANIME_LIST_BY_ID = "REMOVE_ANIME_LIST_BY_ID";
+export type removeAnimeByIdType = {
+  type: typeof REMOVE_ANIME_LIST_BY_ID;
+  payload: string;
 };
 
 export type UserAnimeListActionTypes =
@@ -95,4 +98,5 @@ export type UserAnimeListActionTypes =
   | toggleLoadingUserAnimeListType
   | setUserAnimeList
   | setErrorAnimeListType
-  | changeAnimeUserListType;
+  | changeAnimeUserListType
+  | removeAnimeByIdType;

@@ -9,6 +9,7 @@ import {
   TOGGLE_LOADING_USER_ANIME_LIST,
   SET_USER_ANIME_LIST,
   CHANGE_ANIME_USER_LIST,
+  REMOVE_ANIME_LIST_BY_ID,
 } from "./types";
 
 type UserAnimeListState = {
@@ -34,6 +35,8 @@ export const UserAnimeList = (
       return {
         ...state,
       };
+    case REMOVE_ANIME_LIST_BY_ID:
+      return { ...state };
     case CHANGE_ANIME_USER_LIST: {
       return {
         ...state,
@@ -67,3 +70,8 @@ export const userAnimeList = (state: AppState) =>
   (state.userAnimeList.data?.length && state.userAnimeList.data) || null;
 
 export const userAnimeListState = (state: AppState) => state.userAnimeList;
+
+export const animeInUserList = (state: AppState, animeId: string) => {
+  const selectedList = state.userAnimeList._original;
+  return selectedList && selectedList[animeId];
+};
