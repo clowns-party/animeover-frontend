@@ -9,9 +9,9 @@ import {
   removeAnimeUserListById,
 } from "../actions";
 import { animeInUserList, userAnimeListState } from "../reducer";
-import { UserAnimeListStatuses } from "../types";
+import { UserAnimeListFormData, UserAnimeListStatuses } from "../types";
 
-export const useCrudUserAnimeList = () => {
+export const useCrudUserAnimeList = (withFetch = true) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const animeId = router.query.id.toString();
@@ -22,15 +22,19 @@ export const useCrudUserAnimeList = () => {
   const { data, isFetching: loadingUser } = useAuth();
   const user = data?.user;
   React.useEffect(() => {
-    if (user) {
+    if (user && withFetch) {
       dispatch(getUserAnimeList());
     }
-  }, [user]);
+  }, [user, withFetch]);
 
-  const onChange = async (status: UserAnimeListStatuses) => {
+  const onChange = async (
+    status: UserAnimeListStatuses,
+    params: Omit<UserAnimeListFormData, "animeId" | "status"> = {}
+  ) => {
     const form = {
       animeId,
       status,
+      ...params,
     };
     dispatch(changeAnimeUserList(form));
   };

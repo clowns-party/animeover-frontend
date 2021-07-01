@@ -57,6 +57,7 @@
     "no-unused-expressions": "off",
     "arrow-parens": "off",
     "function-paren-newline": "off",
+    "react/jsx-pascal-case": "off",
     "import/extensions": [
       1,
       "ignorePackages",

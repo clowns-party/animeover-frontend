@@ -35,6 +35,8 @@ export function* changeUserAnimeListWorker(
       userAnimeList?.length &&
       userAnimeList.find((anime) => anime._id === changed.animeId);
     const notify = Boolean(!findInList || changed.status === "viewed");
+    const typeNotify = changed?.review || changed?.star ? "review" : "update";
+
     // Fetch for update user anime list
     const fetchUpdatedAnime: AxiosResponse<Anime> = yield call(
       service.animeService.anime,
@@ -59,7 +61,7 @@ export function* changeUserAnimeListWorker(
     };
     storage.set(payload._original, payload.data);
     yield put(setUserAnimeList(payload));
-    yield call(useNotificationAnimeList, notify);
+    yield call(useNotificationAnimeList, notify, typeNotify);
   } catch (error) {
     yield put(setErrorAnimeList(error));
   } finally {
