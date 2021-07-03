@@ -12,6 +12,8 @@ import {
   UserAnimeListFormData,
   REMOVE_ANIME_LIST_BY_ID,
   removeAnimeByIdType,
+  toggleUserAnimeListModalType,
+  TOGGLE_USER_ANIME_LIST_MODAL,
 } from "./types";
 
 export function getUserAnimeList(): getUserAnimeListType {
@@ -59,6 +61,15 @@ export function changeAnimeUserList(
 export function removeAnimeUserListById(payload: string): removeAnimeByIdType {
   return {
     type: REMOVE_ANIME_LIST_BY_ID,
+    payload,
+  };
+}
+
+export function toggleUserAnimeListModal(
+  payload: boolean
+): toggleUserAnimeListModalType {
+  return {
+    type: TOGGLE_USER_ANIME_LIST_MODAL,
     payload,
   };
 }

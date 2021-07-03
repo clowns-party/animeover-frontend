@@ -10,6 +10,7 @@ import {
   SET_USER_ANIME_LIST,
   CHANGE_ANIME_USER_LIST,
   REMOVE_ANIME_LIST_BY_ID,
+  TOGGLE_USER_ANIME_LIST_MODAL,
 } from "./types";
 
 type UserAnimeListState = {
@@ -17,6 +18,7 @@ type UserAnimeListState = {
   isFetching: boolean;
   error: ErrorHttpAction | false;
   _original: RawAnimeListType;
+  show: boolean;
 };
 
 const initialState: UserAnimeListState = {
@@ -24,6 +26,7 @@ const initialState: UserAnimeListState = {
   isFetching: false,
   error: false,
   _original: null,
+  show: false,
 };
 
 export const UserAnimeList = (
@@ -57,6 +60,11 @@ export const UserAnimeList = (
       return {
         ...state,
         error: action.payload,
+      };
+    case TOGGLE_USER_ANIME_LIST_MODAL:
+      return {
+        ...state,
+        show: action.payload,
       };
     default:
       // eslint-disable-next-line no-case-declarations

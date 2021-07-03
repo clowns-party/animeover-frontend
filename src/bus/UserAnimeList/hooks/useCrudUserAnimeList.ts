@@ -11,11 +11,11 @@ import {
 import { animeInUserList, userAnimeListState } from "../reducer";
 import { UserAnimeListFormData, UserAnimeListStatuses } from "../types";
 
-export const useCrudUserAnimeList = (withFetch = true) => {
+export const useCrudUserAnimeList = (withFetch = true, id?: string) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const animeId = router.query.id.toString();
-  const { isFetching } = useSelector(userAnimeListState);
+  const animeId = id ?? router.query.id.toString();
+  const { isFetching, show } = useSelector(userAnimeListState);
   const inList = useSelector((state: AppState) =>
     animeInUserList(state, animeId)
   );
@@ -50,5 +50,6 @@ export const useCrudUserAnimeList = (withFetch = true) => {
     inList,
     onChange,
     onRemove,
+    show,
   };
 };

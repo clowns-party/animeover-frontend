@@ -19,7 +19,10 @@ const Container = styled.div`
 const Card = styled(BaseProfileCardStyle)`
   height: 100%;
   flex-direction: column;
-  min-height: 600px;
+  min-height: 655px;
+  max-height: 655px;
+  overflow: hidden;
+  overflow-y: scroll;
 `;
 
 export const ProfileAnimeList = () => {

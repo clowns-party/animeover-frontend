@@ -7,11 +7,15 @@ import { BaseButton } from "Elements/Base/Button/BaseButton";
 import styled from "styled-components";
 import RateAnime from "Elements/RateAnime";
 import { BaseTextarea } from "Elements/Base/BaseTextarea";
+import { useDispatch } from "react-redux";
 import { useCrudUserAnimeList } from "../hooks/useCrudUserAnimeList";
 import { UserAnimeListFormData, UserAnimeListStars } from "../types";
+import { toggleUserAnimeListModal } from "../actions";
 
 type Props = {
   disabled?: boolean;
+  withBtn?: boolean;
+  animeId?: string;
 };
 
 const Body = styled.div`
@@ -50,8 +54,17 @@ const Submit = styled(BaseButton)`
   width: 126px;
 `;
 
-export const UserAnimeListModal: FC<Props> = ({ disabled }) => {
-  const { isFetching, inList, onChange } = useCrudUserAnimeList(false);
+export const UserAnimeListModal: FC<Props> = ({
+  disabled,
+  withBtn = true,
+  animeId,
+}) => {
+  const dispatch = useDispatch();
+  const { isFetching, inList, onChange, show } = useCrudUserAnimeList(
+    false,
+    animeId
+  );
+
   const [form, setform] = useState<
     Omit<UserAnimeListFormData, "animeId" | "status">
   >({
@@ -59,12 +72,11 @@ export const UserAnimeListModal: FC<Props> = ({ disabled }) => {
     star: inList?.star || "0",
   });
 
-  const [visible, setVisible] = useState(false);
-  const show = () => {
-    setVisible(true);
+  const openModal = () => {
+    dispatch(toggleUserAnimeListModal(true));
   };
   const cancel = () => {
-    !isFetching && setVisible(false);
+    !isFetching && dispatch(toggleUserAnimeListModal(false));
   };
 
   const updateStar = (value: number) => {
@@ -87,12 +99,14 @@ export const UserAnimeListModal: FC<Props> = ({ disabled }) => {
 
   return (
     <>
-      <BaseButton disabled={disabled} onClick={show}>
-        Edit
-      </BaseButton>
+      {withBtn && (
+        <BaseButton disabled={disabled} onClick={openModal}>
+          Edit
+        </BaseButton>
+      )}
       <BaseModal
-        visible={visible}
-        show={show}
+        visible={show}
+        show={openModal}
         cancel={cancel}
         style={{ zIndex: zIndexLayout.MIDDLE_LEVEL }}
       >

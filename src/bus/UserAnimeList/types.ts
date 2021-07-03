@@ -93,10 +93,17 @@ export type removeAnimeByIdType = {
   payload: string;
 };
 
+export const TOGGLE_USER_ANIME_LIST_MODAL = "TOGGLE_USER_ANIME_LIST_MODAL";
+export type toggleUserAnimeListModalType = {
+  type: typeof TOGGLE_USER_ANIME_LIST_MODAL;
+  payload: boolean;
+};
+
 export type UserAnimeListActionTypes =
   | getUserAnimeListType
   | toggleLoadingUserAnimeListType
   | setUserAnimeList
   | setErrorAnimeListType
   | changeAnimeUserListType
-  | removeAnimeByIdType;
+  | removeAnimeByIdType
+  | toggleUserAnimeListModalType;

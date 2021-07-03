@@ -5,6 +5,7 @@ import {
   setErrorAnimeList,
   setUserAnimeList,
   toggleLoadingUserAnimeList,
+  toggleUserAnimeListModal,
 } from "bus/UserAnimeList/actions";
 import {
   changeAnimeUserListType,
@@ -62,6 +63,9 @@ export function* changeUserAnimeListWorker(
     storage.set(payload._original, payload.data);
     yield put(setUserAnimeList(payload));
     yield call(useNotificationAnimeList, notify, typeNotify);
+    if (typeNotify === "review") {
+      yield put(toggleUserAnimeListModal(false));
+    }
   } catch (error) {
     yield put(setErrorAnimeList(error));
   } finally {

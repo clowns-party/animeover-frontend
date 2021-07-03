@@ -8,7 +8,7 @@ export const useNotificationAnimeList = (
 ) => {
   const isUpdate = type === "update";
   const message = isUpdate
-    ? "You added anime to your list!"
+    ? "You added or changed status anime to your list!"
     : "You added review on your anime!";
   const description = isUpdate
     ? "You can add a rating or write your own review about this anime."
@@ -16,7 +16,7 @@ export const useNotificationAnimeList = (
   if (notify || !isUpdate) {
     const key = `open${Date.now()}`;
     const btn = (
-      <BaseButton onClick={() => notification.close(key)}>Edit</BaseButton>
+      <BaseButton onClick={() => notification.close(key)}>Ok</BaseButton>
     );
     notification.open({
       message,
