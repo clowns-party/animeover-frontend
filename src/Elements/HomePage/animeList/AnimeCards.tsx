@@ -3,6 +3,7 @@ import { Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { AnimeList } from "bus/anime/types";
 import Router from "next/router";
+import Picture from "Elements/picture";
 import styles from "./animeList.module.scss";
 
 export const AnimeCards: FC<{ animeList: AnimeList }> = ({ animeList }) => {
@@ -22,7 +23,11 @@ export const AnimeCards: FC<{ animeList: AnimeList }> = ({ animeList }) => {
               size="small"
               hoverable
               cover={
-                <img className={styles.anime} alt="anime" src={el.picture} />
+                <Picture
+                  className={styles.anime}
+                  alt="anime"
+                  url={el.picture}
+                />
               }
             >
               <Meta title={el.title} description={el.type} />

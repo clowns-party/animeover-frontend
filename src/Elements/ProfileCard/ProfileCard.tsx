@@ -3,6 +3,7 @@ import { ProfileForm } from "bus/profile/form/ProfileForm";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import React, { FC } from "react";
 import styled from "styled-components";
+import imgOnLoad from "utils/common/imgOnLoad";
 import { User } from "../../bus/auth/types";
 
 type Props = {
@@ -64,14 +65,14 @@ const Info = styled.div`
 
 export const ProfileCard: FC<Props> = ({ user }) => {
   const [showEdit, setShowEdit] = React.useState(false);
-  const imgUri = user?.photoURL;
+  const imgUri = imgOnLoad(user?.photoURL, "/user.svg");
   const toggle = () => {
     setShowEdit(!showEdit);
   };
   return (
     <Card>
       <Avatar>
-        {imgUri ? <img src={imgUri} alt="user" /> : <UserOutlined />}
+        <img src={imgUri} alt="user" />
       </Avatar>
       {!showEdit ? (
         <Info>

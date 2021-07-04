@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useRef } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
 import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeListDropdown";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
+import Picture from "Elements/picture";
 import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
@@ -11,11 +12,20 @@ import { imgFormatter } from "../../utils/imgFormatter";
 import { avatarSize, formatTags } from "./anime.functions";
 
 export const Anime: FC = () => {
+  const imgRef = useRef(null);
   const { anime, isFetching, error } = useAnime();
 
   const animePicture = anime && imgFormatter(anime?.picture);
 
   const isShiki = anime && anime.sources.includes("shikimori");
+
+  const successLoad = () => {
+    debugger;
+  };
+
+  const badLoad = () => {
+    debugger;
+  };
 
   return (
     <AnimeContainer>
@@ -23,10 +33,13 @@ export const Anime: FC = () => {
         <div className={styles.info_container}>
           <div className={styles.picture_and_button}>
             {!isFetching ? (
-              <img
+              <Picture
+                ref={imgRef}
                 className={styles.anime_picture}
-                src={animePicture}
+                url={animePicture}
                 alt={anime?.title || "anime"}
+                onLoad={successLoad}
+                onError={badLoad}
               />
             ) : (
               <Skeleton.Avatar active shape="square" style={avatarSize()} />

@@ -7,6 +7,7 @@ import { AuthForm } from "Elements/authForm";
 import { HeaderMobile } from "Elements/Base/HeaderMobile";
 import { ROUTES } from "utils/routes";
 import { zIndexLayout } from "utils/constants/zIndexLayout";
+import imgOnLoad from "utils/common/imgOnLoad";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 
 const Mobile = styled.div`
@@ -83,6 +84,7 @@ export const Header: FC = () => {
   const onSearch = (event) => console.log(event.target.value);
   const { data, isFetching, error } = useAuth();
   const auth = data?.user;
+  const imgUri = imgOnLoad(auth?.photoURL, "/user.svg");
 
   const links = [
     {
@@ -123,7 +125,7 @@ export const Header: FC = () => {
           {auth ? (
             <Link href="/profile">
               <a href="/profile">
-                <img src={auth?.photoURL} alt="user" />
+                <img src={imgUri} alt="user" />
               </a>
             </Link>
           ) : (
