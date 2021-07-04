@@ -43,4 +43,7 @@ export class Service extends Api {
   anime(id: IdType): Promise<AxiosResponse<Anime>> {
     return this.getInstance().get<Anime>(`/animedb/anime/${id}`);
   }
+  searchAnime(text: string): Promise<AxiosResponse<Anime>> {
+    return this.getInstance().get<Anime>(`/search?queryText=${text}`);
+  }
 }

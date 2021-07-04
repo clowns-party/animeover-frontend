@@ -1,7 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import Link from "next/link";
 import { DesktopLogo } from "assets/icons/DesktopLogo";
-import { BaseInput, InputType } from "Elements/Base/Input/BaseInput";
 import styled from "styled-components";
 import { AuthForm } from "Elements/authForm";
 import { HeaderMobile } from "Elements/Base/HeaderMobile";
@@ -9,6 +8,7 @@ import { ROUTES } from "utils/routes";
 import { zIndexLayout } from "utils/constants/zIndexLayout";
 import imgOnLoad from "utils/common/imgOnLoad";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
+import { SearchAnime } from "../search/SearchAnime";
 
 const Mobile = styled.div`
   display: none;
@@ -47,16 +47,6 @@ const HeaderStyled = styled.div`
   }
 `;
 
-const InputWrap = styled.div`
-  margin-right: 156px;
-  @media screen and (max-width: 992px) {
-    input {
-      width: 150px;
-    }
-    margin-right: 30px;
-  }
-`;
-
 const Links = styled.div`
   display: flex;
 `;
@@ -81,7 +71,6 @@ const Clearfix = styled.div`
 `;
 
 export const Header: FC = () => {
-  const onSearch = (event) => console.log(event.target.value);
   const { data, isFetching, error } = useAuth();
   const auth = data?.user;
   const imgUri = imgOnLoad(auth?.photoURL, "/user.svg");
@@ -114,14 +103,7 @@ export const Header: FC = () => {
           ))}
         </Links>
         <div className="header-end">
-          <InputWrap>
-            <BaseInput
-              placeholder="SEARCH"
-              typeComponent={InputType.search}
-              onChange={onSearch}
-              className="input"
-            />
-          </InputWrap>
+          <SearchAnime />
           {auth ? (
             <Link href="/profile">
               <a href="/profile">
