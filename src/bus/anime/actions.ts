@@ -28,6 +28,11 @@ import {
   AnimeListPageParams,
   SET_CURRENT_PAGE,
   setCurrentPageType,
+  setFilteredType,
+  SET_FILTERED,
+  FiltersPayload,
+  FETCH_WITH_FILTERS,
+  SetFilteredPayload,
 } from "./types";
 
 export function startAnime(): startAnimeListType {
@@ -107,6 +112,20 @@ export function changePage(payload: AnimeListPageParams): changePageType {
 export function setCurrentPage(payload: number): setCurrentPageType {
   return {
     type: SET_CURRENT_PAGE,
+    payload,
+  };
+}
+
+export function setFiltered(payload: SetFilteredPayload): setFilteredType {
+  return {
+    type: SET_FILTERED,
+    payload,
+  };
+}
+
+export function fetchWithFilters(payload: FiltersPayload) {
+  return {
+    type: FETCH_WITH_FILTERS,
     payload,
   };
 }

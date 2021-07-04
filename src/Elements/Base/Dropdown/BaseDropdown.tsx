@@ -1,8 +1,8 @@
-import React, { DetailedHTMLProps } from 'react';
-import { ChevronDown } from 'assets/icons/ChevronDown';
-import { FC, HTMLAttributes, useState } from 'react';
-import { useOutsideClick } from 'utils/hooks/useOutsideClick';
-import styled from 'styled-components';
+import React, { DetailedHTMLProps } from "react";
+import { ChevronDown } from "assets/icons/ChevronDown";
+import { FC, HTMLAttributes, useState } from "react";
+import { useOutsideClick } from "utils/hooks/useOutsideClick";
+import styled from "styled-components";
 
 type StyledDropdown = {
   toggled: boolean;
@@ -24,11 +24,11 @@ const DefaultDropdown = styled.div<{ disabled: boolean; toggled: boolean }>`
   padding-right: 8px;
   padding-left: 8px;
   user-select: none;
-  opacity: ${props => (props.disabled ? '0.7' : '1')};
-  cursor: ${props => (props.disabled ? 'no-drop' : 'auto')};
+  opacity: ${(props) => (props.disabled ? "0.7" : "1")};
+  cursor: ${(props) => (props.disabled ? "no-drop" : "auto")};
   svg {
     transform: ${(props: StyledDropdown) =>
-      props.toggled ? 'rotate(180deg)' : 'rotate(0deg)'};
+      props.toggled ? "rotate(180deg)" : "rotate(0deg)"};
   }
 `;
 const HeadDropdown = styled.div<{ disabled: boolean }>`
@@ -36,7 +36,7 @@ const HeadDropdown = styled.div<{ disabled: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: ${props => (props.disabled ? 'no-drop' : 'pointer')};
+  cursor: ${(props) => (props.disabled ? "no-drop" : "pointer")};
   &:hover {
     opacity: 0.7;
   }
@@ -45,7 +45,7 @@ const DropdownList = styled.div`
   position: absolute;
   z-index: 999999;
   width: ${(props: StyledDropdown) =>
-    props.toggled ? '100%' : '0px !important'};
+    props.toggled ? "100%" : "0px !important"};
   left: 0;
   background: #e8ebee;
   border: 1px solid #e8ebee;
@@ -55,16 +55,16 @@ const DropdownList = styled.div`
   padding-left: 8px;
   border-radius: 4px;
   transition: 0.3s all ease;
-  opacity: ${(props: StyledDropdown) => (props.toggled ? '1' : '0 !important')};
+  opacity: ${(props: StyledDropdown) => (props.toggled ? "1" : "0 !important")};
   height: ${(props: StyledDropdown) =>
-    props.toggled ? 'auto' : '0px !important'};
+    props.toggled ? "auto" : "0px !important"};
   box-sizing: border-box;
 `;
 type StyledItemProps = {
   active: boolean;
 };
 const Item = styled.div<{ disabled: boolean; active: boolean }>`
-  cursor: ${props => (props.disabled ? 'no-drop' : 'pointer')};
+  cursor: ${(props) => (props.disabled ? "no-drop" : "pointer")};
   display: inline-block;
   font-style: normal;
   font-weight: normal;
@@ -73,7 +73,7 @@ const Item = styled.div<{ disabled: boolean; active: boolean }>`
   display: flex;
   align-items: center;
   color: ${(props: StyledItemProps) =>
-    props.active ? 'rgba(0, 0, 0, 0.3)' : '#4a4a4a'};
+    props.active ? "rgba(0, 0, 0, 0.3)" : "#4a4a4a"};
   padding-top: 10px;
   width: 100%;
 `;
@@ -105,6 +105,7 @@ export const BaseDropdown: FC<Props> = ({
     }
   };
   useOutsideClick(ref, close);
+
   return (
     <DefaultDropdown
       {...other}
@@ -114,7 +115,7 @@ export const BaseDropdown: FC<Props> = ({
       disabled={disabled}
     >
       <HeadDropdown onClick={toggle} disabled={disabled}>
-        {active || '-'}
+        {active || "-"}
         <ChevronDown />
       </HeadDropdown>
       <DropdownList toggled={toggled}>

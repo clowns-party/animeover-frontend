@@ -11,7 +11,9 @@ export const useAnime = (): AnimeState => {
     error,
     currentPage,
     totalPages,
+    filtered,
     pageLimit,
+    filters,
   } = useSelector<AppState, AnimeState>((state) => state.anime);
 
   return {
@@ -21,7 +23,9 @@ export const useAnime = (): AnimeState => {
     totalPages,
     ongoing,
     pageLimit,
-    isFetching: Boolean(isFetching || !anime),
+    isFetching,
     error,
+    filtered,
+    filters,
   };
 };
