@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { ProfileContainer } from "Elements/Base/Containers/ProfileContainer";
 import { ProfileAnimeList } from "Elements/profile/ProfileAnimeList";
 import { useAuth } from "bus/auth/hooks/useAuth";
+import HistoryProfile from "bus/history";
 import { Header } from "../../Elements/header";
 import {
   BaseProfileCardStyle,
@@ -33,8 +34,11 @@ const ProfileColumnCards = styled.div`
 
 const HistoryCard = styled(BaseProfileCardStyle)`
   margin-top: 68px;
-  height: 295px;
   margin-bottom: 68px;
+  min-height: 295px;
+  max-height: 295px;
+  overflow: hidden;
+  flex-direction: column;
 `;
 
 type Props = {
@@ -49,7 +53,9 @@ const Profile: FC<Props> = ({ user }) => {
       <ProfileContainer>
         <ProfileColumnCards>
           <ProfileCard user={userData} />
-          <HistoryCard>history</HistoryCard>
+          <HistoryCard>
+            <HistoryProfile />
+          </HistoryCard>
         </ProfileColumnCards>
         <ProfileAnimeList />
       </ProfileContainer>

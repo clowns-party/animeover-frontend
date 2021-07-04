@@ -1,25 +1,14 @@
 import React from "react";
-import App from "next/app";
 import "antd/dist/antd.css";
 import withReduxSaga from "next-redux-saga";
 import { wrapperSome } from "redux/store";
 import "../styles/globals.css";
+import useRouteUrlHistory from "bus/history/hooks/useRouteUrlHistory";
+import { AppProps } from "next/dist/next-server/lib/router/router";
 
-class ExampleApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
+function MyApp({ Component, pageProps }: AppProps) {
+  useRouteUrlHistory();
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
-  render() {
-    const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
-  }
+  return <Component {...pageProps} />;
 }
-
-export default wrapperSome.withRedux(withReduxSaga(ExampleApp));
+export default wrapperSome.withRedux(withReduxSaga(MyApp));

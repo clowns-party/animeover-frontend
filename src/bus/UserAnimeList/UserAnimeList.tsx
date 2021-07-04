@@ -74,6 +74,20 @@ const TableItem = styled.div`
   .links {
     display: flex;
   }
+  @media screen and (max-width: 576px) {
+    img {
+      margin-right: 15px;
+    }
+    .detail {
+      h3,
+      h4 {
+        font-size: 10px;
+      }
+      h3 {
+        max-width: 50px;
+      }
+    }
+  }
 `;
 
 export const UserAnimeList = () => {

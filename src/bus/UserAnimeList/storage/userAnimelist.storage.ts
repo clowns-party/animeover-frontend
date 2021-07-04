@@ -1,4 +1,5 @@
 import { isEqual } from "lodash";
+import { fromJSON, toJSON } from "utils/common/localstorage";
 import { RawAnimeListType, UserAnimeListType } from "../types";
 // import * as isequal from "lodash.isequal";
 
@@ -32,21 +33,4 @@ export const userAnimelistStorage = () => {
     },
   };
   return storage;
-};
-
-const toJSON = (param: any) => {
-  try {
-    return JSON.stringify(param);
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-};
-
-const fromJSON = (param: any) => {
-  try {
-    return JSON.parse(param);
-  } catch (error) {
-    return null;
-  }
 };
