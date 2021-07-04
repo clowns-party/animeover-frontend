@@ -14,11 +14,16 @@ import {
   Anime,
   SET_ANIME_LIST_COUNT,
   SET_CURRENT_PAGE,
+  SET_FILTERED,
+  FETCH_WITH_FILTERS,
+  FiltersPayload,
 } from "./types";
 
 export type AnimeState = {
   anime: Anime | null;
   animeList: AnimeList | null;
+  filtered: AnimeList | null;
+  filters: FiltersPayload | null;
   ongoing: AnimeList | null;
   isFetching: boolean;
   currentPage: number;
@@ -30,12 +35,14 @@ export type AnimeState = {
 const initialState: AnimeState = {
   anime: null,
   animeList: null,
+  filtered: null,
   ongoing: null,
   isFetching: false,
   currentPage: 1,
   totalPages: null,
   pageLimit: 20,
   error: false,
+  filters: null,
 };
 
 export const animeReducer = (
@@ -55,6 +62,16 @@ export const animeReducer = (
       return {
         ...state,
         animeList: [...action.payload],
+      };
+    case FETCH_WITH_FILTERS:
+      return {
+        ...state,
+      };
+    case SET_FILTERED:
+      return {
+        ...state,
+        filtered: action.payload.animeList,
+        filters: action.payload.filters,
       };
     case SET_ANIME_LIST_COUNT:
       return {

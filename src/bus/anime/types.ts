@@ -1,3 +1,5 @@
+import { AnimeTagsType, SeasonsType } from "bus/filters/types";
+
 export type AnimeList = Array<Anime>;
 
 export type Anime = {
@@ -106,6 +108,27 @@ export type setCurrentPageType = {
   payload: number;
 };
 
+export type FiltersPayload = {
+  season?: SeasonsType;
+  tags?: string;
+  tag?: AnimeTagsType;
+};
+export const FETCH_WITH_FILTERS = "FETCH_WITH_FILTERS";
+export type fetchWithFiltersType = {
+  type: typeof FETCH_WITH_FILTERS;
+  payload: FiltersPayload;
+};
+
+export type SetFilteredPayload = {
+  animeList: AnimeList;
+  filters: FiltersPayload;
+};
+export const SET_FILTERED = "SET_FILTERED";
+export type setFilteredType = {
+  type: typeof SET_FILTERED;
+  payload: SetFilteredPayload;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
   | setOngoingListType
@@ -117,4 +140,6 @@ export type animeActionsTypes =
   | setAnimeType
   | setAnimeListCountType
   | getOngoingListType
-  | setCurrentPageType;
+  | setCurrentPageType
+  | setFilteredType
+  | fetchWithFiltersType;
