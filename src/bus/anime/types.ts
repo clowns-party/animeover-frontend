@@ -10,7 +10,7 @@ export type Anime = {
   episodes: number;
   status: string;
   animeSeason: {
-    season: SeasonsType;
+    season: SeasonsType | string;
     year: number;
   };
   picture: string;
