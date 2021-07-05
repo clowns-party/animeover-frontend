@@ -6,6 +6,7 @@ import { service } from "../../../../Services";
 import {
   setErrorAnime,
   setFiltered,
+  setFilters,
   startAnime,
   stopAnime,
 } from "../../actions";
@@ -18,14 +19,18 @@ export function* animeListFiltersWorker(
   const { payload } = action;
   const filters = {
     ...payload,
+    tags: "",
   };
   delete filters.tag;
   if (filters.season === "-") {
     delete filters.season;
   }
-  if (filters.tags === "-") {
+  if (!payload.tag || payload.tag === "-") {
     delete filters.tags;
+  } else {
+    filters.tags = JSON.stringify([payload.tag]);
   }
+
   yield put(startAnime());
 
   try {
@@ -38,9 +43,11 @@ export function* animeListFiltersWorker(
     yield put(
       setFiltered({
         animeList: result.data.animeList,
+        // remove later
         filters: payload,
       })
     );
+    yield put(setFilters(payload));
   } catch (err) {
     yield put(setErrorAnime(err?.response?.data));
   } finally {

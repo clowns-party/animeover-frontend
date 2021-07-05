@@ -17,6 +17,7 @@ import {
   SET_FILTERED,
   FETCH_WITH_FILTERS,
   FiltersPayload,
+  SET_FILTERS,
 } from "./types";
 
 export type AnimeState = {
@@ -71,7 +72,11 @@ export const animeReducer = (
       return {
         ...state,
         filtered: action.payload.animeList,
-        filters: action.payload.filters,
+      };
+    case SET_FILTERS:
+      return {
+        ...state,
+        filters: action.payload,
       };
     case SET_ANIME_LIST_COUNT:
       return {

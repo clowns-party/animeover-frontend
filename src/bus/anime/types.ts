@@ -10,7 +10,7 @@ export type Anime = {
   episodes: number;
   status: string;
   animeSeason: {
-    season: string;
+    season: SeasonsType;
     year: number;
   };
   picture: string;
@@ -110,7 +110,6 @@ export type setCurrentPageType = {
 
 export type FiltersPayload = {
   season?: SeasonsType;
-  tags?: string;
   tag?: AnimeTagsType;
 };
 export const FETCH_WITH_FILTERS = "FETCH_WITH_FILTERS";
@@ -129,6 +128,12 @@ export type setFilteredType = {
   payload: SetFilteredPayload;
 };
 
+export const SET_FILTERS = "SET_FILTERS";
+export type setFiltersType = {
+  type: typeof SET_FILTERS;
+  payload: FiltersPayload;
+};
+
 export type animeActionsTypes =
   | getAnimeListType
   | setOngoingListType
@@ -142,4 +147,5 @@ export type animeActionsTypes =
   | getOngoingListType
   | setCurrentPageType
   | setFilteredType
-  | fetchWithFiltersType;
+  | fetchWithFiltersType
+  | setFiltersType;

@@ -33,6 +33,7 @@ import {
   FiltersPayload,
   FETCH_WITH_FILTERS,
   SetFilteredPayload,
+  SET_FILTERS,
 } from "./types";
 
 export function startAnime(): startAnimeListType {
@@ -126,6 +127,13 @@ export function setFiltered(payload: SetFilteredPayload): setFilteredType {
 export function fetchWithFilters(payload: FiltersPayload) {
   return {
     type: FETCH_WITH_FILTERS,
+    payload,
+  };
+}
+
+export function setFilters(payload: FiltersPayload) {
+  return {
+    type: SET_FILTERS,
     payload,
   };
 }

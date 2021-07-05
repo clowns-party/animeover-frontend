@@ -48,7 +48,7 @@ export type AnimeTagsType =
 export type SeasonsType =
   | "-"
   | "SUMMER"
-  | "UNDEFINED"
+  // | "UNDEFINED"
   | "WINTER"
   | "SPRING"
   | "FALL";
