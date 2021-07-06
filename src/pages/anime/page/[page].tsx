@@ -11,6 +11,7 @@ import Loader from "Elements/loader";
 import { ROUTES } from "utils/routes";
 import styled from "styled-components";
 import { applyFilters } from "utils/anime/applyFilters";
+import { useToast } from "utils/hooks/useToast";
 
 const Container = styled.div`
   display: flex;
@@ -21,13 +22,16 @@ const Container = styled.div`
 
 const AnimePage = () => {
   const router = useRouter();
-  const { animeList, isFetching, totalPages, filtered, filters } = useAnime();
+  const { animeList, isFetching, count, filtered, filters, error } = useAnime();
   const [globalSearch, setGlobalSearch] = useState(false);
 
   const { list: apply, messageResult } = React.useMemo(
     () => applyFilters(animeList, filters),
     [globalSearch, animeList, filters]
   );
+
+  const msg = error ? `${error?.code || "Some errors when fetching"}` : "";
+  useToast(msg, 3, "error");
 
   const list = globalSearch ? filtered : apply;
 
@@ -53,6 +57,7 @@ const AnimePage = () => {
       <Row justify="center">
         <Col xs={16} sm={16} md={16} lg={16} xl={16} xxl={16}>
           <h2>{!globalSearch && messageResult}</h2>
+          {msg && <h2>Sorry cant fetch, retry later</h2>}
           <Loader loading={isFetching} />
           <Container>
             <AnimeCards animeList={list} />
@@ -66,8 +71,9 @@ const AnimePage = () => {
         <Col>
           <Pagination
             defaultCurrent={page}
-            total={totalPages}
+            total={count}
             current={page}
+            pageSize={20}
             onChange={updatePage}
           />
         </Col>

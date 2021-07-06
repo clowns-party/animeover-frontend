@@ -29,7 +29,7 @@ export const applyFilters = (
     list: filtered?.length ? filtered : list,
     wasApply,
     messageResult:
-      wasApply && !filtered.length ? "Can't search by you filter" : "",
+      wasApply && !filtered?.length ? "Can't search by you filter" : "",
   };
 };
 

@@ -28,7 +28,7 @@ export type AnimeState = {
   ongoing: AnimeList | null;
   isFetching: boolean;
   currentPage: number;
-  totalPages: number;
+  count: number;
   pageLimit: number;
   error: AnimeError | false;
 };
@@ -40,7 +40,7 @@ const initialState: AnimeState = {
   ongoing: null,
   isFetching: false,
   currentPage: 1,
-  totalPages: null,
+  count: null,
   pageLimit: 20,
   error: false,
   filters: null,
@@ -81,7 +81,7 @@ export const animeReducer = (
     case SET_ANIME_LIST_COUNT:
       return {
         ...state,
-        totalPages: action.payload,
+        count: action.payload,
       };
     case SET_ONGOING_LIST:
       return {

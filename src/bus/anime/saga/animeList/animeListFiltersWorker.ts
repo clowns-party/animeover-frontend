@@ -4,6 +4,7 @@ import { AppState } from "../../../../redux/rootReducer";
 import { fetchWithFiltersType, AnimeListReponse } from "../../types";
 import { service } from "../../../../Services";
 import {
+  setAnimeListCount,
   setErrorAnime,
   setFiltered,
   setFilters,
@@ -47,6 +48,7 @@ export function* animeListFiltersWorker(
         filters: payload,
       })
     );
+    yield put(setAnimeListCount(result.data.count));
     yield put(setFilters(payload));
   } catch (err) {
     yield put(setErrorAnime(err?.response?.data));
