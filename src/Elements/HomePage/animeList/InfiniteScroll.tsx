@@ -34,6 +34,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
       page: currentPage || 1,
       prevY: 0,
       type: type || "default",
+      // eslint-disable-next-line react/no-unused-state
       filters,
     };
   }
@@ -57,6 +58,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
     if (!isEqual(prevProps.animeList, this.props.animeList)) {
       this.updateList();
     }
+    // @ts-ignore
     if (!isEqual(prevProps.router.query, this.props.router.query)) {
       this.clear();
       this.fetchAnime(0);
@@ -87,6 +89,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
         page,
       });
     } else {
+      // @ts-ignore
       const { query }: any = this.props.router;
       const season = query?.season
         ? (query?.season.toString().toUpperCase() as SeasonsType)
@@ -96,6 +99,8 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
         season,
         tag,
       };
+
+      // eslint-disable-next-line react/no-unused-state
       this.setState({ filters: queryFilters });
       this.props.fetchWithFilters(queryFilters);
     }
@@ -175,6 +180,6 @@ const connector = connect(mapStateToProps, {
 });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-const enhance = compose(withRouter, connector);
+const enhance: any = compose(withRouter, connector);
 
 export default enhance(InfiniteScroll);
