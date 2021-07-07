@@ -58,6 +58,7 @@
     "arrow-parens": "off",
     "function-paren-newline": "off",
     "react/jsx-pascal-case": "off",
+    "react/destructuring-assignment": "off",
     "import/extensions": [
       1,
       "ignorePackages",

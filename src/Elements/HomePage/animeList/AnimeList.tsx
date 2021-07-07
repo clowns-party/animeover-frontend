@@ -2,7 +2,7 @@ import { Card, Skeleton } from "antd";
 import React, { FC } from "react";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./animeList.module.scss";
-import { InfiniteScroll } from "./InfiniteScroll";
+import InfiniteScroll from "./InfiniteScroll";
 
 export const AnimeList: FC = () => {
   const { animeList, currentPage } = useAnime();

@@ -1,20 +1,28 @@
 import { fetchWithFilters, setFilters } from "bus/anime/actions";
 import { useAnime } from "bus/anime/hooks/useAnime";
-import { BaseCheckbox } from "Elements/Base/Checkbox/BaseCheckbox";
+import { BaseButton } from "Elements/Base/Button/BaseButton";
 import { BaseDropdown } from "Elements/Base/Dropdown/BaseDropdown";
-import React, { useState } from "react";
-import { FC } from "react";
+import { useRouter } from "next/router";
+import React, { useState, FC } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "redux/rootReducer";
+import { routeFilters } from "utils/anime/routeFilters";
 import { Seasons } from "utils/constants/seasons";
 import { AnimeTags } from "utils/constants/tags";
 import { AnimeTagsType, SeasonsType } from "./types";
 
 type Props = {
-  setChecked: (active: boolean) => void;
+  setGlobalSearch: () => void;
   globalSearch: boolean;
+  offChoiceGlobal?: boolean;
 };
-const AnimeFilters: FC<Props> = ({ setChecked, globalSearch }) => {
+const AnimeFilters: FC<Props> = ({
+  setGlobalSearch,
+  globalSearch,
+  offChoiceGlobal = false,
+}) => {
+  const history = useRouter();
   const page = useSelector((state: AppState) => state.anime.currentPage);
   const dispatch = useDispatch();
   const { filters } = useAnime();
@@ -22,10 +30,10 @@ const AnimeFilters: FC<Props> = ({ setChecked, globalSearch }) => {
   const sesonsList = Seasons;
   const tags = AnimeTags;
 
-  const [form, setForm] = useState({
+  const form = {
     season: filters?.season || sesonsList[0],
     tag: filters?.tag || tags[0],
-  });
+  };
 
   React.useEffect(() => {
     if (globalSearch) {
@@ -38,11 +46,9 @@ const AnimeFilters: FC<Props> = ({ setChecked, globalSearch }) => {
       ...form,
       tag,
     };
-    setForm(save);
-    if (!globalSearch) {
-      dispatch(setFilters(save));
-    } else {
-      dispatch(fetchWithFilters(save));
+    dispatch(setFilters(save));
+    if (globalSearch) {
+      history.push(routeFilters(save?.season, save?.tag));
     }
   };
 
@@ -51,21 +57,17 @@ const AnimeFilters: FC<Props> = ({ setChecked, globalSearch }) => {
       ...form,
       season,
     };
-    setForm(save);
-    if (!globalSearch) {
-      dispatch(setFilters(save));
-    } else {
-      dispatch(fetchWithFilters(save));
+    dispatch(setFilters(save));
+    if (globalSearch) {
+      history.push(routeFilters(save?.season, save?.tag));
     }
   };
 
   return (
     <>
-      <BaseCheckbox
-        checked={globalSearch}
-        setChecked={setChecked}
-        label="Global search"
-      />
+      {!offChoiceGlobal && (
+        <BaseButton onClick={setGlobalSearch}>Global search</BaseButton>
+      )}
       <h2>Season</h2>
       <BaseDropdown
         list={sesonsList}
