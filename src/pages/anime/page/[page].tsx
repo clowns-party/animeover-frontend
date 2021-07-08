@@ -3,11 +3,12 @@ import { useAnime } from "bus/anime/hooks/useAnime";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { Col, Pagination, Row } from "antd";
+import { Pagination } from "antd";
 import { ROUTES } from "utils/routes";
 import { applyFilters } from "utils/anime/applyFilters";
 import { useToast } from "utils/hooks/useToast";
 import CustomizeAnimePage from "bus/anime";
+import Container from "Elements/layout/Container";
 
 const AnimePage = () => {
   const router = useRouter();
@@ -39,17 +40,15 @@ const AnimePage = () => {
   return (
     <>
       <CustomizeAnimePage list={list} />
-      <Row>
-        <Col>
-          <Pagination
-            defaultCurrent={page}
-            total={count}
-            current={page}
-            pageSize={20}
-            onChange={updatePage}
-          />
-        </Col>
-      </Row>
+      <Container>
+        <Pagination
+          defaultCurrent={page}
+          total={count}
+          current={page}
+          pageSize={20}
+          onChange={updatePage}
+        />
+      </Container>
     </>
   );
 };

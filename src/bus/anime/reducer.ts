@@ -24,7 +24,7 @@ export type AnimeState = {
   anime: Anime | null;
   animeList: AnimeList | null;
   filtered: AnimeList | null;
-  filters: FiltersPayload | null;
+  filters: Omit<FiltersPayload, "page"> | null;
   ongoing: AnimeList | null;
   isFetching: boolean;
   currentPage: number;
@@ -76,7 +76,10 @@ export const animeReducer = (
     case SET_FILTERS:
       return {
         ...state,
-        filters: action.payload,
+        filters: {
+          season: action.payload.season,
+          tag: action.payload.tag,
+        },
       };
     case SET_ANIME_LIST_COUNT:
       return {

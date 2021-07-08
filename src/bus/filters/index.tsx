@@ -1,12 +1,11 @@
-import { fetchWithFilters, setFilters } from "bus/anime/actions";
+import { setFilters } from "bus/anime/actions";
 import { useAnime } from "bus/anime/hooks/useAnime";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
 import { BaseDropdown } from "Elements/Base/Dropdown/BaseDropdown";
 import { useRouter } from "next/router";
-import React, { useState, FC } from "react";
+import React, { FC } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "redux/rootReducer";
+import { useDispatch } from "react-redux";
 import { routeFilters } from "utils/anime/routeFilters";
 import { Seasons } from "utils/constants/seasons";
 import { AnimeTags } from "utils/constants/tags";
@@ -23,7 +22,6 @@ const AnimeFilters: FC<Props> = ({
   offChoiceGlobal = false,
 }) => {
   const history = useRouter();
-  const page = useSelector((state: AppState) => state.anime.currentPage);
   const dispatch = useDispatch();
   const { filters } = useAnime();
 
@@ -34,12 +32,6 @@ const AnimeFilters: FC<Props> = ({
     season: filters?.season || sesonsList[0],
     tag: filters?.tag || tags[0],
   };
-
-  React.useEffect(() => {
-    if (globalSearch) {
-      dispatch(fetchWithFilters(form));
-    }
-  }, [globalSearch, page]);
 
   const selectTag = (tag: AnimeTagsType) => {
     const save = {

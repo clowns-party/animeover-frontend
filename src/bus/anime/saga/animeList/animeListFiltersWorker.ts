@@ -1,10 +1,12 @@
 import { SagaIterator } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
+import { AnimeState } from "bus/anime/reducer";
 import { AppState } from "../../../../redux/rootReducer";
 import { fetchWithFiltersType, AnimeListReponse } from "../../types";
 import { service } from "../../../../Services";
 import {
   setAnimeListCount,
+  setCurrentPage,
   setErrorAnime,
   setFiltered,
   setFilters,
@@ -15,14 +17,20 @@ import {
 export function* animeListFiltersWorker(
   action: fetchWithFiltersType
 ): SagaIterator {
-  const page = yield select((state: AppState) => state.anime.currentPage);
-  const limit = 20;
   const { payload } = action;
+  const { currentPage, pageLimit }: AnimeState = yield select(
+    (state: AppState) => state.anime
+  );
+  const page = payload?.page || currentPage;
+
+  const limit = pageLimit;
+
   const filters = {
     ...payload,
     tags: "",
   };
   delete filters.tag;
+  delete filters.page;
   if (filters.season === "-") {
     delete filters.season;
   }
@@ -48,6 +56,7 @@ export function* animeListFiltersWorker(
         filters: payload,
       })
     );
+    yield put(setCurrentPage(page));
     yield put(setAnimeListCount(result.data.count));
     yield put(setFilters(payload));
   } catch (err) {

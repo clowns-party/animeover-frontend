@@ -111,6 +111,7 @@ export type setCurrentPageType = {
 export type FiltersPayload = {
   season?: SeasonsType;
   tag?: AnimeTagsType;
+  page?: number;
 };
 export const FETCH_WITH_FILTERS = "FETCH_WITH_FILTERS";
 export type fetchWithFiltersType = {

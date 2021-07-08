@@ -4,38 +4,58 @@ import Meta from "antd/lib/card/Meta";
 import { AnimeList } from "bus/anime/types";
 import Router from "next/router";
 import Picture from "Elements/picture";
-import styles from "./animeList.module.scss";
+import styled from "styled-components";
+import { SkeletonAnimeList } from "Elements/skeletons/SkeletonAnimeList";
 
-export const AnimeCards: FC<{ animeList: AnimeList }> = ({ animeList }) => {
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-right: 20px;
+`;
+
+const StyledCard = styled(Card)`
+  width: 200px;
+  margin-bottom: 20px !important;
+  border-radius: 20px !important;
+  img {
+    border-radius: 20px 20px 0 0 !important;
+  }
+`;
+
+const StyledPicture = styled(Picture)`
+  height: 250px;
+  object-fit: cover;
+`;
+
+export const AnimeCards: FC<{ animeList: AnimeList; loading?: boolean }> = ({
+  animeList,
+  loading = false,
+}) => {
   const animeClicked = (id: string) => {
     Router.push(`/anime/${id}`);
   };
 
   return (
-    <>
-      {animeList?.length &&
+    <Wrapper>
+      {animeList &&
+        animeList?.length > 0 &&
         animeList.map((el) => {
           return (
             // если не нужен див, изменить на React.Fragment
-            <div key={el._id}>
-              <Card
+            <React.Fragment key={el._id}>
+              <StyledCard
                 onClick={() => animeClicked(el._id)}
-                className={styles.card}
                 size="small"
                 hoverable
-                cover={
-                  <Picture
-                    className={styles.anime}
-                    alt="anime"
-                    url={el.picture}
-                  />
-                }
+                cover={<StyledPicture alt="anime" url={el.picture} />}
               >
                 <Meta title={el.title} description={el.type} />
-              </Card>
-            </div>
+              </StyledCard>
+            </React.Fragment>
           );
         })}
-    </>
+      {loading && <SkeletonAnimeList />}
+    </Wrapper>
   );
 };

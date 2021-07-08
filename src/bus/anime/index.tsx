@@ -1,29 +1,18 @@
-import { Row, Col } from "antd";
 import AnimeFilters from "bus/filters";
 import { Header } from "Elements/header";
 import { AnimeCards } from "Elements/HomePage/animeList/AnimeCards";
 import InfiniteScroll, {
   StateInfiniteScroll,
 } from "Elements/HomePage/animeList/InfiniteScroll";
+import Container from "Elements/layout/Container";
 import Loader from "Elements/loader";
 import { useRouter } from "next/dist/client/router";
-import React, { useState, useEffect } from "react";
-import { FC } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, FC } from "react";
 import styled from "styled-components";
 import { routeFilters } from "utils/anime/routeFilters";
 import { useToast } from "utils/hooks/useToast";
-import { ROUTES } from "utils/routes";
-import { changePage } from "./actions";
 import { useAnime } from "./hooks/useAnime";
 import { AnimeList } from "./types";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-right: 20px;
-`;
 
 type Props = {
   list: AnimeList;
@@ -31,6 +20,15 @@ type Props = {
   infinite?: boolean;
   type?: StateInfiniteScroll["type"];
 };
+const Wrap = styled.div`
+  display: flex;
+`;
+
+const List = styled.div`
+  width: 80%;
+`;
+
+const Filters = styled.div``;
 
 const CustomizeAnimePage: FC<Props> = ({
   list,
@@ -52,33 +50,27 @@ const CustomizeAnimePage: FC<Props> = ({
   return (
     <>
       <Header />
-      <Row justify="center">
-        <Col xs={16} sm={16} md={16} lg={16} xl={16} xxl={16}>
-          {infinite ? (
-            <>
-              <Container>
-                <InfiniteScroll type={type} />
-              </Container>
-              <Loader loading={isFetching} />
-            </>
-          ) : (
-            <>
-              <Loader loading={isFetching} />
-              <Container>
+      <Container>
+        <Wrap>
+          <List>
+            {infinite ? (
+              <InfiniteScroll type={type} />
+            ) : (
+              <>
+                <Loader loading={isFetching} />
                 <AnimeCards animeList={list} />
-              </Container>
-            </>
-          )}
-        </Col>
-
-        <Col>
-          <AnimeFilters
-            globalSearch={globalSearch}
-            setGlobalSearch={setGlobalSearch}
-            offChoiceGlobal={isGlobalSearch}
-          />
-        </Col>
-      </Row>
+              </>
+            )}
+          </List>
+          <Filters>
+            <AnimeFilters
+              globalSearch={globalSearch}
+              setGlobalSearch={setGlobalSearch}
+              offChoiceGlobal={isGlobalSearch}
+            />
+          </Filters>
+        </Wrap>
+      </Container>
     </>
   );
 };

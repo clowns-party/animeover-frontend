@@ -1,7 +1,6 @@
 import { changePage, fetchWithFilters } from "bus/anime/actions";
 import { AnimeList, FiltersPayload } from "bus/anime/types";
 import { AnimeTagsType, SeasonsType } from "bus/filters/types";
-import Loader from "Elements/loader";
 import { isEqual } from "lodash";
 import { withRouter } from "next/router";
 import React from "react";
@@ -18,6 +17,7 @@ export type StateInfiniteScroll = {
   prevY: number;
   type?: "default" | "filtered";
   filters?: FiltersPayload;
+  end: boolean;
 };
 interface Props extends PropsFromRedux {
   startPage?: number;
@@ -28,14 +28,15 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
   loadingRef: HTMLDivElement;
   constructor(props: Props) {
     super(props);
-    const { animeList, currentPage, type, filters } = this.props;
+    const { animeList, type, filters, startPage } = this.props;
     this.state = {
       animeList: animeList || [],
-      page: currentPage || 1,
+      page: startPage || 1,
       prevY: 0,
       type: type || "default",
       // eslint-disable-next-line react/no-unused-state
       filters,
+      end: false,
     };
   }
 
@@ -61,7 +62,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
     // @ts-ignore
     if (!isEqual(prevProps.router.query, this.props.router.query)) {
       this.clear();
-      this.fetchAnime(0);
+      // this.fetchAnime(1);
     }
   }
 
@@ -70,39 +71,42 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
     _observer: IntersectionObserver
   ) {
     const { y } = entities[0].boundingClientRect;
-    if (!this.props.isFetching) {
+    if (!this.props.isFetching && !this.state.end) {
       const { prevY, page } = this.state;
       if (prevY > y) {
         const curPage = page + 1;
         this.fetchAnime(curPage);
-        this.setState({ page: curPage });
       }
     }
 
     this.setState({ prevY: y });
   }
 
-  fetchAnime(page) {
-    if (this.state.type === "default") {
-      this.props.changePage({
-        limit: this.props.pageLimit,
-        page,
-      });
-    } else {
-      // @ts-ignore
-      const { query }: any = this.props.router;
-      const season = query?.season
-        ? (query?.season.toString().toUpperCase() as SeasonsType)
-        : "SUMMER";
-      const tag = query?.tag as AnimeTagsType;
-      const queryFilters = {
-        season,
-        tag,
-      };
-
-      // eslint-disable-next-line react/no-unused-state
-      this.setState({ filters: queryFilters });
-      this.props.fetchWithFilters(queryFilters);
+  fetchAnime(page: number) {
+    if (!this.state.end) {
+      if (this.state.type === "default") {
+        this.props.changePage({
+          limit: this.props.pageLimit,
+          page,
+        });
+        this.setState({ page });
+      } else {
+        // @ts-ignore
+        const { query }: any = this.props.router;
+        const season = query?.season
+          ? (query?.season.toString().toUpperCase() as SeasonsType)
+          : "SUMMER";
+        const tag = query?.tag as AnimeTagsType;
+        const queryFilters = {
+          season,
+          tag,
+          page,
+        };
+        this.setState({ page });
+        // eslint-disable-next-line react/no-unused-state
+        this.setState({ filters: queryFilters });
+        this.props.fetchWithFilters(queryFilters);
+      }
     }
   }
 
@@ -117,18 +121,24 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
       this.setState({
         animeList: merged,
       });
+    } else {
+      this.setState({
+        end: true,
+      });
     }
   }
 
   clear() {
     this.setState({
       animeList: [],
+      end: false,
+      page: 0,
     });
   }
 
   render() {
-    const { animeList } = this.state;
-    const { isFetching: loading } = this.props;
+    const { animeList, end } = this.state;
+    const { isFetching } = this.props;
     const loadingCSS = {
       height: "15px",
       margin: "15px",
@@ -136,7 +146,8 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
 
     return (
       <>
-        <AnimeCards animeList={animeList} />
+        <AnimeCards animeList={animeList} loading={isFetching} />
+        {end && <h2>This is end!</h2>}
         <div
           ref={(loadingRef) => {
             this.loadingRef = loadingRef;
