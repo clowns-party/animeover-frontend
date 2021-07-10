@@ -7,6 +7,6 @@ networks:
 
 services:
   frontend:
-    image: animeoverfrontend
+    image: docker.pkg.github.com/clowns-party/animeover-frontend/animeoverfrontend:production
     ports:
       - 3000:3000
