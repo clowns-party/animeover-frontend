@@ -17,7 +17,7 @@ jobs:
         with:
           token: ${{ secrets.DOCKER_GITHUB_ACCESS }}
           branch: gh-pages # The branch the action should deploy to.
-          # folder: docs-build # The folder that the build-storybook script generates files.
+          folder: root # The folder that the build-storybook script generates files.
           # target-folder: docs # The folder that we serve our Storybook files from
       - name: Deploy storybook
         run: |
