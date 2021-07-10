@@ -1,4 +1,5 @@
 import AnimeFilters from "bus/filters";
+import { Suggestions } from "bus/filters/Suggestions";
 import { Header } from "Elements/header";
 import { AnimeCards } from "Elements/HomePage/animeList/AnimeCards";
 import InfiniteScroll, {
@@ -26,9 +27,16 @@ const Wrap = styled.div`
 
 const List = styled.div`
   width: 80%;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
-const Filters = styled.div``;
+const Filters = styled.div`
+  @media (max-width: 576px) {
+    display: none;
+  }
+`;
 
 const CustomizeAnimePage: FC<Props> = ({
   list,
@@ -50,6 +58,7 @@ const CustomizeAnimePage: FC<Props> = ({
   return (
     <>
       <Header />
+      <Suggestions />
       <Container>
         <Wrap>
           <List>

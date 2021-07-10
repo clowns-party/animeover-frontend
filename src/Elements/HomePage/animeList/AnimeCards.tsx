@@ -27,10 +27,15 @@ const StyledPicture = styled(Picture)`
   height: 250px;
   object-fit: cover;
 `;
-
-export const AnimeCards: FC<{ animeList: AnimeList; loading?: boolean }> = ({
+type Props = {
+  animeList: AnimeList;
+  loading?: boolean;
+  children?: React.ReactNode;
+};
+export const AnimeCards: FC<Props> = ({
   animeList,
   loading = false,
+  children,
 }) => {
   const animeClicked = (id: string) => {
     Router.push(`/anime/${id}`);
@@ -56,6 +61,7 @@ export const AnimeCards: FC<{ animeList: AnimeList; loading?: boolean }> = ({
           );
         })}
       {loading && <SkeletonAnimeList />}
+      {children || ""}
     </Wrapper>
   );
 };
