@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: fregante/setup-git-user@v1
       - name: Install and Build Storybook 🔧
         run: |
           npm install
