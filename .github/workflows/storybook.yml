@@ -11,6 +11,7 @@ jobs:
       - name: Install and Build Storybook 🔧
         run: |
           npm install
-          npm run build-storybook
+          npm run predeploy
+          npm run deploy-storybook
         env:
           GH_TOKEN: ${{ secrets.DOCKER_GITHUB_ACCESS }}

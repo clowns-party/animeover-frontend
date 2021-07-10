@@ -1,5 +1,5 @@
 {
-  "homepage": "http://clowns-party.github.io/animeover-frontend",
+  "homepage": "https://clowns-party.github.io/animeover-frontend/",
   "name": "animeover",
   "version": "0.1.0",
   "private": true,
@@ -12,7 +12,9 @@
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "predeploy": "npm run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -66,6 +68,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.2.1",
     "prettier-eslint-cli": "^5.0.1",
     "style-loader": "^3.0.0"
