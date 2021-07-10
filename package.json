@@ -1,4 +1,5 @@
 {
+  "homepage": "https://clowns-party.github.io/animeover-frontend/",
   "name": "animeover",
   "version": "0.1.0",
   "private": true,
@@ -9,7 +10,11 @@
     "start:as-build": "next start",
     "heroku-postbuild": "npm run build",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
-    "lint": "eslint \"src/**/*.{ts,tsx}\""
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "predeploy": "npm run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -40,14 +45,21 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
     "@babel/eslint-parser": "^7.13.14",
     "@next/eslint-plugin-next": "^10.1.2",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/react": "^6.3.4",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^14.14.41",
     "@types/react": "^17.0.3",
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.1.0",
@@ -56,7 +68,9 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.2.1",
-    "prettier-eslint-cli": "^5.0.1"
+    "prettier-eslint-cli": "^5.0.1",
+    "style-loader": "^3.0.0"
   }
 }
