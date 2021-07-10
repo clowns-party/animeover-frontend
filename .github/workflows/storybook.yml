@@ -13,6 +13,8 @@ jobs:
         run: |
           npm install
           npm run predeploy
+          git config --local user.name "${context.payload.commits[0].author.name}"
+          git config --local user.email "${context.payload.commits[0].author.email}"
           npm run deploy-storybook
         env:
           GH_TOKEN: ${{ secrets.DOCKER_GITHUB_ACCESS }}
