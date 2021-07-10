@@ -43,6 +43,7 @@ export const Button = ({
       {...props}
     >
       {label}
+      ___tested
     </button>
   );
 };
