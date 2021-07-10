@@ -7,12 +7,16 @@ import { service } from "Services";
 export function* searchAnimeWorker(action): SagaIterator {
   const { payload } = action || {};
   try {
-    const text = payload[0]?.toUpperCase() + payload?.substring(1);
-    const { data }: { data: AnimeList } = yield call(
-      service.animeService.searchAnime,
-      text
-    );
-    yield put(setSearchAnime(data));
+    if (payload) {
+      const text = payload[0]?.toUpperCase() + payload?.substring(1);
+      const { data }: { data: AnimeList } = yield call(
+        service.animeService.searchAnime,
+        text
+      );
+      yield put(setSearchAnime(data));
+    } else {
+      yield put(setSearchAnime(null));
+    }
   } catch (error) {
     console.log(error);
   }

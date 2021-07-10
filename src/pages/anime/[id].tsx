@@ -12,7 +12,7 @@ const AnimePage: FC = () => {
   } = useRouter();
   useEffect(() => {
     dispatch(getAnime(id));
-  }, []);
+  }, [id]);
 
   return (
     <div>
