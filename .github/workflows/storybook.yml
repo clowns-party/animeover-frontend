@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git config --global user.email "sieugene@mail.ru"
-      - run: git config --global user.name "cistorybook"
+      - run: git config --global user.name "sieugene"
       - name: Install and Build Storybook 🔧
         run: |
           npm install
