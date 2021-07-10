@@ -2,9 +2,13 @@ import { changePage, fetchWithFilters } from "bus/anime/actions";
 import { AnimeList, FiltersPayload } from "bus/anime/types";
 import { AnimeTagsType, SeasonsType } from "bus/filters/types";
 import { isEqual } from "lodash";
+import {
+  ExcludeRouterProps,
+  WithRouterProps,
+} from "next/dist/client/with-router";
 import { withRouter } from "next/router";
 import React from "react";
-import { connect, ConnectedProps } from "react-redux";
+import { connect, ConnectedComponent, ConnectedProps } from "react-redux";
 import { compose } from "redux";
 import { AppState } from "redux/rootReducer";
 import { removeDuplicateObjectFromArray } from "utils/common/removeDuplicateObjectFromArray";
@@ -19,10 +23,11 @@ export type StateInfiniteScroll = {
   filters?: FiltersPayload;
   end: boolean;
 };
-interface Props extends PropsFromRedux {
+interface ComponentProps {
   startPage?: number;
   type?: StateInfiniteScroll["type"];
 }
+interface Props extends PropsFromRedux, ComponentProps, WithRouterProps {}
 class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
   observer: IntersectionObserver;
   loadingRef: HTMLDivElement;
@@ -34,7 +39,6 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
       page: startPage || 1,
       prevY: 0,
       type: type || "default",
-      // eslint-disable-next-line react/no-unused-state
       filters,
       end: false,
     };
@@ -59,10 +63,9 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
     if (!isEqual(prevProps.animeList, this.props.animeList)) {
       this.updateList();
     }
-    // @ts-ignore
+
     if (!isEqual(prevProps.router.query, this.props.router.query)) {
       this.clear();
-      // this.fetchAnime(1);
     }
   }
 
@@ -91,8 +94,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
         });
         this.setState({ page });
       } else {
-        // @ts-ignore
-        const { query }: any = this.props.router;
+        const { query } = this.props.router;
         const season = query?.season
           ? (query?.season.toString().toUpperCase() as SeasonsType)
           : "SUMMER";
@@ -103,7 +105,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
           page,
         };
         this.setState({ page });
-        // eslint-disable-next-line react/no-unused-state
+
         this.setState({ filters: queryFilters });
         this.props.fetchWithFilters(queryFilters);
       }
@@ -137,7 +139,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
   }
 
   render() {
-    const { animeList, end } = this.state;
+    const { animeList, end, filters } = this.state;
     const { isFetching } = this.props;
     const loadingCSS = {
       height: "15px",
@@ -191,6 +193,12 @@ const connector = connect(mapStateToProps, {
 });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-const enhance: any = compose(withRouter, connector);
+const enhance = compose<
+  React.ComponentType<ExcludeRouterProps<WithRouterProps>> &
+    ConnectedComponent<typeof InfiniteScroll, ComponentProps>
+>(
+  withRouter,
+  connector
+)(InfiniteScroll);
 
-export default enhance(InfiniteScroll);
+export default enhance;
