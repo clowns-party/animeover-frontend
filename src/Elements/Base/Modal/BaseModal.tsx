@@ -12,6 +12,7 @@ type Props = {
   show?: () => void;
   submit?: () => void;
   cancel?: () => void;
+  withoutOutsideClick?: boolean;
 };
 const ModalWrapper = styled.div`
   position: fixed;

@@ -9,6 +9,10 @@ import { SearchList } from "./searchList/searchList";
 
 const SearchContainer = styled.div`
   position: relative;
+  @media screen and (max-width: 768px) {
+    min-width: 90%;
+    margin-top: 20px;
+  }
 `;
 
 const InputWrap = styled.div`
@@ -19,9 +23,17 @@ const InputWrap = styled.div`
     }
     margin-right: 30px;
   }
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+    input {
+      width: 100%;
+    }
+  }
 `;
 
-export const SearchAnime: FC = () => {
+export const SearchAnime: FC<{ mobileCLose?: () => void }> = ({
+  mobileCLose,
+}) => {
   const dispatch = useDispatch();
   const { searchAnimeList } = useSearchList();
   const [focus, setFocus] = useState(false);
@@ -57,6 +69,7 @@ export const SearchAnime: FC = () => {
           focus={focus}
           listFocus={listFocus}
           setListFocus={setListFocus}
+          mobileCLose={mobileCLose}
         />
       </InputWrap>
     </SearchContainer>

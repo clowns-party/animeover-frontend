@@ -45,6 +45,15 @@ const ListContainer = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #adadad;
   }
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    max-height: 70vh;
+    top: 20px;
+    position: relative;
+  }
 `;
 const LinkItem = styled.a`
   cursor: pointer;
@@ -66,6 +75,16 @@ const LinkItem = styled.a`
   &:hover {
     opacity: 0.7;
   }
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    min-height: 40px;
+    border-bottom: 1px solid #c7c0c0;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 `;
 
 const EmptyList = styled.div`
@@ -80,10 +99,12 @@ export const SearchList: FC<{
   focus: boolean;
   listFocus: boolean;
   setListFocus: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ focus, listFocus, setListFocus }) => {
+  mobileCLose?: () => void;
+}> = ({ focus, listFocus, setListFocus, mobileCLose }) => {
   const { searchAnimeList } = useSearchList();
   const dispatch = useDispatch();
   const linkClick = () => {
+    mobileCLose();
     dispatch(setSearchAnime(null));
   };
   return (
@@ -91,7 +112,7 @@ export const SearchList: FC<{
       onMouseEnter={() => setListFocus(true)}
       onMouseLeave={() => setListFocus(false)}
     >
-      {true && (
+      {(focus || listFocus) && (
         <>
           {searchAnimeList?.length ? (
             <ListContainer>

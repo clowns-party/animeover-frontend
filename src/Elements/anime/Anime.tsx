@@ -18,15 +18,6 @@ export const Anime: FC = () => {
   const animePicture = anime && imgFormatter(anime?.picture);
 
   const isShiki = anime && anime.sources.includes("shikimori");
-
-  const successLoad = () => {
-    debugger;
-  };
-
-  const badLoad = () => {
-    debugger;
-  };
-
   return (
     <AnimeContainer>
       <div className={styles.anime_container}>
@@ -38,8 +29,6 @@ export const Anime: FC = () => {
                 className={styles.anime_picture}
                 url={animePicture}
                 alt={anime?.title || "anime"}
-                onLoad={successLoad}
-                onError={badLoad}
               />
             ) : (
               <Skeleton.Avatar active shape="square" style={avatarSize()} />

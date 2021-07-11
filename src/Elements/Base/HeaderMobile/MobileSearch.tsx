@@ -1,13 +1,7 @@
-import { AddUser } from "assets/icons/AddUser";
-import { SpaIcon } from "assets/icons/SpaIcon";
-import { signModalToggle } from "bus/auth/actions";
-import { useAuth } from "bus/auth/hooks/useAuth";
-import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { ROUTES } from "utils/routes";
 import BaseModal from "../Modal/BaseModal";
+import { SearchAnime } from "../../search/SearchAnime";
 
 const OverlayWrapper = styled.div`
   width: 100%;
@@ -67,36 +61,7 @@ type Props = {
   visible: boolean;
 };
 
-export const HeaderOverlay: FC<Props> = ({ show, visible, cancel }) => {
-  const dispatch = useDispatch();
-  const { data } = useAuth();
-  const auth = data?.user;
-  const router = useRouter();
-  const extraLinks = [
-    {
-      title: auth ? "Profile" : "Log In",
-      icon: <AddUser />,
-      active: false,
-      action: () => {
-        if (!auth) {
-          show();
-          dispatch(signModalToggle(true));
-        } else {
-          show();
-          router.push(ROUTES.profile);
-        }
-      },
-    },
-    {
-      title: "Anime",
-      icon: <SpaIcon />,
-      active: false,
-      action: () => {
-        show();
-        router.push(ROUTES.anime);
-      },
-    },
-  ];
+export const MobileSearch: FC<Props> = ({ visible, show }) => {
   return (
     <BaseModal visible={visible}>
       <OverlayWrapper>
@@ -104,11 +69,7 @@ export const HeaderOverlay: FC<Props> = ({ show, visible, cancel }) => {
           <span onClick={() => show()}>+</span>
         </Close>
         <OverlayContent>
-          {extraLinks.map((link, index) => (
-            <OverlayItem key={index.toString()} onClick={link.action}>
-              {link.title}
-            </OverlayItem>
-          ))}
+          <SearchAnime mobileCLose={show} />
         </OverlayContent>
       </OverlayWrapper>
     </BaseModal>

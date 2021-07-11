@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { zIndexLayout } from "utils/constants/zIndexLayout";
 import { ROUTES } from "utils/routes";
 import { HeaderOverlay } from "./HeaderOverlay";
+import { MobileSearch } from "./MobileSearch";
 
 const MobileWrap = styled.div<{ overlay: boolean }>`
   position: fixed;
@@ -79,12 +80,20 @@ const Tab = styled.div<{ active: boolean }>`
 export const HeaderMobile = () => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
+  const [searchVisible, setSearchVisible] = useState(false);
   const show = () => {
+    setSearchVisible(false);
     setVisible(!visible);
   };
-
   const cancel = () => {
     setVisible(false);
+  };
+  const showSearch = () => {
+    setVisible(false);
+    setSearchVisible(!searchVisible);
+  };
+  const cancelSearch = () => {
+    setSearchVisible(false);
   };
   const items = [
     {
@@ -107,7 +116,7 @@ export const HeaderMobile = () => {
       title: "Search",
       icon: <SearchIcon />,
       active: false,
-      action: () => null,
+      action: () => showSearch(),
     },
 
     {
@@ -119,7 +128,7 @@ export const HeaderMobile = () => {
   ];
 
   return (
-    <MobileWrap overlay={visible}>
+    <MobileWrap overlay={visible || searchVisible}>
       <div className="tabs">
         {items.map(({ active, icon, title, action }, index) => (
           <Tab key={index.toString()} active={active} onClick={action}>
@@ -128,6 +137,11 @@ export const HeaderMobile = () => {
           </Tab>
         ))}
       </div>
+      <MobileSearch
+        show={showSearch}
+        cancel={cancelSearch}
+        visible={searchVisible}
+      />
       <HeaderOverlay show={show} cancel={cancel} visible={visible} />
     </MobileWrap>
   );
