@@ -8,10 +8,10 @@ const EmptyDefault = styled.div`
   height: auto;
   background: white;
   border-radius: 10px;
-  display: flex;
+  display: grid;
+  grid-column: 1 / -1;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-items: center;
 
   h2 {
     margin-top: 30px;

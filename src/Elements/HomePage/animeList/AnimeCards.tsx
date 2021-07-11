@@ -8,9 +8,9 @@ import styled from "styled-components";
 import { SkeletonAnimeList } from "Elements/skeletons/SkeletonAnimeList";
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
   margin-right: 20px;
 `;
 
