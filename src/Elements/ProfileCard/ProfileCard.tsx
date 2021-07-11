@@ -1,4 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
+import { useLogout } from "bus/auth/hooks/useLogout";
 import { ProfileForm } from "bus/profile/form/ProfileForm";
 import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
 import React, { FC } from "react";
@@ -58,17 +59,23 @@ const Info = styled.div`
     line-height: 21px;
     color: #9c9898;
   }
-  .btn {
+  .btns {
     margin-top: 25px;
+    display: flex;
+    .btn {
+      margin-right: 5px;
+    }
   }
 `;
 
 export const ProfileCard: FC<Props> = ({ user }) => {
+  const logout = useLogout();
   const [showEdit, setShowEdit] = React.useState(false);
   const imgUri = imgOnLoad(user?.photoURL, "/user.svg");
   const toggle = () => {
     setShowEdit(!showEdit);
   };
+
   return (
     <Card>
       <Avatar>
@@ -78,13 +85,18 @@ export const ProfileCard: FC<Props> = ({ user }) => {
         <Info>
           <h2>{user?.displayName}</h2>
           <h3>{user?.email}</h3>
-          <BaseButton
-            typeComponent={ButtonType.default}
-            className="btn"
-            onClick={toggle}
-          >
-            Edit
-          </BaseButton>
+          <div className="btns">
+            <BaseButton
+              typeComponent={ButtonType.default}
+              className="btn"
+              onClick={toggle}
+            >
+              Edit
+            </BaseButton>
+            <BaseButton typeComponent={ButtonType.danger} onClick={logout}>
+              Exit
+            </BaseButton>
+          </div>
         </Info>
       ) : (
         <ProfileForm toggle={toggle} />

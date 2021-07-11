@@ -22,6 +22,15 @@ const BtnsGroup = styled.div`
   width: 100%;
   justify-content: space-between;
 `;
+
+const NoAuth = styled.div`
+  margin-top: 10px;
+  margin-bottom: 15px;
+  p {
+    margin-top: 5px;
+  }
+`;
+
 type Props = {
   show?: boolean;
 };
@@ -46,7 +55,11 @@ export const UserAnimeListDropdown: FC<Props> = ({ show = true }) => {
     return <></>;
   }
   if (!user && !loadingUser) {
-    return <div>Login for adding anime in your list</div>;
+    return (
+      <NoAuth>
+        <p>Login for adding anime in your list</p>
+      </NoAuth>
+    );
   }
 
   return (

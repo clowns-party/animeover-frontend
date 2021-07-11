@@ -43,13 +43,7 @@ const Ongoing = ({ el, id }) => {
         className={styles.card}
         size="small"
         hoverable
-        cover={
-          <img
-            className={styles.anime}
-            alt="anime"
-            src={`https://shikimori.one/${el.picture}`}
-          />
-        }
+        cover={<img className={styles.anime} alt="anime" src={el.picture} />}
       >
         <Meta title={el.title} description={el.type} />
       </Card>

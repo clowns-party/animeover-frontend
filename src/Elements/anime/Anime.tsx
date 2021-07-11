@@ -4,12 +4,18 @@ import { Skeleton } from "antd";
 import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeListDropdown";
 import { BaseButton } from "Elements/Base/Button/BaseButton";
 import Picture from "Elements/picture";
+import styled from "styled-components";
 import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
 import { Anime as AnimeType } from "../../bus/anime/types";
 import { imgFormatter } from "../../utils/imgFormatter";
 import { avatarSize, formatTags } from "./anime.functions";
+
+const StyledBtn = styled(BaseButton)`
+  margin-top: 10px;
+  margin-bottom: 15px;
+`;
 
 export const Anime: FC = () => {
   const imgRef = useRef(null);
@@ -33,7 +39,11 @@ export const Anime: FC = () => {
             ) : (
               <Skeleton.Avatar active shape="square" style={avatarSize()} />
             )}
-            {!isFetching && isShiki && <BaseButton>Go to shiki</BaseButton>}
+            {!isFetching && isShiki && (
+              <a href="https://shikimori.one/" target="_blank" rel="noreferrer">
+                <StyledBtn>Go to shiki</StyledBtn>
+              </a>
+            )}
             {!isFetching ? (
               <UserAnimeListDropdown show={!isShiki} />
             ) : (

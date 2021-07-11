@@ -6,6 +6,7 @@ import { ProfileContainer } from "Elements/Base/Containers/ProfileContainer";
 import { ProfileAnimeList } from "Elements/profile/ProfileAnimeList";
 import { useAuth } from "bus/auth/hooks/useAuth";
 import HistoryProfile from "bus/history";
+import Head from "next/head";
 import { Header } from "../../Elements/header";
 import {
   BaseProfileCardStyle,
@@ -49,6 +50,9 @@ const Profile: FC<Props> = ({ user }) => {
   const userData = data?.user || user;
   return (
     <>
+      <Head>
+        <title>Animeover | Profile</title>
+      </Head>
       <Header />
       <ProfileContainer>
         <ProfileColumnCards>

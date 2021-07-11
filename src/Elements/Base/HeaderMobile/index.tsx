@@ -99,7 +99,7 @@ export const HeaderMobile = () => {
     {
       title: "Home",
       icon: <SmallLogo />,
-      active: true,
+      active: router.pathname === "/",
       action: () => {
         router.push(ROUTES.main);
       },
@@ -107,7 +107,7 @@ export const HeaderMobile = () => {
     {
       title: "Ongoing",
       icon: <WhatshotIcon />,
-      active: false,
+      active: router.pathname === "/ongoing",
       action: () => {
         router.push(ROUTES.ongoing);
       },

@@ -9,6 +9,7 @@ const Container = styled.div`
   overflow: hidden;
   overflow-y: scroll;
   width: 100%;
+  padding-bottom: 50px;
 `;
 
 const HistoryItem = styled.div`
@@ -26,7 +27,7 @@ const HistoryProfile = () => {
             return (
               <HistoryItem key={index.toString()}>
                 <a href={item.url} target="_blank" rel="noreferrer">
-                  {new Date(item.date).toISOString()}
+                  {item.title || new Date(item.date).toISOString()}
                 </a>
               </HistoryItem>
             );

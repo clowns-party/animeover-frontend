@@ -9,6 +9,7 @@ import { applyFilters } from "utils/anime/applyFilters";
 import { useToast } from "utils/hooks/useToast";
 import CustomizeAnimePage from "bus/anime";
 import Container from "Elements/layout/Container";
+import Head from "next/head";
 
 const AnimePage = () => {
   const router = useRouter();
@@ -39,6 +40,9 @@ const AnimePage = () => {
 
   return (
     <>
+      <Head>
+        <title>Animes | {page}</title>
+      </Head>
       <CustomizeAnimePage list={list} />
       <Container>
         <Pagination

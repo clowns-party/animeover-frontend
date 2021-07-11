@@ -23,6 +23,7 @@ const Body = styled.div`
   border-radius: 24px;
   background: #ffffff;
   padding: 20px 30px 20px 30px;
+
   h2 {
     font-family: IBM Plex Sans;
     font-style: normal;
@@ -40,6 +41,17 @@ const Body = styled.div`
     line-height: 22px;
     color: #2c2738;
     display: flex;
+  }
+
+  @media (max-width: 576px) {
+    width: 320px;
+  }
+  @media (max-height: 768px) {
+    max-height: 90vh;
+    max-width: 90vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 `;
 

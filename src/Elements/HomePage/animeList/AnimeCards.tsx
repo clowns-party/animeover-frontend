@@ -10,8 +10,11 @@ import { SkeletonAnimeList } from "Elements/skeletons/SkeletonAnimeList";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
   margin-right: 20px;
+  @media screen and (max-width: 576px) {
+    justify-items: center;
+    margin-right: 0px;
+  }
 `;
 
 const StyledCard = styled(Card)`

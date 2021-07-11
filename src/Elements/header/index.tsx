@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import { DesktopLogo } from "assets/icons/DesktopLogo";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { zIndexLayout } from "utils/constants/zIndexLayout";
 import imgOnLoad from "utils/common/imgOnLoad";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { SearchAnime } from "../search/SearchAnime";
+import { useRouter } from "next/router";
 
 const Mobile = styled.div`
   display: none;
@@ -50,11 +51,11 @@ const HeaderStyled = styled.div`
 const Links = styled.div`
   display: flex;
 `;
-const LinkItem = styled.a`
+const LinkItem = styled.a<{ active: boolean }>`
   cursor: pointer;
   margin-right: 30px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: ${(props) => (props.active ? "bold" : "normal")};
   font-size: 14px;
   line-height: 24px;
   color: #000000;
@@ -68,9 +69,13 @@ const Clearfix = styled.div`
   height: 60px;
   margin-bottom: 30px;
   position: relative;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Header: FC = () => {
+  const router = useRouter();
   const { data, isFetching, error } = useAuth();
   const auth = data?.user;
   const imgUri = imgOnLoad(auth?.photoURL, "/user.svg");
@@ -79,10 +84,12 @@ export const Header: FC = () => {
     {
       name: "Ongoing",
       link: ROUTES.ongoing,
+      active: router.pathname === "/ongoing",
     },
     {
       name: "Anime",
       link: ROUTES.anime,
+      active: router.pathname.includes("anime"),
     },
   ];
 
@@ -98,7 +105,9 @@ export const Header: FC = () => {
         <Links>
           {links.map((link, index) => (
             <Link href={link.link} key={index.toString()}>
-              <LinkItem href={link.link}>{link.name}</LinkItem>
+              <LinkItem href={link.link} active={link.active}>
+                {link.name}
+              </LinkItem>
             </Link>
           ))}
         </Links>

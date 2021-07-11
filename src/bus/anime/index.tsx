@@ -20,6 +20,7 @@ type Props = {
   isGlobalSearch?: boolean;
   infinite?: boolean;
   type?: StateInfiniteScroll["type"];
+  withFilters?: boolean;
 };
 const Wrap = styled.div`
   display: flex;
@@ -42,6 +43,7 @@ const CustomizeAnimePage: FC<Props> = ({
   list,
   isGlobalSearch = false,
   infinite = false,
+  withFilters = true,
   type,
 }) => {
   const history = useRouter();
@@ -71,13 +73,15 @@ const CustomizeAnimePage: FC<Props> = ({
               </>
             )}
           </List>
-          <Filters>
-            <AnimeFilters
-              globalSearch={globalSearch}
-              setGlobalSearch={setGlobalSearch}
-              offChoiceGlobal={isGlobalSearch}
-            />
-          </Filters>
+          {withFilters && (
+            <Filters>
+              <AnimeFilters
+                globalSearch={globalSearch}
+                setGlobalSearch={setGlobalSearch}
+                offChoiceGlobal={isGlobalSearch}
+              />
+            </Filters>
+          )}
         </Wrap>
       </Container>
     </>
