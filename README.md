@@ -9,7 +9,7 @@
 <img src="https://img.shields.io/badge/typescript-4.2.4-blue"/>
 <img src="https://img.shields.io/badge/storybook-6.3.4-blue"/>
 <img src="https://img.shields.io/badge/next-10.1.3-blue"/>
-</p>
+	</p>
 
 <p align="center">
   <b>The pet project is like a website with a database of anime series and   <br/>
@@ -22,6 +22,15 @@
 <br/>
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+
+<br/>
+
+## ➤ Links
+
+[![production](https://img.shields.io/badge/production-v1-blue)](https://animeover.herokuapp.com/)
+[![storybook](https://img.shields.io/badge/storybook-v1-blue)](https://clowns-party.github.io/animeover-frontend)
+
+
 
 <br/>
 
