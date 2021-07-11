@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useToast } from "utils/hooks/useToast";
 import CustomizeAnimePage from "bus/anime";
+import Head from "next/head";
 
 const OngoingPage = () => {
   const { ongoing, error } = useAnime();
@@ -17,7 +18,14 @@ const OngoingPage = () => {
     dispatch(getOngoingList());
   }, []);
 
-  return <CustomizeAnimePage list={ongoing} withFilters={false} />;
+  return (
+    <>
+      <Head>
+        <title>Animeover | Ongoing</title>
+      </Head>
+      <CustomizeAnimePage list={ongoing} withFilters={false} />
+    </>
+  );
 };
 
 export default OngoingPage;

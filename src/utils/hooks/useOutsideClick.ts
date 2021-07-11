@@ -7,7 +7,7 @@ export const useOutsideClick = (ref, handler, root?: any) => {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
-      handler(event);
+      handler && event && handler(event);
     };
     container?.addEventListener("mousedown", listener);
     container?.addEventListener("touchstart", listener);

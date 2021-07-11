@@ -5,6 +5,10 @@
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .anime_picture {
@@ -68,8 +72,14 @@
   color: #fff;
   font: 14px "Noto Sans";
   font-weight: 500;
-  display: flex;
   align-items: center;
+
+  display: flex;
+  justify-content: center;
+  @media (max-width: 576px) {
+    max-width: 55px;
+    margin-bottom: 10px;
+  }
 }
 
 .container_button {
