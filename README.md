@@ -3,8 +3,13 @@
 </p>
 <h1 align="center">@clownsparty/animeover</h1>
 <p align="center">
-![](https://img.shields.io/badge/contributors-2-red) ![](https://img.shields.io/badge/packages-1-blue) ![](https://img.shields.io/badge/release-v0.0-blue) ![](https://img.shields.io/badge/typescript-4.2.4-blue) ![](https://img.shields.io/badge/storybook-6.3.4-blue) ![](https://img.shields.io/badge/next-10.1.3-blue)
-	</p>
+<img src="https://img.shields.io/badge/contributors-2-red"/>
+<img src="https://img.shields.io/badge/packages-1-blue"/>
+<img src="https://img.shields.io/badge/release-v0.0-blue"/>
+<img src="https://img.shields.io/badge/typescript-4.2.4-blue"/>
+<img src="https://img.shields.io/badge/storybook-6.3.4-blue"/>
+<img src="https://img.shields.io/badge/next-10.1.3-blue"/>
+</p>
 
 <p align="center">
   <b>The pet project is like a website with a database of anime series and   <br/>
