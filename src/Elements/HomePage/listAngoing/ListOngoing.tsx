@@ -1,14 +1,11 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
 import React, { FC } from "react";
 import Router from "next/router";
-import { patchImgShiki } from "utils/common/patchImgShiki";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./listOngoing.module.scss";
 
 export const ListOngoing: FC = () => {
   const { ongoing, isFetching, error } = useAnime();
-
-  const patched = patchImgShiki(ongoing);
 
   return (
     <div className={styles.container}>
@@ -21,8 +18,8 @@ export const ListOngoing: FC = () => {
         </Col>
       </Row>
       <Row className={styles.ongoing_container}>
-        {patched?.length ? (
-          patched.map(
+        {ongoing?.length ? (
+          ongoing.map(
             (el, index) =>
               index <= 7 && <Ongoing key={el._id} id={el._id} el={el} />
           )

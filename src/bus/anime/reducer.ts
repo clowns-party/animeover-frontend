@@ -89,7 +89,7 @@ export const animeReducer = (
     case SET_ONGOING_LIST:
       return {
         ...state,
-        ongoing: [...action.payload],
+        ongoing: action.payload,
       };
     case START_ANIME_LIST:
       return {

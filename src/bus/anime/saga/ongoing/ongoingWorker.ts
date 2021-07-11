@@ -1,5 +1,6 @@
 import { SagaIterator } from "redux-saga";
 import { put, call } from "redux-saga/effects";
+import { patchImgShiki } from "utils/common/patchImgShiki";
 import { service } from "../../../../Services";
 import {
   setOngoingList,
@@ -16,7 +17,7 @@ export function* ongoingWorker(): SagaIterator {
     const result: OngoingListRespose = yield call(
       service.animeService.ongoingList
     );
-    yield put(setOngoingList(result.data));
+    yield put(setOngoingList(patchImgShiki(result.data)));
   } catch (err) {
     yield put(setErrorAnime(err));
   } finally {
