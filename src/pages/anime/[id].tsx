@@ -17,7 +17,7 @@ const AnimePage: FC = () => {
   return (
     <div>
       <Header />
-      <Anime />;
+      <Anime />
     </div>
   );
 };

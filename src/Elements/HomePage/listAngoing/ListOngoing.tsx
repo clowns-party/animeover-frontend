@@ -1,11 +1,14 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
 import React, { FC } from "react";
 import Router from "next/router";
+import { patchImgShiki } from "utils/common/patchImgShiki";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./listOngoing.module.scss";
 
 export const ListOngoing: FC = () => {
   const { ongoing, isFetching, error } = useAnime();
+
+  const patched = patchImgShiki(ongoing);
 
   return (
     <div className={styles.container}>
@@ -18,8 +21,8 @@ export const ListOngoing: FC = () => {
         </Col>
       </Row>
       <Row className={styles.ongoing_container}>
-        {ongoing?.length ? (
-          ongoing.map(
+        {patched?.length ? (
+          patched.map(
             (el, index) =>
               index <= 7 && <Ongoing key={el._id} id={el._id} el={el} />
           )
@@ -43,13 +46,7 @@ const Ongoing = ({ el, id }) => {
         className={styles.card}
         size="small"
         hoverable
-        cover={
-          <img
-            className={styles.anime}
-            alt="anime"
-            src={`https://shikimori.one/${el.picture}`}
-          />
-        }
+        cover={<img className={styles.anime} alt="anime" src={el.picture} />}
       >
         <Meta title={el.title} description={el.type} />
       </Card>
