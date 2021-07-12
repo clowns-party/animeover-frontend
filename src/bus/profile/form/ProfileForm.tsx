@@ -20,14 +20,18 @@ const StyledForm = styled(Form)`
 `;
 
 const FormItem = styled(Form.Item)`
-  display: flex;
-  flex-direction: column !important;
+  /* display: flex !important;
+  flex-direction: column !important; */
+  /* display: contents !important; */
+  display: block !important;
   .ant-form-item-label {
     text-align: left;
   }
+
   label {
     font-weight: bold;
     margin-bottom: 5px;
+    width: 100%;
   }
   margin-bottom: 0px !important;
 `;
