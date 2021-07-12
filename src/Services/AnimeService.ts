@@ -1,12 +1,13 @@
+import autoBind from "auto-bind";
 import { AxiosInstance, AxiosResponse } from "axios";
 import {
   Anime,
-  AnimeList,
-  IdType,
   AnimeData,
+  AnimeList,
   FiltersPayload,
+  IdType,
 } from "bus/anime/types";
-import autoBind from "auto-bind";
+import { RawAnimeListType } from "bus/UserAnimeList/types";
 import { Api } from "./Api";
 
 export class Service extends Api {
@@ -42,6 +43,9 @@ export class Service extends Api {
 
   anime(id: IdType): Promise<AxiosResponse<Anime>> {
     return this.getInstance().get<Anime>(`/animedb/anime/${id}`);
+  }
+  animeDetailByID(id: IdType): Promise<AxiosResponse<RawAnimeListType[]>> {
+    return this.getInstance().get<RawAnimeListType[]>(`/animedetail/${id}`);
   }
   searchAnime(text: string): Promise<AxiosResponse<Anime>> {
     return this.getInstance().get<Anime>(`/search?queryText=${text}`);

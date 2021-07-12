@@ -84,6 +84,8 @@ To launch storybook, use
 - Pagination
 - Infinite scroll
 - Rate and review for anime
+- Rating 
+- Reviews list
 
 <br/>
 

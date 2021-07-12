@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { AppState } from "redux/rootReducer";
+import { calculateRating } from "../../../utils/anime/calculateRating";
 import { AnimeState } from "../reducer";
 
-export const useAnime = (): AnimeState => {
+export const useAnime = () => {
   const {
     animeList,
     anime,
@@ -18,7 +19,9 @@ export const useAnime = (): AnimeState => {
 
   return {
     animeList,
-    anime: !isFetching && anime,
+    anime: !isFetching && anime?.info,
+    details: anime?.detail,
+    rating: calculateRating(anime?.detail),
     currentPage,
     count,
     ongoing,

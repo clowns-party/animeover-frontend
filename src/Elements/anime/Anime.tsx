@@ -5,6 +5,7 @@ import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeLis
 import { BaseButton } from "Elements/Base/Button/BaseButton";
 import Picture from "Elements/picture";
 import styled from "styled-components";
+import Comments from "bus/comments";
 import styles from "./anime.module.scss";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
 import { AnimeContainer } from "../animeContainer/AnimeContainer";
@@ -17,9 +18,17 @@ const StyledBtn = styled(BaseButton)`
   margin-bottom: 15px;
 `;
 
+const CommentsList = styled.div`
+  background-color: #fff;
+  padding: 16px 36px 16px 16px;
+  margin-top: 35px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+`;
+
 export const Anime: FC = () => {
   const imgRef = useRef(null);
-  const { anime, isFetching, error } = useAnime();
+  const { anime, isFetching, rating } = useAnime();
 
   const animePicture = anime && imgFormatter(anime?.picture);
 
@@ -62,7 +71,7 @@ export const Anime: FC = () => {
               <StarOutlined
                 style={{ color: "#FFEC44", fontSize: 15, marginRight: 4 }}
               />
-              8.6
+              {rating}
             </div>
           ) : (
             <Skeleton.Input
@@ -72,6 +81,9 @@ export const Anime: FC = () => {
           )}
         </div>
       </div>
+      <CommentsList>
+        <Comments />
+      </CommentsList>
     </AnimeContainer>
   );
 };

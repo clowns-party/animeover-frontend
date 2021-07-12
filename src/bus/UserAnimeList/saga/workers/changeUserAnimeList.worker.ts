@@ -9,10 +9,14 @@ import {
 } from "bus/UserAnimeList/actions";
 import {
   changeAnimeUserListType,
+  DetailsAnimeList,
+  RawAnimeListType,
   ResponseUserAnimeListType,
 } from "bus/UserAnimeList/types";
 import { call, put } from "redux-saga/effects";
 import { service } from "Services";
+import { formatAnimeDetail } from "utils/anime/formatAnimeDetail";
+import { setAnime } from "bus/anime/actions";
 import { useNotificationAnimeList } from "../../hooks/useNotificationAnimeList";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";
 
@@ -43,6 +47,15 @@ export function* changeUserAnimeListWorker(
       service.animeService.anime,
       changed.animeId
     );
+    const detail: { data: RawAnimeListType[] } = yield call(
+      service.animeService.animeDetailByID,
+      fetchUpdatedAnime.data._id
+    );
+    const formatted: DetailsAnimeList = yield call(
+      formatAnimeDetail,
+      detail.data
+    );
+
     // Push if not found
     if (!findInList) {
       userAnimeList.push(fetchUpdatedAnime.data);
@@ -61,6 +74,7 @@ export function* changeUserAnimeListWorker(
       data: updatedUserAnimeList,
     };
     storage.set(payload._original, payload.data);
+    yield put(setAnime({ anime: fetchUpdatedAnime.data, detail: formatted }));
     yield put(setUserAnimeList(payload));
     yield call(useNotificationAnimeList, notify, typeNotify);
     if (typeNotify === "review") {

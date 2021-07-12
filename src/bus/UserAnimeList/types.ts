@@ -22,6 +22,12 @@ export type RawAnimeListType = {
     star: UserAnimeListStars;
   };
 };
+export type DetailsAnimeList = {
+  status: UserAnimeListStatuses;
+  review: string;
+  star: UserAnimeListStars;
+  user: string
+}[];
 
 export type ResponseUserAnimeListType = AxiosResponse<RawAnimeListType>;
 

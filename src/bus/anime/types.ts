@@ -1,4 +1,5 @@
 import { AnimeTagsType, SeasonsType } from "bus/filters/types";
+import { DetailsAnimeList } from "bus/UserAnimeList/types";
 
 export type AnimeList = Array<Anime>;
 
@@ -85,9 +86,13 @@ export type getAnimeType = {
 };
 
 export const SET_ANIME = "SET_ANIME";
+export type SetAnimePayload = {
+  anime: Anime;
+  detail: DetailsAnimeList;
+};
 export type setAnimeType = {
   type: typeof SET_ANIME;
-  payload: Anime;
+  payload: SetAnimePayload;
 };
 
 export const SET_ANIME_LIST_COUNT = "SET_ANIME_LIST_COUNT";
