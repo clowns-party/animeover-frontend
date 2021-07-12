@@ -31,9 +31,10 @@ const InputWrap = styled.div`
   }
 `;
 
-export const SearchAnime: FC<{ mobileCLose?: () => void }> = ({
-  mobileCLose,
-}) => {
+export const SearchAnime: FC<{
+  mobileCLose?: () => void;
+  showAlways?: boolean;
+}> = ({ mobileCLose, showAlways }) => {
   const dispatch = useDispatch();
   const { searchAnimeList } = useSearchList();
   const [focus, setFocus] = useState(false);
@@ -66,6 +67,7 @@ export const SearchAnime: FC<{ mobileCLose?: () => void }> = ({
           className="input"
         />
         <SearchList
+          showAlways={showAlways}
           focus={focus}
           listFocus={listFocus}
           setListFocus={setListFocus}

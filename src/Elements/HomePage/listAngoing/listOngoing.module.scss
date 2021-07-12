@@ -3,24 +3,18 @@
   object-fit: cover;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  height: 30px;
-  width: 100%;
-  background-color: #e6f7ff;
-  color: #40a9ff;
-  font-size: 16px;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-  span {
-    background-color: #1890ff;
-    width: 4px;
-    height: 100%;
-    margin-right: 8px;
-  }
-}
+// .header {
+//   display: flex;
+//   align-items: center;
+//   height: 30px;
+//   width: 100%;
+//   background-color: #e6f7ff;
+//   color: #40a9ff;
+//   font-size: 16px;
+//   font-family: "Open Sans", sans-serif;
+//   font-weight: 600;
+//   cursor: pointer;
+// }
 
 .ongoing_container {
   &::-webkit-scrollbar {

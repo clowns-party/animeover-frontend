@@ -1,20 +1,105 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
 import React, { FC } from "react";
 import Router from "next/router";
+import styled from "styled-components";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./listOngoing.module.scss";
 
+const Title = styled.div`
+  color: #000;
+  font-style: normal;
+  font-weight: bold;
+  font-family: IBM Plex Sans;
+  font-size: 40px;
+  @media screen and (max-width: 400px) {
+    font-size: 34px;
+  }
+`;
+
+const Year = styled.div`
+  color: #ff6666;
+  font-style: normal;
+  font-weight: bold;
+  font-family: IBM Plex Sans;
+  font-size: 18px;
+`;
+
+const Today = styled.div`
+  color: #000;
+  font-style: normal;
+  font-weight: bold;
+  font-family: IBM Plex Sans;
+  font-size: 20px;
+  margin: 20px 0 12px 0;
+`;
+
+const Release = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`;
+const Point = styled.div<{ active?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    background: ${(props) => (props.active ? "#ff6666" : "#fff")};
+    border: ${(props) => (props.active ? "none" : "3px solid #8c929d")};
+    box-sizing: border-box;
+  }
+`;
+const Time = styled.div<{ active?: boolean }>`
+  color: ${(props) => (props.active ? "#ff6666" : "#8c929d")};
+  font-style: normal;
+  font-weight: bold;
+  font-family: IBM Plex Sans;
+  font-size: 14px;
+`;
+const Line = styled.span<{ active?: boolean }>`
+  display: inline-block;
+  height: 2px;
+  width: 10rem;
+  background: ${(props) => (props.active ? "#ff6666" : "#8c929d")};
+  margin-bottom: 9px;
+`;
+
+const timeList = [
+  { time: "01:00", active: true },
+  { time: "13:00", active: true },
+  { time: "15:15", active: true },
+  { time: "15:30", active: false },
+  { time: "16:00", active: false },
+];
+
 export const ListOngoing: FC = () => {
   const { ongoing, isFetching, error } = useAnime();
-
   return (
     <div className={styles.container}>
       <Row style={{ margin: "16px 0" }}>
         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-          <div className={styles.header}>
-            <span />
-            ОНГОИНГИ
-          </div>
+          <Title>Ongoing Calendar</Title>
+          <Year>See Fall 2021 Lineup</Year>
+          <Today>TODAY 12/07</Today>
+        </Col>
+        <Col xs={24}>
+          <Release>
+            {timeList?.map((el, index) => {
+              return (
+                <React.Fragment key={index.toString()}>
+                  <Point active={el.active}>
+                    <Time active={el.active}>{el?.time}</Time>
+                    <span />
+                  </Point>
+                  {index + 1 < timeList?.length && <Line active={el.active} />}
+                </React.Fragment>
+              );
+            })}
+          </Release>
         </Col>
       </Row>
       <Row className={styles.ongoing_container}>

@@ -100,7 +100,8 @@ export const SearchList: FC<{
   listFocus: boolean;
   setListFocus: React.Dispatch<React.SetStateAction<boolean>>;
   mobileCLose?: () => void;
-}> = ({ focus, listFocus, setListFocus, mobileCLose }) => {
+  showAlways?: boolean;
+}> = ({ focus, listFocus, setListFocus, mobileCLose, showAlways }) => {
   const { searchAnimeList } = useSearchList();
   const dispatch = useDispatch();
   const linkClick = () => {
@@ -112,7 +113,7 @@ export const SearchList: FC<{
       onMouseEnter={() => setListFocus(true)}
       onMouseLeave={() => setListFocus(false)}
     >
-      {(focus || listFocus) && (
+      {(showAlways ?? (focus || listFocus)) && (
         <>
           {searchAnimeList?.length ? (
             <ListContainer>

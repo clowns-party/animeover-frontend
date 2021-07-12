@@ -69,7 +69,7 @@ export const MobileSearch: FC<Props> = ({ visible, show }) => {
           <span onClick={() => show()}>+</span>
         </Close>
         <OverlayContent>
-          <SearchAnime mobileCLose={show} />
+          <SearchAnime mobileCLose={show} showAlways />
         </OverlayContent>
       </OverlayWrapper>
     </BaseModal>

@@ -7,9 +7,9 @@ import { HeaderMobile } from "Elements/Base/HeaderMobile";
 import { ROUTES } from "utils/routes";
 import { zIndexLayout } from "utils/constants/zIndexLayout";
 import imgOnLoad from "utils/common/imgOnLoad";
+import { useRouter } from "next/router";
 import { useAuth } from "../../bus/auth/hooks/useAuth";
 import { SearchAnime } from "../search/SearchAnime";
-import { useRouter } from "next/router";
 
 const Mobile = styled.div`
   display: none;
