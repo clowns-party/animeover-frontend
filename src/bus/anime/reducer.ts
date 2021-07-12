@@ -1,3 +1,4 @@
+import { DetailsAnimeList, RawAnimeListType } from "bus/UserAnimeList/types";
 import {
   GET_ANIME_LIST,
   animeActionsTypes,
@@ -21,7 +22,10 @@ import {
 } from "./types";
 
 export type AnimeState = {
-  anime: Anime | null;
+  anime: {
+    info: Anime;
+    detail: DetailsAnimeList | null;
+  } | null;
   animeList: AnimeList | null;
   filtered: AnimeList | null;
   filters: Omit<FiltersPayload, "page"> | null;
@@ -114,7 +118,10 @@ export const animeReducer = (
     case SET_ANIME:
       return {
         ...state,
-        anime: { ...action.payload },
+        anime: {
+          info: action.payload?.anime,
+          detail: action.payload?.detail,
+        },
       };
     case SET_CURRENT_PAGE: {
       return {

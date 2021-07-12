@@ -32,6 +32,13 @@ const EmptyWithBg = styled(EmptyDefault)`
   background-repeat: no-repeat;
 `;
 
+const CenteredEmpty = styled(EmptyDefault)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
 const Empties = () => {
   return (
     <EmptyWithBg>
@@ -53,6 +60,18 @@ Empties.End = () => {
         <BaseButton>Go back</BaseButton>
       </Link>
     </EmptyDefault>
+  );
+};
+
+Empties.Comments = () => {
+  return (
+    <CenteredEmpty>
+      <h2>👀</h2>
+      <p>
+        There are no reviews here yet, you can add anime to your list and leave
+        a review!
+      </p>
+    </CenteredEmpty>
   );
 };
 
