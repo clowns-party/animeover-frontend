@@ -37,13 +37,17 @@ export type AnimeState = {
   error: AnimeError | false;
 };
 
+const getRandomPage = (min, max) => {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
 const initialState: AnimeState = {
   anime: null,
   animeList: null,
   filtered: null,
   ongoing: null,
   isFetching: false,
-  currentPage: 1,
+  currentPage: getRandomPage(1, 378),
   count: null,
   pageLimit: 20,
   error: false,
