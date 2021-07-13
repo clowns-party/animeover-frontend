@@ -28,6 +28,15 @@
     border-radius: 9em;
     box-shadow: inset 1px 1px 10px #f3faf7;
   }
+  @media screen and (max-width: 768px) {
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 .card {

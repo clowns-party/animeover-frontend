@@ -10,15 +10,23 @@ import { SkeletonAnimeList } from "Elements/skeletons/SkeletonAnimeList";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-right: 20px;
+  grid-gap: 0 10px;
+  justify-items: center;
+  @media screen and (max-width: 666px) {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
   @media screen and (max-width: 576px) {
     justify-items: center;
     margin-right: 0px;
   }
+  @media screen and (max-width: 532px) {
+    grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  }
 `;
 
 const StyledCard = styled(Card)`
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   margin-bottom: 20px !important;
   border-radius: 20px !important;
   img {
@@ -29,6 +37,12 @@ const StyledCard = styled(Card)`
 const StyledPicture = styled(Picture)`
   height: 250px;
   object-fit: cover;
+  @media screen and (max-width: 532px) {
+    height: 160px;
+  }
+  @media screen and (max-width: 429px) {
+    height: 200px;
+  }
 `;
 type Props = {
   animeList: AnimeList;

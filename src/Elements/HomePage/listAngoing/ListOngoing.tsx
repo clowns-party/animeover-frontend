@@ -171,6 +171,23 @@ const TitleOngoing = ({ el }) => {
   );
 };
 
+const Avatar = styled(Skeleton.Avatar)`
+  &.ant-skeleton-element {
+    display: flex !important;
+  }
+  &.ant-skeleton-avatar {
+    display: block !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 142px;
+    height: 180px !important;
+    border-radius: 20px 20px 0 0;
+    @media screen and (max-width: 800px) {
+      height: 160px !important;
+    }
+  }
+`;
+
 const Skeletons: FC = () => {
   const temp = Array.from(Array(8).keys());
   return (
@@ -181,7 +198,7 @@ const Skeletons: FC = () => {
           key={el}
           size="small"
           hoverable
-          cover={<Skeleton.Avatar active size={142} shape="square" />}
+          cover={<Avatar active shape="square" />}
         >
           <Skeleton title active paragraph={{ rows: 1 }} />
         </Card>
