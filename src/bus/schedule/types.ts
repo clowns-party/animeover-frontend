@@ -1,4 +1,4 @@
-import { Anime } from "../types";
+import { Anime } from "../anime/types";
 
 export interface AnimeItemExtended extends Anime {
   date: string;
