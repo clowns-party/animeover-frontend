@@ -79,14 +79,14 @@ To launch storybook, use
 - History
 - User anime list
 - Filters
-- Ongoing "integrate with [shikimori](https://shikimori.one/)"
+- Ongoing
 - Authorization 
 - Pagination
 - Infinite scroll
 - Rate and review for anime
 - Rating 
 - Reviews list
-- Calendar "integrate with [subsplease](https://subsplease.org/schedule/)"
+- Calendar
 
 <br/>
 
