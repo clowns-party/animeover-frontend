@@ -1,12 +1,12 @@
 import React, { useState, FC } from "react";
 
-import BaseModal from "Elements/Base/Modal/BaseModal";
+import BaseModal from "stories/BaseModal";
 import { zIndexLayout } from "utils/constants/zIndexLayout";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
+import { BaseButton } from "stories/BaseButton";
 
 import styled from "styled-components";
 import RateAnime from "Elements/RateAnime";
-import { BaseTextarea } from "Elements/Base/BaseTextarea";
+import { BaseTextarea } from "stories/BaseTextarea";
 import { useDispatch } from "react-redux";
 import { useCrudUserAnimeList } from "../hooks/useCrudUserAnimeList";
 import { UserAnimeListFormData, UserAnimeListStars } from "../types";

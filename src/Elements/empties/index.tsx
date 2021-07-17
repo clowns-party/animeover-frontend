@@ -1,4 +1,4 @@
-import { BaseButton } from "Elements/Base/Button/BaseButton";
+import { BaseButton } from "stories/BaseButton";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";

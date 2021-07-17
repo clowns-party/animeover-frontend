@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import BaseModal from "../Modal/BaseModal";
+import BaseModal from "../../../stories/BaseModal";
 import { SearchAnime } from "../../search/SearchAnime";
 
 const OverlayWrapper = styled.div`

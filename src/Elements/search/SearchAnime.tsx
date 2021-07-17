@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
-import { BaseInput, InputType } from "Elements/Base/Input/BaseInput";
+import { BaseInput, InputType } from "stories/BaseInput";
 import { debounce } from "lodash";
 import styled from "styled-components";
 import { searchAnimeAction } from "bus/search/actions";

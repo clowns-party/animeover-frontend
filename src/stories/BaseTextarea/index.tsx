@@ -5,10 +5,12 @@ export enum TextareaType {
   "default" = "default",
 }
 
-const DefaultTextarea: any = styled.textarea`
+const DefaultTextarea: any = styled.textarea<{ hasError: boolean }>`
   height: 121px;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid
+    ${(props) =>
+      props.hasError ? "rgba(194, 15, 15, 0.3)" : "rgba(0, 0, 0, 0.3)"};
   box-sizing: border-box;
   border-radius: 4px;
   font-style: normal;
@@ -18,8 +20,11 @@ const DefaultTextarea: any = styled.textarea`
   color: rgba(0, 0, 0, 0.5);
   padding: 12px;
   resize: none;
+  outline: ${(props) => (props.hasError ? "#c40f0f" : "rgba(15, 99, 196, 1)")};
   &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid
+      ${(props) =>
+        props.hasError ? "rgba(133, 5, 5, 0.5)" : "rgba(0, 0, 0, 0.5)"};
     color: #000000;
   }
   &:disabled {
@@ -49,7 +54,10 @@ type Props = {
   style?: React.CSSProperties;
   typeComponent?: TextareaType;
   hasError?: string | boolean;
-} & React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+} & React.DetailedHTMLProps<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  HTMLTextAreaElement
+>;
 export const BaseTextarea: FC<Props> = ({
   children,
   style,

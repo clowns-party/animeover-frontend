@@ -2,7 +2,7 @@ import React, { FC, useRef } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
 import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeListDropdown";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
+import { BaseButton } from "stories/BaseButton";
 import Picture from "Elements/picture";
 import styled from "styled-components";
 import Comments from "bus/comments";

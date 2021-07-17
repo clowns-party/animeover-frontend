@@ -4,9 +4,9 @@ import React, { FC } from "react";
 import { Form } from "antd";
 // Hooks
 import { useDispatch } from "react-redux";
-import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
+import { BaseButton, ButtonType } from "stories/BaseButton";
 import styled from "styled-components";
-import { BaseInput } from "Elements/Base/Input/BaseInput";
+import { BaseInput } from "stories/BaseInput";
 import { AuthFormStates } from "Elements/authForm";
 import { useToast } from "utils/hooks/useToast";
 import { useAuth } from "../../bus/auth/hooks/useAuth";

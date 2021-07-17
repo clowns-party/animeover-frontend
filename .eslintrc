@@ -60,6 +60,7 @@
     "react/jsx-pascal-case": "off",
     "react/destructuring-assignment": "off",
     "camelcase": "off",
+    "react/require-default-props": "off",
     "import/extensions": [
       1,
       "ignorePackages",

@@ -1,11 +1,10 @@
 import { setFilters } from "bus/anime/actions";
 import { useAnime } from "bus/anime/hooks/useAnime";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
-import { BaseDropdown } from "Elements/Base/Dropdown/BaseDropdown";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-
 import { useDispatch } from "react-redux";
+import { BaseButton } from "stories/BaseButton";
+import { BaseDropdown } from "stories/BaseDropdown";
 import { routeFilters } from "utils/anime/routeFilters";
 import { Seasons } from "utils/constants/seasons";
 import { AnimeTags } from "utils/constants/tags";

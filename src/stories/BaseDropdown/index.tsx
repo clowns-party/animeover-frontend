@@ -1,8 +1,7 @@
-import React, { DetailedHTMLProps } from "react";
-import { ChevronDown } from "assets/icons/ChevronDown";
-import { FC, HTMLAttributes, useState } from "react";
-import { useOutsideClick } from "utils/hooks/useOutsideClick";
+import React, { DetailedHTMLProps, FC, HTMLAttributes, useState } from "react";
 import styled from "styled-components";
+import { ChevronDown } from "../../assets/icons/ChevronDown";
+import { useOutsideClick } from "../../utils/hooks/useOutsideClick";
 
 type StyledDropdown = {
   toggled: boolean;

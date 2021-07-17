@@ -7,7 +7,7 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { ROUTES } from "utils/routes";
-import BaseModal from "../Modal/BaseModal";
+import BaseModal from "../../../stories/BaseModal";
 
 const OverlayWrapper = styled.div`
   width: 100%;

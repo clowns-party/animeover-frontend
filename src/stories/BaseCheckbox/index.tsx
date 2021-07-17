@@ -1,9 +1,4 @@
-import React, {
-  DetailedHTMLProps,
-  FC,
-  HTMLAttributes,
-  InputHTMLAttributes,
-} from "react";
+import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 
 export enum CheckboxType {

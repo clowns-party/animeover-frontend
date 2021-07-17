@@ -1,7 +1,7 @@
 import { signModalToggle } from "bus/auth/actions";
 import { useAuth } from "bus/auth/hooks/useAuth";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
-import BaseModal from "Elements/Base/Modal/BaseModal";
+import { BaseButton } from "stories/BaseButton";
+import BaseModal from "stories/BaseModal";
 import { SignInForm } from "Elements/signInForm";
 import { SignUpForm } from "Elements/signUpForm";
 import React, { useState } from "react";

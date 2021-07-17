@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, FC, HTMLAttributes } from "react";
-import { PlusIcon } from "assets/icons/PlusIcon";
 import styled from "styled-components";
+import { PlusIcon } from "../../assets/icons/PlusIcon";
 
 export enum ButtonType {
   "important" = "important",

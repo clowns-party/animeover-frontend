@@ -1,9 +1,9 @@
 import React, { FC, useRef } from "react";
-import styled from "styled-components";
-import { zIndexLayout } from "utils/constants/zIndexLayout";
-import { useOutsideClick } from "utils/hooks/useOutsideClick";
 import { Portal } from "react-portal";
-import { useImperativeDisableScroll } from "utils/hooks/useImperativeDisableScroll";
+import styled from "styled-components";
+import { zIndexLayout } from "../../utils/constants/zIndexLayout";
+import { useImperativeDisableScroll } from "../../utils/hooks/useImperativeDisableScroll";
+import { useOutsideClick } from "../../utils/hooks/useOutsideClick";
 
 type Props = {
   children: React.ReactNode;

@@ -1,6 +1,6 @@
-import { SearchIcon } from "assets/icons/SearchIcon";
 import React, { FC, HTMLAttributes, InputHTMLAttributes } from "react";
 import styled from "styled-components";
+import { SearchIcon } from "../../assets/icons/SearchIcon";
 
 export enum InputType {
   "default" = "default",

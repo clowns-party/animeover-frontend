@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Form, Checkbox, Row, Col } from "antd";
 import { useDispatch } from "react-redux";
-import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
+import { BaseButton, ButtonType } from "stories/BaseButton";
 import styled from "styled-components";
-import { BaseInput } from "Elements/Base/Input/BaseInput";
+import { BaseInput } from "stories/BaseInput";
 import { AuthFormStates } from "Elements/authForm";
 import { AuthBody, ModalFormItem } from "Elements/signUpForm";
 import { useAuth } from "bus/auth/hooks/useAuth";

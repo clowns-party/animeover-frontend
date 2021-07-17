@@ -1,8 +1,8 @@
 import { Form } from "antd";
 import styled from "styled-components";
-import { BaseButton, ButtonType } from "Elements/Base/Button/BaseButton";
+import { BaseButton, ButtonType } from "stories/BaseButton";
 import React, { FC } from "react";
-import { BaseInput } from "Elements/Base/Input/BaseInput";
+import { BaseInput } from "stories/BaseInput";
 import { VALIDA_IMAGE_URL_PATTERN } from "utils/validate/validateImgUrl";
 import { useAuth } from "bus/auth/hooks/useAuth";
 import { UpdateUserFormData } from "../types";

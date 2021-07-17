@@ -1,6 +1,6 @@
 import React from "react";
 import { notification } from "antd";
-import { BaseButton } from "Elements/Base/Button/BaseButton";
+import { BaseButton } from "stories/BaseButton";
 
 export const useNotificationAnimeList = (
   notify: boolean,
