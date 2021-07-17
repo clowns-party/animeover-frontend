@@ -105,7 +105,7 @@ export const SearchList: FC<{
   const { searchAnimeList } = useSearchList();
   const dispatch = useDispatch();
   const linkClick = () => {
-    mobileCLose();
+    mobileCLose && mobileCLose();
     dispatch(setSearchAnime(null));
   };
   return (

@@ -13,5 +13,6 @@ export const calculateRating = (details: DetailsAnimeList) => {
       return acc;
     }, []);
   }
-  return (count / WithoutNull?.length).toFixed(1) || 0;
+  const rating = Number((count / WithoutNull?.length).toFixed(1));
+  return rating || 0;
 };

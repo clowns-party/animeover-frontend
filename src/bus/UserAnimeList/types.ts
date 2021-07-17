@@ -1,16 +1,3 @@
-// {
-//   "02c1848c-8ec6-4288-8348-9e6bd9f5526d": {
-//     "status": "look",
-//     "review": "норм, смотреть можно",
-//     "star": "9"
-//   },
-//   "0010beea-25f0-427e-b833-34c38f92d4fe": {
-//     "review": "",
-//     "status": "viewed",
-//     "star": "0"
-//   }
-// }
-
 import { AxiosResponse } from "axios";
 import { Anime } from "bus/anime/types";
 import { ErrorHttpAction } from "bus/auth/types";
@@ -26,7 +13,7 @@ export type DetailsAnimeList = {
   status: UserAnimeListStatuses;
   review: string;
   star: UserAnimeListStars;
-  user: string
+  user: string;
 }[];
 
 export type ResponseUserAnimeListType = AxiosResponse<RawAnimeListType>;
