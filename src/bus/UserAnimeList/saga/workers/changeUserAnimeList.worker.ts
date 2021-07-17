@@ -1,22 +1,22 @@
-import { AxiosResponse } from "axios";
 import { SagaIterator } from "@redux-saga/types";
+import { AxiosResponse } from "axios";
+import { setAnime } from "bus/anime/actions";
 import { Anime } from "bus/anime/types";
 import {
   setErrorAnimeList,
   setUserAnimeList,
   toggleLoadingUserAnimeList,
-  toggleUserAnimeListModal,
+  toggleUserAnimeListModal
 } from "bus/UserAnimeList/actions";
 import {
   changeAnimeUserListType,
   DetailsAnimeList,
   RawAnimeListType,
-  ResponseUserAnimeListType,
+  ResponseUserAnimeListType
 } from "bus/UserAnimeList/types";
 import { call, put } from "redux-saga/effects";
-import service from "services";
 import { formatAnimeDetail } from "utils/anime/formatAnimeDetail";
-import { setAnime } from "bus/anime/actions";
+import service from "../../../../services";
 import { useNotificationAnimeList } from "../../hooks/useNotificationAnimeList";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";
 

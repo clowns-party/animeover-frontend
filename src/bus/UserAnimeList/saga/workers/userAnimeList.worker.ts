@@ -3,14 +3,13 @@ import { Anime } from "bus/anime/types";
 import {
   setErrorAnimeList,
   setUserAnimeList,
-  toggleLoadingUserAnimeList,
+  toggleLoadingUserAnimeList
 } from "bus/UserAnimeList/actions";
 import {
-  ResponseUserAnimeListType,
-  RawAnimeListType,
+  RawAnimeListType, ResponseUserAnimeListType
 } from "bus/UserAnimeList/types";
 import { call, put } from "redux-saga/effects";
-import service from "services";
+import service from "../../../../services";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";
 
 export function* userAnimeListWorker(): SagaIterator {

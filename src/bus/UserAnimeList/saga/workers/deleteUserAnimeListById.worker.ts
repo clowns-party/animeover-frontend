@@ -1,6 +1,6 @@
-import { AppState } from "redux/rootReducer";
 import { SagaIterator } from "@redux-saga/types";
 import { setAnime } from "bus/anime/actions";
+import { Anime } from "bus/anime/types";
 import {
   setErrorAnimeList,
   setUserAnimeList,
@@ -13,9 +13,9 @@ import {
   ResponseUserAnimeListType,
 } from "bus/UserAnimeList/types";
 import { call, put, select } from "redux-saga/effects";
-import service from "services";
+import { AppState } from "redux/rootReducer";
 import { formatAnimeDetail } from "utils/anime/formatAnimeDetail";
-import { Anime } from "bus/anime/types";
+import service from "../../../../services";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";
 
 export function* deleteUserAnimeListById(
