@@ -2,7 +2,7 @@ import { AnimeList } from "bus/anime/types";
 import { setSearchAnime } from "bus/search/actions";
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
-import { service } from "Services";
+import { service } from "services";
 
 export function* searchAnimeWorker(action): SagaIterator {
   const { payload } = action || {};

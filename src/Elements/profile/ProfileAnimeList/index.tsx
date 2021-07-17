@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { BaseProfileCardStyle } from "Elements/ProfileCard/ProfileCard";
+import { BaseProfileCardStyle } from "Elements/profile/ProfileCard/ProfileCard";
 import { getUserAnimeList } from "bus/UserAnimeList/actions";
 import { useDispatch } from "react-redux";
-import { UserAnimeList } from "bus/UserAnimeList/UserAnimeList";
+import { UserAnimeList } from "bus/UserAnimeList";
 
 const Container = styled.div`
   display: block;

@@ -188,7 +188,7 @@ class InfiniteScroll extends React.PureComponent<Props, StateInfiniteScroll> {
           }}
           style={{
             ...loadingCSS,
-            height: "0px",
+            height: "5px",
             width: "0px",
           }}
         >

@@ -1,11 +1,11 @@
 import { UserOutlined } from "@ant-design/icons";
 import { useLogout } from "bus/auth/hooks/useLogout";
-import { ProfileForm } from "bus/profile/form/ProfileForm";
+import { ProfileForm } from "Elements/forms/profile/ProfileForm";
 import { BaseButton, ButtonType } from "stories/BaseButton";
 import React, { FC } from "react";
 import styled from "styled-components";
 import imgOnLoad from "utils/common/imgOnLoad";
-import { User } from "../../bus/auth/types";
+import { User } from "../../../bus/auth/types";
 
 type Props = {
   user: User["user"] | null;

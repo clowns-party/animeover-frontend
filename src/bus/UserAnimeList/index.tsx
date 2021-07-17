@@ -9,7 +9,7 @@ import Loader from "Elements/loader";
 import { EditOutlined, LinkOutlined } from "@ant-design/icons";
 import { ellipsis } from "utils/common/ellipsis";
 import { userAnimeList } from "./reducer";
-import { UserAnimeListModal } from "./Components/UserAnimeListModal";
+import { UserAnimeListModal } from "../../Elements/user/UserAnimeListModal";
 import { toggleUserAnimeListModal } from "./actions";
 
 const Table = styled.div``;

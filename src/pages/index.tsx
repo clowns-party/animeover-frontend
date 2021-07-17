@@ -1,5 +1,5 @@
 import { Header } from "Elements/header";
-import { HomePage } from "Elements/HomePage/HomePage";
+import { HomePage } from "Elements/home/HomePage";
 import Head from 'next/head';
 import React from "react";
 

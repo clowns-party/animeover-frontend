@@ -1,10 +1,10 @@
 import AnimeFilters from "bus/filters";
 import { Suggestions } from "bus/filters/Suggestions";
 import { Header } from "Elements/header";
-import { AnimeCards } from "Elements/HomePage/animeList/AnimeCards";
+import { AnimeCards } from "Elements/home/animeList/AnimeCards";
 import InfiniteScroll, {
   StateInfiniteScroll,
-} from "Elements/HomePage/animeList/InfiniteScroll";
+} from "Elements/home/animeList/InfiniteScroll";
 import Container from "Elements/layout/Container";
 import Loader from "Elements/loader";
 import { useRouter } from "next/dist/client/router";

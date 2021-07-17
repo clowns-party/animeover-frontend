@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 // Components
 import styled from "styled-components";
-import { ProfileContainer } from "Elements/Base/Containers/ProfileContainer";
+import { ProfileContainer } from "Elements/layout/ProfileContainer";
 import { ProfileAnimeList } from "Elements/profile/ProfileAnimeList";
 import { useAuth } from "bus/auth/hooks/useAuth";
 import HistoryProfile from "bus/history";
@@ -11,7 +11,7 @@ import { Header } from "../../Elements/header";
 import {
   BaseProfileCardStyle,
   ProfileCard,
-} from "../../Elements/ProfileCard/ProfileCard";
+} from "../../Elements/profile/ProfileCard/ProfileCard";
 // Hooks
 import { useServerSideSecure } from "../auth/hooks/useServerSideSecure";
 // Types

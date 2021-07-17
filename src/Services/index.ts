@@ -1,5 +1,5 @@
-import { Service as AuthService } from "./AuthService";
 import { Service as AnimeService } from "./AnimeService";
+import { Service as AuthService } from "./AuthService";
 import { Service as UserService } from "./UserService";
 
 class Services {

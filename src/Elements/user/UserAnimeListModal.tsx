@@ -5,12 +5,12 @@ import { zIndexLayout } from "utils/constants/zIndexLayout";
 import { BaseButton } from "stories/BaseButton";
 
 import styled from "styled-components";
-import RateAnime from "Elements/RateAnime";
+import RateAnime from "Elements/rate";
 import { BaseTextarea } from "stories/BaseTextarea";
 import { useDispatch } from "react-redux";
-import { useCrudUserAnimeList } from "../hooks/useCrudUserAnimeList";
-import { UserAnimeListFormData, UserAnimeListStars } from "../types";
-import { toggleUserAnimeListModal } from "../actions";
+import { useCrudUserAnimeList } from "../../bus/UserAnimeList/hooks/useCrudUserAnimeList";
+import { UserAnimeListFormData, UserAnimeListStars } from "../../bus/UserAnimeList/types";
+import { toggleUserAnimeListModal } from "../../bus/UserAnimeList/actions";
 
 type Props = {
   disabled?: boolean;

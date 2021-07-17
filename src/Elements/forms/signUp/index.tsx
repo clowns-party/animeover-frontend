@@ -7,13 +7,13 @@ import { useDispatch } from "react-redux";
 import { BaseButton, ButtonType } from "stories/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "stories/BaseInput";
-import { AuthFormStates } from "Elements/authForm";
+import { AuthFormStates } from "Elements/forms/auth";
 import { useToast } from "utils/hooks/useToast";
-import { useAuth } from "../../bus/auth/hooks/useAuth";
+import { useAuth } from "../../../bus/auth/hooks/useAuth";
 // Actions
-import { signUpAsync } from "../../bus/auth/actions";
+import { signUpAsync } from "../../../bus/auth/actions";
 // Types
-import { AuthFormData } from "../../bus/auth/types";
+import { AuthFormData } from "../../../bus/auth/types";
 
 // const layout = { labelCol: { span: 24 }, wrapperCol: { span: 24 } };
 

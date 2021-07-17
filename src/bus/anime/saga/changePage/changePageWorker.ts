@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import { SagaIterator } from "redux-saga";
-import { service } from "../../../../Services";
+import { service } from "../../../../services";
 import { AnimeListReponse } from "../../types";
 import {
   setAnimeList,

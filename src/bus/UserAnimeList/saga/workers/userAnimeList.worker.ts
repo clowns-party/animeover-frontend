@@ -10,7 +10,7 @@ import {
   RawAnimeListType,
 } from "bus/UserAnimeList/types";
 import { call, put } from "redux-saga/effects";
-import { service } from "Services";
+import { service } from "services";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";
 
 export function* userAnimeListWorker(): SagaIterator {

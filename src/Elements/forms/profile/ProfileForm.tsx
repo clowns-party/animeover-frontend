@@ -5,8 +5,8 @@ import React, { FC } from "react";
 import { BaseInput } from "stories/BaseInput";
 import { VALIDA_IMAGE_URL_PATTERN } from "utils/validate/validateImgUrl";
 import { useAuth } from "bus/auth/hooks/useAuth";
-import { UpdateUserFormData } from "../types";
-import { useProfileForm } from "../hooks/useProfileForm";
+import { UpdateUserFormData } from "../../../bus/profile/types";
+import { useProfileForm } from "../../../bus/profile/hooks/useProfileForm";
 
 const StyledForm = styled(Form)`
   display: flex;

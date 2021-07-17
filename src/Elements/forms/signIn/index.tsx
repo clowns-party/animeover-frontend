@@ -4,12 +4,12 @@ import { useDispatch } from "react-redux";
 import { BaseButton, ButtonType } from "stories/BaseButton";
 import styled from "styled-components";
 import { BaseInput } from "stories/BaseInput";
-import { AuthFormStates } from "Elements/authForm";
-import { AuthBody, ModalFormItem } from "Elements/signUpForm";
+import { AuthFormStates } from "Elements/forms/auth";
+import { AuthBody, ModalFormItem } from "Elements/forms/signUp";
 import { useAuth } from "bus/auth/hooks/useAuth";
 import { useToast } from "utils/hooks/useToast";
-import { AuthFormData } from "../../bus/auth/types";
-import { signInAsync } from "../../bus/auth/actions";
+import { AuthFormData } from "../../../bus/auth/types";
+import { signInAsync } from "../../../bus/auth/actions";
 
 const LoginHeader = styled.div`
   color: #2c2738;

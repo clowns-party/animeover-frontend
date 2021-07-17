@@ -10,7 +10,7 @@ import {
   stopFetching,
 } from "../../actions";
 import { signInAsyncType, UserResponse } from "../../types";
-import { service } from "../../../../Services";
+import { service } from "../../../../services";
 
 export function* authWorker(action: signInAsyncType): SagaIterator {
   try {

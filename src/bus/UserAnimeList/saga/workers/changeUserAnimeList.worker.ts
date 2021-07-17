@@ -14,7 +14,7 @@ import {
   ResponseUserAnimeListType,
 } from "bus/UserAnimeList/types";
 import { call, put } from "redux-saga/effects";
-import { service } from "Services";
+import { service } from "services";
 import { formatAnimeDetail } from "utils/anime/formatAnimeDetail";
 import { setAnime } from "bus/anime/actions";
 import { useNotificationAnimeList } from "../../hooks/useNotificationAnimeList";

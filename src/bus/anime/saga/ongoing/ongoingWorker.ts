@@ -1,7 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { put, call } from "redux-saga/effects";
 import { patchImgShiki } from "utils/common/patchImgShiki";
-import { service } from "../../../../Services";
+import { service } from "../../../../services";
 import {
   setOngoingList,
   startAnime,

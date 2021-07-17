@@ -1,17 +1,17 @@
-import React, { FC, useRef } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import { Skeleton } from "antd";
-import { UserAnimeListDropdown } from "bus/UserAnimeList/Components/UserAnimeListDropdown";
-import { BaseButton } from "stories/BaseButton";
-import Picture from "Elements/picture";
-import styled from "styled-components";
 import Comments from "bus/comments";
-import styles from "./anime.module.scss";
+import { UserAnimeListDropdown } from "Elements/user/UserAnimeListDropdown";
+import Container from "Elements/layout/Container";
+import Picture from "Elements/picture";
+import React, { FC, useRef } from "react";
+import { BaseButton } from "stories/BaseButton";
+import styled from "styled-components";
+import { imgFormatter } from "utils/common/imgFormatter";
 import { useAnime } from "../../bus/anime/hooks/useAnime";
-import { AnimeContainer } from "../animeContainer/AnimeContainer";
 import { Anime as AnimeType } from "../../bus/anime/types";
-import { imgFormatter } from "../../utils/imgFormatter";
 import { avatarSize, formatTags } from "./anime.functions";
+import styles from "./anime.module.scss";
 
 const StyledBtn = styled(BaseButton)`
   margin-top: 10px;
@@ -34,7 +34,7 @@ export const Anime: FC = () => {
 
   const isShiki = anime && anime.sources.includes("shikimori");
   return (
-    <AnimeContainer>
+    <Container>
       <div className={styles.anime_container}>
         <div className={styles.info_container}>
           <div className={styles.picture_and_button}>
@@ -84,7 +84,7 @@ export const Anime: FC = () => {
       <CommentsList>
         <Comments />
       </CommentsList>
-    </AnimeContainer>
+    </Container>
   );
 };
 

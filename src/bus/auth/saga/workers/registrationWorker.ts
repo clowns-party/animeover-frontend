@@ -9,7 +9,7 @@ import {
   signInAsync,
 } from "../../actions";
 import { signUpAsyncType } from "../../types";
-import { service } from "../../../../Services";
+import { service } from "../../../../services";
 
 export function* signUpWorker(action: signUpAsyncType): SagaIterator {
   const { payload } = action;

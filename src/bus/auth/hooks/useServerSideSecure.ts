@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import { getToken } from "utils/axios/axios.auth";
-import { service } from "../../../Services";
+import { service } from "../../../services";
 import { User } from "../types";
 
 type Redirect = {

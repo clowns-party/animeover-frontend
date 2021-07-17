@@ -3,7 +3,7 @@ import { BaseButton, ButtonType } from "stories/BaseButton";
 import { BaseDropdown } from "stories/BaseDropdown";
 import styled from "styled-components";
 import { selectedAnimeList } from "utils/constants/selectedAnimeList";
-import { useCrudUserAnimeList } from "../hooks/useCrudUserAnimeList";
+import { useCrudUserAnimeList } from "../../bus/UserAnimeList/hooks/useCrudUserAnimeList";
 import { UserAnimeListModal } from "./UserAnimeListModal";
 
 const Container = styled.div`
