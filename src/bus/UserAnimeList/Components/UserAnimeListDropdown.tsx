@@ -1,8 +1,8 @@
-import { BaseDropdown } from "Elements/Base/Dropdown/BaseDropdown";
 import React, { FC } from "react";
+import { BaseButton, ButtonType } from "stories/BaseButton";
+import { BaseDropdown } from "stories/BaseDropdown";
 import styled from "styled-components";
 import { selectedAnimeList } from "utils/constants/selectedAnimeList";
-import { BaseButton, ButtonType } from "stories/BaseButton";
 import { useCrudUserAnimeList } from "../hooks/useCrudUserAnimeList";
 import { UserAnimeListModal } from "./UserAnimeListModal";
 
