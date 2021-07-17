@@ -1,15 +1,14 @@
 import { SagaIterator } from "redux-saga";
-import { put, call } from "redux-saga/effects";
-
+import { call, put } from "redux-saga/effects";
+import service from "Services";
 import {
+  callAuthError,
+  signInAsync,
+  signModalToggle,
   startFetching,
   stopFetching,
-  callAuthError,
-  signModalToggle,
-  signInAsync,
 } from "../../actions";
 import { signUpAsyncType } from "../../types";
-import service  from "../../../../services";
 
 export function* signUpWorker(action: signUpAsyncType): SagaIterator {
   const { payload } = action;

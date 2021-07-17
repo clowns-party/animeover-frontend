@@ -3,7 +3,7 @@ import { useAuth } from "bus/auth/hooks/useAuth";
 import { UserSchema } from "bus/auth/types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import services from "services";
+import services from "Services";
 import { diffBetweenObjs } from "utils/common/diffBetweenObjs";
 import { useToast } from "utils/hooks/useToast";
 import { UpdateUserFormData, UserUpdateResponse } from "../types";

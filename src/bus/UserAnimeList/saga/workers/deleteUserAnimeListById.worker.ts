@@ -15,7 +15,7 @@ import {
 import { call, put, select } from "redux-saga/effects";
 import { AppState } from "redux/rootReducer";
 import { formatAnimeDetail } from "utils/anime/formatAnimeDetail";
-import service from "../../../../services";
+import service from "Services";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";
 
 export function* deleteUserAnimeListById(

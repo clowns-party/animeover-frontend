@@ -1,9 +1,8 @@
+import { AnimeState } from "bus/anime/reducer";
 import { SagaIterator } from "redux-saga";
 import { call, put, select } from "redux-saga/effects";
-import { AnimeState } from "bus/anime/reducer";
+import service from "Services";
 import { AppState } from "../../../../redux/rootReducer";
-import { fetchWithFiltersType, AnimeListReponse } from "../../types";
-import service from "../../../../services";
 import {
   setAnimeListCount,
   setCurrentPage,
@@ -13,6 +12,7 @@ import {
   startAnime,
   stopAnime,
 } from "../../actions";
+import { AnimeListReponse, fetchWithFiltersType } from "../../types";
 
 export function* animeListFiltersWorker(
   action: fetchWithFiltersType

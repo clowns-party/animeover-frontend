@@ -1,6 +1,7 @@
+import Cookies from "js-cookie";
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
-import Cookies from "js-cookie";
+import service from "Services";
 import { AUTH_TOKEN, REFRESH_TOKEN } from "utils/axios/axios.auth";
 import {
   callAuthError,
@@ -10,7 +11,6 @@ import {
   stopFetching,
 } from "../../actions";
 import { signInAsyncType, UserResponse } from "../../types";
-import service  from "../../../../services";
 
 export function* authWorker(action: signInAsyncType): SagaIterator {
   try {

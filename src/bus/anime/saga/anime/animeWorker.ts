@@ -1,7 +1,7 @@
 import { DetailsAnimeList, RawAnimeListType } from "bus/UserAnimeList/types";
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
-import service from "../../../../services";
+import service from "Services";
 import { setAnime, setErrorAnime, startAnime, stopAnime } from "../../actions";
 import { AnimeResponse, getAnimeType } from "../../types";
 import { formatAnimeDetail } from "../../../../utils/anime/formatAnimeDetail";
