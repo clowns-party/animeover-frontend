@@ -3,7 +3,7 @@ import { call, put, select } from "redux-saga/effects";
 import { AnimeState } from "bus/anime/reducer";
 import { AppState } from "../../../../redux/rootReducer";
 import { fetchWithFiltersType, AnimeListReponse } from "../../types";
-import { service } from "../../../../services";
+import service from "../../../../services";
 import {
   setAnimeListCount,
   setCurrentPage,

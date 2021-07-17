@@ -4,7 +4,7 @@ import { call, put } from "redux-saga/effects";
 import { REFRESH_TOKEN } from "utils/axios/axios.auth";
 import { set, callAuthError, startFetching, stopFetching } from "../../actions";
 import { meAction, User } from "../../types";
-import { service } from "../../../../services";
+import service  from "../../../../services";
 
 export function* meWorker(action: meAction): SagaIterator {
   try {

@@ -3,7 +3,7 @@ import { useAuth } from "bus/auth/hooks/useAuth";
 import { UserSchema } from "bus/auth/types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { service } from "services";
+import services from "services";
 import { diffBetweenObjs } from "utils/common/diffBetweenObjs";
 import { useToast } from "utils/hooks/useToast";
 import { UpdateUserFormData, UserUpdateResponse } from "../types";
@@ -45,7 +45,7 @@ export const useProfileForm = () => {
     delete values.email;
     if (diffBetweenObjs(formatUser(user), values)) {
       try {
-        const res = await service.userService.updateUser(values);
+        const res = await services.userService.updateUser(values);
         updateUser(res.data);
         return true;
       } catch (error) {

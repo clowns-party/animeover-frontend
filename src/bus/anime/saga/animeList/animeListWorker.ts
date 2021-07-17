@@ -1,6 +1,6 @@
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
-import { service } from "../../../../services";
+import service  from "../../../../services";
 import {
   setAnimeList,
   setAnimeListCount,

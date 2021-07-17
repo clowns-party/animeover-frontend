@@ -13,7 +13,7 @@ import {
   ResponseUserAnimeListType,
 } from "bus/UserAnimeList/types";
 import { call, put, select } from "redux-saga/effects";
-import { service } from "services";
+import service from "services";
 import { formatAnimeDetail } from "utils/anime/formatAnimeDetail";
 import { Anime } from "bus/anime/types";
 import { userAnimelistStorage } from "../../storage/userAnimelist.storage";

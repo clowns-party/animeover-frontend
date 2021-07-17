@@ -13,4 +13,4 @@ class Services {
   }
 }
 
-export const service = new Services();
+export default new Services();
