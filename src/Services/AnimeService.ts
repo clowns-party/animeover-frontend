@@ -38,7 +38,7 @@ export class Service extends Api {
   }
 
   ongoingList(): Promise<AxiosResponse<AnimeList>> {
-    return this.getInstance().get<AnimeList>("/ongoing");
+    return this.getInstance().get<AnimeList>("/animedb/schedule");
   }
 
   anime(id: IdType): Promise<AxiosResponse<Anime>> {

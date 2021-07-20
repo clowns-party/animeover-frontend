@@ -52,7 +52,7 @@
 @media (max-width: 1200px) {
   .ongoing_container {
     flex-wrap: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
   .card {
     margin-right: 4px;

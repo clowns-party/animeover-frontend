@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { useRouter } from "next/dist/client/router";
 
 const Body = styled.div`
-  background-image: url("/not_found_bg.jpg");
+  background-image: url("/girl.jpg");
   background-position: right bottom;
-  background-size: 50%;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
@@ -13,8 +12,8 @@ const Body = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    background-size: contain;
+  @media screen and (max-width: 1100px) {
+    background-size: 30%;
   }
 `;
 
@@ -51,6 +50,18 @@ const Button = styled.div`
   border-radius: 4px;
   cursor: pointer;
 `;
+
+// const Girl = styled.div`
+//   display: inline-block;
+//   background-image: url("/girl.png");
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+//   width: 100px;
+//   height: 200px;
+//   position: absolute;
+//   right: 0;
+//   z-index: 999;
+// `;
 
 export default function Custom404() {
   const router = useRouter();

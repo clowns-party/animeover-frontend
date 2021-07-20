@@ -17,7 +17,8 @@ export function* ongoingWorker(): SagaIterator {
     const result: OngoingListRespose = yield call(
       service.animeService.ongoingList
     );
-    yield put(setOngoingList(patchImgShiki(result.data)));
+    // patchImgShiki убрать
+    yield put(setOngoingList(result.data));
   } catch (err) {
     yield put(setErrorAnime(err));
   } finally {
