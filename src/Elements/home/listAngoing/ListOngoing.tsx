@@ -124,7 +124,7 @@ export const ListOngoing: FC = () => {
           <Prompt>See what comes out any day of the week</Prompt>
           <Today>
             {`TODAY ${formatDate(date?.getDate())}/${formatDate(
-              date?.getMonth()
+              date?.getMonth() + 1
             )}`}
           </Today>
         </Col>
