@@ -1,0 +1,69 @@
+.anime {
+  height: 180px;
+  object-fit: cover;
+}
+
+// .header {
+//   display: flex;
+//   align-items: center;
+//   height: 30px;
+//   width: 100%;
+//   background-color: #e6f7ff;
+//   color: #40a9ff;
+//   font-size: 16px;
+//   font-family: "Open Sans", sans-serif;
+//   font-weight: 600;
+//   cursor: pointer;
+// }
+
+.ongoing_container {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #ced0d1;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+  }
+  @media screen and (max-width: 768px) {
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.card {
+  min-width: 142px;
+  max-width: 142px;
+  margin-right: 4px;
+  border-radius: 20px !important;
+  img {
+    border-radius: 20px 20px 0 0 !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ongoing_container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .card {
+    margin-right: 4px;
+  }
+}
+@media (max-width: 800px) {
+  .card {
+    min-width: 120px;
+    font-size: 12px;
+  }
+  .anime {
+    height: 160px;
+  }
+}

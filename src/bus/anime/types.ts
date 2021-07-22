@@ -1,4 +1,5 @@
 import { AnimeTagsType, SeasonsType } from "bus/filters/types";
+import { ScheduleDateItems } from "bus/schedule/types";
 import { DetailsAnimeList } from "bus/UserAnimeList/types";
 
 export type AnimeList = Array<Anime>;
@@ -140,7 +141,20 @@ export type setFiltersType = {
   payload: FiltersPayload;
 };
 
+export const GET_SHEDULE = "GET_SHEDULE";
+export type getSheduleType = {
+  type: typeof GET_SHEDULE;
+};
+
+export const SET_SHEDULE = "SET_SHEDULE";
+export type setSheduleType = {
+  type: typeof SET_SHEDULE;
+  payload: ScheduleDateItems;
+};
+
 export type animeActionsTypes =
+  | setSheduleType
+  | getSheduleType
   | getAnimeListType
   | setOngoingListType
   | setAnimeListType

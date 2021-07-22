@@ -15,3 +15,5 @@ export type ScheduleDateItems = {
   Tuesday: ScheduleAnimeItem;
   Wednesday: ScheduleAnimeItem;
 };
+
+export type SheduleRespose = { data: ScheduleDateItems };

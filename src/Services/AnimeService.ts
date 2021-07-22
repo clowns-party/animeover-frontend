@@ -38,6 +38,10 @@ export class Service extends Api {
   }
 
   ongoingList(): Promise<AxiosResponse<AnimeList>> {
+    return this.getInstance().get<AnimeList>("/ongoing");
+  }
+
+  sheduleAnime(): Promise<AxiosResponse<AnimeList>> {
     return this.getInstance().get<AnimeList>("/animedb/schedule");
   }
 

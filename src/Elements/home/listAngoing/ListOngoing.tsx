@@ -1,12 +1,13 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Router from "next/router";
 import styled from "styled-components";
+import { FireOutlined } from "@ant-design/icons";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./listOngoing.module.scss";
 
 const Title = styled.div`
-  color: #000;
+  color: #ff6666;
   font-style: normal;
   font-weight: bold;
   font-family: IBM Plex Sans;
@@ -16,142 +17,20 @@ const Title = styled.div`
   }
 `;
 
-const Year = styled.div`
-  color: #ff6666;
-  font-style: normal;
-  font-weight: bold;
-  font-family: IBM Plex Sans;
-  font-size: 18px;
-`;
-
-const Today = styled.div`
-  color: #000;
-  font-style: normal;
-  font-weight: bold;
-  font-family: IBM Plex Sans;
-  font-size: 20px;
-  margin: 20px 0 12px 0;
-`;
-
-const Release = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-`;
-const Point = styled.div<{ active?: boolean }>`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  span {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border-radius: 100%;
-    background: ${(props) => (props.active ? "#ff6666" : "#fff")};
-    border: ${(props) => (props.active ? "none" : "3px solid #8c929d")};
-    box-sizing: border-box;
-  }
-  @media screen and (max-width: 768px) {
-    padding: 0 4px;
-  } ;
-`;
-const Time = styled.div<{ active?: boolean }>`
-  color: ${(props) => (props.active ? "#ff6666" : "#8c929d")};
-  font-style: normal;
-  font-weight: bold;
-  font-family: IBM Plex Sans;
-  font-size: 14px;
-`;
-const Line = styled.span<{ active?: boolean }>`
-  display: inline-block;
-  height: 2px;
-  width: 10rem;
-  background: ${(props) => (props.active ? "#ff6666" : "#8c929d")};
-  margin-bottom: 9px;
-`;
-
-const Prompt = styled.div`
-  color: #bfbfbf;
-  font-style: normal;
-  font-weight: bold;
-  font-family: IBM Plex Sans;
-  font-size: 14px;
-`;
-
-const daysList = [
-  { day: "Monday", id: 1 },
-  { day: "Tuesday", id: 2 },
-  { day: "Wednesday", id: 3 },
-  { day: "Thursday", id: 4 },
-  { day: "Friday", id: 5 },
-  { day: "Saturday", id: 6 },
-  { day: "Sunday", id: 7 },
-];
-
-const formatDate = (date: number) => {
-  if (String(date)?.length < 2) return `0${date}`;
-  return date;
-};
-
 export const ListOngoing: FC = () => {
   const { ongoing, isFetching, error } = useAnime();
-  const date = new Date();
-  const dayNumber = date?.getDay();
-  const [day, setDay] = useState(
-    new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date)
-  );
-  const changeOngoingList = (value) => {
-    setDay(value);
-  };
-
-  const getCurrectName = (name) => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 768) {
-        return name.substring(0, 2);
-      }
-      return name;
-    }
-    return name;
-  };
   return (
     <div className={styles.container}>
       <Row style={{ margin: "16px 0" }}>
         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-          <Title>Ongoing Calendar</Title>
-          <Year>{`See Fall ${date?.getFullYear()} Lineup`}</Year>
-          <Prompt>See what comes out any day of the week</Prompt>
-          <Today>
-            {`TODAY ${formatDate(date?.getDate())}/${formatDate(
-              date?.getMonth() + 1
-            )}`}
-          </Today>
-        </Col>
-        <Col xs={24}>
-          <Release>
-            {daysList?.map((el, index) => {
-              return (
-                <React.Fragment key={index.toString()}>
-                  {index + 1 !== 1 && <Line active={el?.id <= dayNumber} />}
-                  <Point
-                    active={el?.id <= dayNumber}
-                    onClick={() => changeOngoingList(el?.day)}
-                  >
-                    <Time active={el?.id <= dayNumber}>
-                      {getCurrectName(el?.day)}
-                    </Time>
-                    <span />
-                  </Point>
-                </React.Fragment>
-              );
-            })}
-          </Release>
+          <Title>
+            HOT LIST <FireOutlined twoToneColor="#FF6666" />
+          </Title>
         </Col>
       </Row>
       <Row className={styles.ongoing_container}>
         {ongoing ? (
-          ongoing[day].map(
+          ongoing.map(
             (el, index) =>
               index <= 7 && <Ongoing key={el._id} id={el._id} el={el} />
           )

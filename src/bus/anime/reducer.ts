@@ -1,4 +1,5 @@
-import { DetailsAnimeList, RawAnimeListType } from "bus/UserAnimeList/types";
+import { ScheduleDateItems } from "bus/schedule/types";
+import { DetailsAnimeList } from "bus/UserAnimeList/types";
 import {
   GET_ANIME_LIST,
   animeActionsTypes,
@@ -19,6 +20,8 @@ import {
   FETCH_WITH_FILTERS,
   FiltersPayload,
   SET_FILTERS,
+  GET_SHEDULE,
+  SET_SHEDULE,
 } from "./types";
 
 export type AnimeState = {
@@ -35,6 +38,7 @@ export type AnimeState = {
   count: number;
   pageLimit: number;
   error: AnimeError | false;
+  shedule: ScheduleDateItems | null;
 };
 
 const getRandomPage = (min, max) => {
@@ -52,6 +56,7 @@ const initialState: AnimeState = {
   pageLimit: 20,
   error: false,
   filters: null,
+  shedule: null,
 };
 
 export const animeReducer = (
@@ -59,6 +64,15 @@ export const animeReducer = (
   action: animeActionsTypes
 ): AnimeState => {
   switch (action.type) {
+    case SET_SHEDULE:
+      return {
+        ...state,
+        shedule: action?.payload,
+      };
+    case GET_SHEDULE:
+      return {
+        ...state,
+      };
     case GET_ANIME_LIST:
       return {
         ...state,

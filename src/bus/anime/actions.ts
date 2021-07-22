@@ -1,3 +1,4 @@
+import { ScheduleDateItems } from "bus/schedule/types";
 import {
   AnimeError,
   AnimeList,
@@ -9,9 +10,11 @@ import {
   getAnimeListType,
   getAnimeType,
   getOngoingListType,
+  getSheduleType,
   GET_ANIME,
   GET_ANIME_LIST,
   GET_ONGOING_LIST,
+  GET_SHEDULE,
   IdType,
   setAnimeListCountType,
   setAnimeListType,
@@ -22,6 +25,7 @@ import {
   SetFilteredPayload,
   setFilteredType,
   setOngoingListType,
+  setSheduleType,
   SET_ANIME,
   SET_ANIME_LIST,
   SET_ANIME_LIST_COUNT,
@@ -30,6 +34,7 @@ import {
   SET_FILTERED,
   SET_FILTERS,
   SET_ONGOING_LIST,
+  SET_SHEDULE,
   startAnimeListType,
   START_ANIME_LIST,
   stopAnimeListType,
@@ -134,6 +139,19 @@ export function fetchWithFilters(payload: FiltersPayload) {
 export function setFilters(payload: FiltersPayload) {
   return {
     type: SET_FILTERS,
+    payload,
+  };
+}
+
+export function getShedule(): getSheduleType {
+  return {
+    type: GET_SHEDULE,
+  };
+}
+
+export function setShedule(payload: ScheduleDateItems): setSheduleType {
+  return {
+    type: SET_SHEDULE,
     payload,
   };
 }

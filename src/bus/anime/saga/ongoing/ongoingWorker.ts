@@ -18,7 +18,7 @@ export function* ongoingWorker(): SagaIterator {
       service.animeService.ongoingList
     );
     // patchImgShiki убрать
-    yield put(setOngoingList(result.data));
+    yield put(setOngoingList(patchImgShiki(result.data)));
   } catch (err) {
     yield put(setErrorAnime(err));
   } finally {
