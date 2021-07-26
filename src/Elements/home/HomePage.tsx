@@ -1,7 +1,6 @@
 import Container from "Elements/layout/Container";
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { getOngoingList, getShedule } from "../../bus/anime/actions";
 import { AnimeList } from "./animeList/AnimeList";
 import styles from "./home.module.scss";

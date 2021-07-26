@@ -4,6 +4,7 @@ import Router from "next/router";
 import styled from "styled-components";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./calendar.module.scss";
+import Picture from "Elements/picture";
 
 const Title = styled.div`
   color: #000;
@@ -176,8 +177,15 @@ const Ongoing = ({ el, id }) => {
         className={styles.card}
         size="small"
         hoverable
-        cover={<img className={styles.anime} alt="anime" src={el.picture} />}
+        cover={
+          <Picture
+            className={styles.anime}
+            url={el.picture}
+            alt={el?.title || "anime"}
+          />
+        }
       >
+        {/* ref={imgRef} */}
         <Meta title={el.title} description={el.type} />
       </Card>
     </Tooltip>
@@ -232,7 +240,8 @@ const Avatar = styled(Skeleton.Avatar)`
     border-radius: 20px 20px 0 0;
     @media screen and (max-width: 800px) {
       height: 160px !important;
-    }
+    }import { Picture } from 'Elements/picture';
+
   }
 `;
 
