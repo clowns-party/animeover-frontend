@@ -1,10 +1,10 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
-import React, { FC, useState } from "react";
+import Picture from "Elements/picture";
 import Router from "next/router";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./calendar.module.scss";
-import Picture from "Elements/picture";
 
 const Title = styled.div`
   color: #000;
@@ -39,20 +39,77 @@ const Release = styled.div`
   align-items: flex-end;
   justify-content: center;
 `;
-const Point = styled.div<{ active?: boolean }>`
+const Point = styled.div<{ active?: boolean; current: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   span {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    position: relative;
     background: ${(props) => (props.active ? "#ff6666" : "#fff")};
-    border: ${(props) => (props.active ? "none" : "3px solid #8c929d")};
-    box-sizing: border-box;
+    border-radius: 50%;
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: "";
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      background-color: transparent;
+      border-radius: 50%;
+      border: ${(props) => (props.active ? "none" : "2px solid #8c929d")};
+      box-shadow: ${(props) =>
+        props.current ? "0 0 1px 1px rgba(170, 77, 200, 0.4)" : "none"};
+    }
+
+    &:before {
+      animation: ${(props) =>
+        props.current ? "euiBeaconPulseLarge 2.5s infinite ease-out;" : "none"};
+    }
+
+    &:after {
+      animation: ${(props) =>
+        props.current ? "euiBeaconPulseLarge 2.5s infinite ease-out;" : "none"};
+    }
+    &:hover {
+      animation: none;
+    }
+  }
+  @keyframes euiBeaconPulseLarge {
+    0% {
+      transform: scale(0.1);
+      opacity: 1;
+    }
+
+    70% {
+      transform: scale(3);
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes euiBeaconPulseSmall {
+    0% {
+      transform: scale(0.1);
+      opacity: 1;
+    }
+
+    70% {
+      transform: scale(2);
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 0;
+    }
   }
   @media screen and (max-width: 768px) {
     padding: 0 4px;
@@ -101,11 +158,13 @@ export const Calendar: FC = () => {
   const date = new Date();
   const [dayNumber, setDayNumber] = useState(date?.getDay());
   const [day, setDay] = useState(
-    new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date)
+    new Intl.DateTimeFormat("en-US", { weekday: "long" })
+      .format(date)
+      .toUpperCase()
   );
-  const changeOngoingList = (value, dayNum) => {
+  const changeOngoingList = (value: string, dayNum) => {
     setDayNumber(dayNum);
-    setDay(value);
+    setDay(value.toUpperCase());
   };
 
   const getCurrectName = (name) => {
@@ -117,6 +176,7 @@ export const Calendar: FC = () => {
     }
     return name;
   };
+
   return (
     <div className={styles.container}>
       <Row style={{ margin: "16px 0" }}>
@@ -138,6 +198,7 @@ export const Calendar: FC = () => {
                   {index + 1 !== 1 && <Line active={el?.id <= dayNumber} />}
                   <Point
                     active={el?.id <= dayNumber}
+                    current={el?.id === dayNumber}
                     onClick={() => changeOngoingList(el?.day, el?.id)}
                   >
                     <Time active={el?.id <= dayNumber}>
@@ -153,7 +214,7 @@ export const Calendar: FC = () => {
       </Row>
       <Row className={styles.ongoing_container}>
         {shedule ? (
-          shedule[day].map(
+          shedule[day]?.map(
             (el, index) =>
               index <= 7 && <Ongoing key={el._id} id={el._id} el={el} />
           )
@@ -240,8 +301,7 @@ const Avatar = styled(Skeleton.Avatar)`
     border-radius: 20px 20px 0 0;
     @media screen and (max-width: 800px) {
       height: 160px !important;
-    }import { Picture } from 'Elements/picture';
-
+    }
   }
 `;
 
