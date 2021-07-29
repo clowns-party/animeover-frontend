@@ -7,7 +7,7 @@ import { watchOngoing } from "bus/anime/saga/ongoing/OngoingWatch";
 import { watchAuth } from "bus/auth/saga/watcherAuth";
 import { userAnimeListWatcher } from "bus/UserAnimeList/saga/userAnimeList.watcher";
 import { searchAnimeWatcher } from "bus/search/saga/searchAnimeWatcher";
-import { watchShedule } from "bus/anime/saga/shedule/ongoing/sheduleWatch";
+import { watchShedule } from "bus/anime/saga/shedule/sheduleWatch";
 
 export function* rootSaga(): Generator {
   yield all([

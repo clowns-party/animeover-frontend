@@ -26,6 +26,10 @@ const CommentsList = styled.div`
   margin-bottom: 15px;
 `;
 
+const Empty = styled.div`
+  margin-bottom: 20px;
+`;
+
 export const Anime: FC = () => {
   const imgRef = useRef(null);
   const { anime, isFetching, rating } = useAnime();
@@ -33,6 +37,7 @@ export const Anime: FC = () => {
   const animePicture = anime && imgFormatter(anime?.picture);
 
   const isShiki = anime && anime.sources.includes("shikimori");
+  const isJikan = anime && anime.sources.includes("jikan");
   return (
     <Container>
       <div className={styles.anime_container}>
@@ -53,8 +58,9 @@ export const Anime: FC = () => {
                 <StyledBtn>Go to shiki</StyledBtn>
               </a>
             )}
+            {!isFetching && isJikan && <Empty />}
             {!isFetching ? (
-              <UserAnimeListDropdown show={!isShiki} />
+              <UserAnimeListDropdown show={!isShiki && !isJikan} />
             ) : (
               <div className={styles.container_button_skeleton}>
                 <Skeleton.Input className={styles.skeleton_button} active />

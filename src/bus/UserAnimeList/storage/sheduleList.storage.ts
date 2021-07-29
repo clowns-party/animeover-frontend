@@ -8,12 +8,17 @@ export const sheduleListStorage = () => {
       sheduleList: fromJSON(
         localStorage.getItem("sheduleList")
       ) as ScheduleDateItems | null,
+      currentDate: fromJSON(localStorage.getItem("currentDate")) as
+        | string
+        | null,
     }),
-    set: (sheduleList: ScheduleDateItems) => {
+    set: (sheduleList: ScheduleDateItems, currentDate: string) => {
       localStorage.setItem("sheduleList", toJSON(sheduleList));
+      localStorage.setItem("currentDate", toJSON(currentDate));
     },
     clear: () => {
       localStorage.setItem("sheduleList", null);
+      localStorage.setItem("currentDate", null);
     },
   };
   return storage;

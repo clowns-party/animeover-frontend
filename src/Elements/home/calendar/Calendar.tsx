@@ -1,7 +1,9 @@
 import { Card, Col, Row, Skeleton, Tooltip } from "antd";
+import { setSelectedDay } from "bus/anime/actions";
 import Picture from "Elements/picture";
 import Router from "next/router";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useAnime } from "../../../bus/anime/hooks/useAnime";
 import styles from "./calendar.module.scss";
@@ -154,17 +156,22 @@ const formatDate = (date: number) => {
 };
 
 export const Calendar: FC = () => {
-  const { shedule, isFetching, error } = useAnime();
+  const dispatch = useDispatch();
+  const { shedule, selectedDay, isFetching, error } = useAnime();
   const date = new Date();
+  useEffect(() => {
+    dispatch(
+      setSelectedDay(
+        new Intl.DateTimeFormat("en-US", { weekday: "long" })
+          .format(date)
+          .toUpperCase()
+      )
+    );
+  }, []);
   const [dayNumber, setDayNumber] = useState(date?.getDay());
-  const [day, setDay] = useState(
-    new Intl.DateTimeFormat("en-US", { weekday: "long" })
-      .format(date)
-      .toUpperCase()
-  );
   const changeOngoingList = (value: string, dayNum) => {
     setDayNumber(dayNum);
-    setDay(value.toUpperCase());
+    dispatch(setSelectedDay(value.toUpperCase()));
   };
 
   const getCurrectName = (name) => {
@@ -214,7 +221,7 @@ export const Calendar: FC = () => {
       </Row>
       <Row className={styles.ongoing_container}>
         {shedule ? (
-          shedule[day]?.map(
+          shedule[selectedDay]?.map(
             (el, index) =>
               index <= 7 && <Ongoing key={el._id} id={el._id} el={el} />
           )

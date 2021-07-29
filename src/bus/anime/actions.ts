@@ -25,6 +25,7 @@ import {
   SetFilteredPayload,
   setFilteredType,
   setOngoingListType,
+  setSelectedDayType,
   setSheduleType,
   SET_ANIME,
   SET_ANIME_LIST,
@@ -34,6 +35,7 @@ import {
   SET_FILTERED,
   SET_FILTERS,
   SET_ONGOING_LIST,
+  SET_SELECTED_DAY,
   SET_SHEDULE,
   startAnimeListType,
   START_ANIME_LIST,
@@ -152,6 +154,13 @@ export function getShedule(): getSheduleType {
 export function setShedule(payload: ScheduleDateItems): setSheduleType {
   return {
     type: SET_SHEDULE,
+    payload,
+  };
+}
+
+export function setSelectedDay(payload: string): setSelectedDayType {
+  return {
+    type: SET_SELECTED_DAY,
     payload,
   };
 }

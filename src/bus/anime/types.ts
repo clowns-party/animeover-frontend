@@ -152,7 +152,14 @@ export type setSheduleType = {
   payload: ScheduleDateItems;
 };
 
+export const SET_SELECTED_DAY = "SET_SELECTED_DAY";
+export type setSelectedDayType = {
+  type: typeof SET_SELECTED_DAY;
+  payload: string;
+};
+
 export type animeActionsTypes =
+  | setSelectedDayType
   | setSheduleType
   | getSheduleType
   | getAnimeListType

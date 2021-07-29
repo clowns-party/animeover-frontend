@@ -16,6 +16,7 @@ export const useAnime = () => {
     pageLimit,
     filters,
     shedule,
+    selectedDay,
   } = useSelector<AppState, AnimeState>((state) => state.anime);
 
   return {
@@ -32,5 +33,6 @@ export const useAnime = () => {
     filtered,
     filters,
     shedule,
+    selectedDay,
   };
 };

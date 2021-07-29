@@ -22,6 +22,7 @@ import {
   SET_FILTERS,
   GET_SHEDULE,
   SET_SHEDULE,
+  SET_SELECTED_DAY,
 } from "./types";
 
 export type AnimeState = {
@@ -39,6 +40,7 @@ export type AnimeState = {
   pageLimit: number;
   error: AnimeError | false;
   shedule: ScheduleDateItems | null;
+  selectedDay: string | null;
 };
 
 const getRandomPage = (min, max) => {
@@ -57,6 +59,7 @@ const initialState: AnimeState = {
   error: false,
   filters: null,
   shedule: null,
+  selectedDay: null,
 };
 
 export const animeReducer = (
@@ -64,6 +67,11 @@ export const animeReducer = (
   action: animeActionsTypes
 ): AnimeState => {
   switch (action.type) {
+    case SET_SELECTED_DAY:
+      return {
+        ...state,
+        selectedDay: action?.payload,
+      };
     case SET_SHEDULE:
       return {
         ...state,
