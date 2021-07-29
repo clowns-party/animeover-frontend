@@ -12,9 +12,12 @@ export function* animeWorker(action: getAnimeType): SagaIterator {
   const storage = sheduleListStorage();
   const { sheduleList } = storage.get();
   const { selectedDay } = yield select((state) => state.anime);
-  const anime = sheduleList[selectedDay]?.find(
-    (el) => el._id === action?.payload
-  );
+  let anime = null;
+  anime = Object.values(sheduleList)?.reduce((acc, el) => {
+    const findAnime = el?.find((el) => el._id === action?.payload);
+    if (findAnime && Object.keys(findAnime).length !== 0) acc = findAnime;
+    return acc;
+  }, {});
   if (!!anime && Object.keys(anime).length !== 0) {
     try {
       yield put(setAnime({ anime, detail: [] }));
