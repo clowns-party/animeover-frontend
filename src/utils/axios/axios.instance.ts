@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { getToken } from "./axios.auth";
 
-export const BASE_API_URL = "https://animeover-api.herokuapp.com";
+export const BASE_API_URL = "https://animeover.vercel.app/";
 export const axiosInstace = (
   context?: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
